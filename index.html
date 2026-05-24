@@ -249,13 +249,18 @@ body{
   background:rgba(201,168,76,0.05);font-size:0.9rem;color:var(--gold-light);line-height:1.8;
 }
 .content-card .img-placeholder{
-  width:100%;height:200px;margin-bottom:20px;border-radius:8px;
+  width:100%;height:220px;margin-bottom:20px;border-radius:8px;
   display:flex;align-items:center;justify-content:center;
   font-size:48px;position:relative;overflow:hidden;
+  background-size:cover;background-position:center;
 }
-#history-section .img-placeholder{background:linear-gradient(135deg,rgba(139,15,15,0.2),rgba(165,28,48,0.1))}
-#reality-section .img-placeholder{background:linear-gradient(135deg,rgba(139,105,20,0.2),rgba(201,168,76,0.1))}
-#future-section .img-placeholder{background:linear-gradient(135deg,rgba(15,42,61,0.3),rgba(79,195,247,0.1))}
+.img-placeholder::before{
+  content:'';position:absolute;inset:0;background:rgba(0,0,0,0.35);z-index:1;
+}
+.img-placeholder>*{position:relative;z-index:2}
+#history-section .img-placeholder{background-color:#1a0a0a}
+#reality-section .img-placeholder{background-color:#1a1508}
+#future-section .img-placeholder{background-color:#08141a}
 
 /* ── Timeline ── */
 .timeline{position:relative;padding:30px 0}
@@ -622,7 +627,7 @@ body{
     </div>
 
     <div class="content-card" id="event-1911" style="display:none">
-      <div class="img-placeholder">🔫</div>
+      <div class="img-placeholder" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/%E8%BE%9B%E4%BA%A5%E9%9D%A9%E5%91%BD%E6%AD%A6%E6%98%8C%E8%B5%B7%E4%B9%89%E7%BA%AA%E5%BF%B5%E9%A6%86.jpg/960px-%E8%BE%9B%E4%BA%A5%E9%9D%A9%E5%91%BD%E6%AD%A6%E6%98%8C%E8%B5%B7%E4%B9%89%E7%BA%AA%E5%BF%B5%E9%A6%86.jpg)">🔫</div>
       <h4 style="color:var(--red-light)">武昌起义（1911年10月10日）</h4>
       <p>1911年10月10日晚，湖北新军工程第八营的革命党人打响了武昌起义的第一枪。起义军迅速占领楚望台军械库，继而攻占总督衙门。一夜之间，武昌全城光复。随后，汉阳、汉口相继被起义军占领。这场由荆楚儿女率先发难的革命，迅速蔓延至全国——不到两个月的时间里，湖南、陕西、江西、山西、云南等十三个省份宣布脱离清廷独立。1912年1月1日，孙中山在南京宣誓就任中华民国临时大总统，延续两千余年的封建帝制就此终结。</p>
       <p>武汉之所以成为辛亥革命的首义之地，有其深刻的历史原因：作为洋务运动后期张之洞督鄂的重要基地，武汉较早接触近代工业和西式教育，新式学堂和新军成为革命思想的温床；同时武汉地处九省通衢，交通便利，信息流通快捷，为革命党人的秘密活动提供了有利条件。</p>
@@ -630,7 +635,7 @@ body{
     </div>
 
     <div class="content-card" id="event-1921" style="display:none">
-      <div class="img-placeholder">🚩</div>
+      <div class="img-placeholder" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/1st_National_Congress_of_CPC.jpg/960px-1st_National_Congress_of_CPC.jpg)">🚩</div>
       <h4 style="color:var(--red-light)">建党与大革命的洪流（1921—1927）</h4>
       <p>1921年7月，中国共产党第一次全国代表大会在上海和嘉兴召开，湖北籍代表董必武、陈潭秋参与了这一开天辟地的历史事件。董必武日后成为中华人民共和国代主席，陈潭秋则为革命事业壮烈牺牲于新疆。他们的革命生涯，正是从荆楚大地起步的。</p>
       <p>1923年2月，京汉铁路工人大罢工（二七大罢工）在武汉爆发，这是中国共产党领导的第一次工人运动高潮的顶点，充分展现了中国工人阶级的组织力量和革命精神。如今屹立于汉口江岸的"二七烈士纪念碑"，仍在无声诉说着那段血与火的岁月。</p>
@@ -639,7 +644,7 @@ body{
     </div>
 
     <div class="content-card" id="event-1927" style="display:none">
-      <div class="img-placeholder">📋</div>
+      <div class="img-placeholder" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/八七会议会址.jpg/960px-八七会议会址.jpg)">📋</div>
       <h4 style="color:var(--red-light)">八七会议（1927年8月7日）</h4>
       <p>1927年，蒋介石、汪精卫相继发动"四一二"和"七一五"反革命政变，大肆屠杀共产党人和革命群众，轰轰烈烈的大革命宣告失败。在白色恐怖的笼罩下，中国共产党面临着自成立以来最严峻的考验。</p>
       <p>在这生死存亡的危急关头，中共中央于1927年8月7日在汉口鄱阳街139号秘密召开紧急会议。由于当时形势极其险恶，会议只开了一天。出席会议的有中央委员、候补中央委员及其他方面的代表共21人。毛泽东在会上以亲身经历批评了陈独秀的右倾投降主义错误，并斩钉截铁地指出："以后要非常注意军事，须知政权是由枪杆子中取得的。"</p>
@@ -648,7 +653,7 @@ body{
     </div>
 
     <div class="content-card" id="event-1934" style="display:none">
-      <div class="img-placeholder">🥾</div>
+      <div class="img-placeholder" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Long_March_veterans.jpg/960px-Long_March_veterans.jpg)">🥾</div>
       <h4 style="color:var(--red-light)">长征与湖北——血染的风采（1934—1936）</h4>
       <p>1934年至1936年，中国工农红军进行了举世闻名的二万五千里长征。湖北作为重要革命根据地——鄂豫皖革命根据地和湘鄂川黔革命根据地的核心区域，在长征史诗中写下了壮丽篇章。</p>
       <p>红四方面军主力于1932年从鄂豫皖根据地出发西征，后于1935年踏上长征路；红二、六军团（后合编为红二方面军）于1935年11月从湘鄂川黔根据地出发长征。两支主力红军途经湖北郧西、郧阳、恩施、宜昌等地，在当地群众的掩护和支援下突破了敌人的重重封锁。郧西县湖北口回族乡的"红军路"至今保存完好，当年老百姓冒着生命危险为红军带路、送粮、护理伤员的事迹在当地代代相传。</p>
@@ -657,7 +662,7 @@ body{
     </div>
 
     <div class="content-card" id="event-1949" style="display:none">
-      <div class="img-placeholder">☀️</div>
+      <div class="img-placeholder" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/China_1949_flag_raising.jpg/960px-China_1949_flag_raising.jpg)">☀️</div>
       <h4 style="color:var(--red-light)">新中国·新武汉·新征程（1949至今）</h4>
       <p>1949年5月16日，中国人民解放军第四野战军解放武汉三镇，这座英雄的城市回到了人民手中。新中国成立后，湖北迅速从战争创伤中恢复，以崭新的姿态投入社会主义建设的热潮。</p>
       <p>在"一五"计划期间，国家将156项重点工程中的8项布局在武汉——武汉钢铁公司（新中国第一座大型钢铁联合企业）、武汉长江大桥（万里长江第一桥）、武汉重型机床厂、武汉锅炉厂等相继建成投产，使武汉成为新中国重要的工业基地和科教重镇。1956年，毛泽东在武汉三次畅游长江，写下了"一桥飞架南北，天堑变通途"的豪迈诗篇。</p>
@@ -755,7 +760,7 @@ body{
     </div>
 
     <div class="content-card" id="loc-museum" style="display:none">
-      <div class="img-placeholder">🏛️</div>
+      <div class="img-placeholder" style="background-image:url(https://picsum.photos/seed/wuhan-museum/800/440)">🏛️</div>
       <h4 style="color:var(--gold-bright)">武汉革命博物馆群</h4>
       <p>位于武昌红巷的武汉革命博物馆，是全国重点文物保护单位和全国爱国主义教育示范基地。整个博物馆群由中央农民运动讲习所旧址、毛泽东旧居、中共五大会址、陈潭秋烈士纪念馆、武昌起义门等多个场馆组成，占地面积超过2万平方米，展陈面积超过8000平方米。</p>
       <p>这里不仅是武汉红色文化的地标，更是一座连接历史与现实的桥梁。每年有超过200万来自全国各地的参观者走进这片红色圣地。实践团参观当天正值周末，团队在农讲所大教室中偶遇了一群来自武汉小学的少先队员，孩子们在老师的带领下齐声朗诵毛泽东诗词，稚嫩而坚定的声音在百年建筑中回荡——那一幕，让所有人真切感受到了"薪火相传"的意义。</p>
@@ -763,7 +768,7 @@ body{
     </div>
 
     <div class="content-card" id="loc-wuda" style="display:none">
-      <div class="img-placeholder">🏫</div>
+      <div class="img-placeholder" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Wuhan_University_Old_Library.jpg/960px-Wuhan_University_Old_Library.jpg)">🏫</div>
       <h4 style="color:var(--gold-bright)">武汉大学：珞珈山下的红色记忆</h4>
       <p>武汉大学不仅以樱花和百年建筑闻名，更有着深厚的红色基因。中共一大代表陈潭秋是武大前身——武昌高等师范学校的毕业生；另一位一大代表李达在1950年代曾任武大校长长达13年。周恩来、董必武等领导人也曾在珞珈山留下足迹。位于珞珈山南麓的"十八栋"别墅群中的周恩来故居（珞珈山"十八栋"27号），是1938年周恩来在武汉领导南方局和指导国民政府军事委员会政治部第三厅开展抗日宣传工作时的主要居所。</p>
       <p>抗战时期，武大西迁四川乐山，在极其艰苦的条件下坚持办学8年，保存了中国高等教育的火种。如今的武大已发展成为国家"双一流"建设A类高校，在校学生超过5万人，继续为国家培养着一代又一代的栋梁之材。</p>
@@ -771,7 +776,7 @@ body{
     </div>
 
     <div class="content-card" id="loc-bridge" style="display:none">
-      <div class="img-placeholder">🌉</div>
+      <div class="img-placeholder" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Wuhan_Yangtze_River_Bridge.jpg/960px-Wuhan_Yangtze_River_Bridge.jpg)">🌉</div>
       <h4 style="color:var(--gold-bright)">武汉长江大桥：钢铁脊梁上的时代印记</h4>
       <p>武汉长江大桥是中国第一座自主设计并建设的公铁两用桥（在苏联专家协助下），于1955年9月1日动工，1957年10月15日正式通车。大桥全长1670米，正桥8墩9孔，上层为公路桥，宽22.5米；下层为双线铁路桥。毛泽东1956年视察时挥毫写下"一桥飞架南北，天堑变通途"的千古名句。</p>
       <p>大桥不仅是工程技术的奇迹，更是新中国自力更生、艰苦奋斗精神的象征。在那个物资匮乏的年代，大桥建设者们创造了多项世界领先的技术成果——首次采用大型管柱钻孔法进行深水基础施工、首次使用国产桥梁钢……这些突破为后续南京长江大桥、九江长江大桥的建设积累了宝贵经验。60多年来，大桥经历了无数次洪水、撞击的考验，至今屹立如初，被誉为"桥坚强"。</p>
@@ -779,7 +784,7 @@ body{
     </div>
 
     <div class="content-card" id="loc-optics" style="display:none">
-      <div class="img-placeholder">💡</div>
+      <div class="img-placeholder" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Wuhan_Optics_Valley_Modern_Tram_%285%29.jpg/960px-Wuhan_Optics_Valley_Modern_Tram_%285%29.jpg)">💡</div>
       <h4 style="color:var(--gold-bright)">中国光谷：从稻田到世界级创新集群</h4>
       <p>武汉东湖新技术开发区（"中国光谷"）的崛起，是中国改革开放和科技创新事业的生动缩影。1988年创建之初，这里还是一片农田和鱼塘；30多年后的今天，518平方公里的土地上集聚了超过13万家企业，其中包括华为、小米、联想、华大基因等国内巨头的研究院，以及长江存储、华星光电、天马微电子等本土科技领军企业。</p>
       <p>光谷拥有42所高校和56个国家及省部级科研院所，是中国最大的光纤光缆生产基地、光通信技术研发基地和激光产业基地。2023年光谷GDP突破3000亿元，高新技术产业增加值占GDP比重超过60%，成为名副其实的中部"硅谷"。从革命年代的"枪杆子"到和平年代的"芯片"，荆楚儿女始终挺立在时代的潮头。</p>
@@ -787,7 +792,7 @@ body{
     </div>
 
     <div class="content-card" id="loc-covid" style="display:none">
-      <div class="img-placeholder">🎗️</div>
+      <div class="img-placeholder" style="background-image:url(https://picsum.photos/seed/wuhan-memorial/800/440)">🎗️</div>
       <h4 style="color:var(--gold-bright)">抗疫精神：新时代的英雄篇章</h4>
       <p>2020年初，一场突如其来的新冠肺炎疫情侵袭武汉。这座拥有1100万人口的特大城市毅然按下"暂停键"——武汉封城76天，以巨大的牺牲为全国乃至全球抗疫赢得了宝贵时间。在这76个日夜里，4.2万名医护人员从全国各地逆行出征，火神山、雷神山医院分别仅用10天和12天建成交付，16座方舱医院迅速投入使用。这就是令世界惊叹的"中国速度"和"中国力量"。</p>
       <p>在武汉抗疫纪念馆中，一封封请战书、一件件防护服、一张张口罩勒痕的面孔照片，无声地讲述着那段刻骨铭心的历史。习近平总书记将其概括为"生命至上、举国同心、舍生忘死、尊重科学、命运与共"的伟大抗疫精神——这是新时代红色基因的生动体现，是长征精神、抗战精神在和平年代的延续与升华。</p>
@@ -795,7 +800,7 @@ body{
     </div>
 
     <div class="content-card" id="loc-rural" style="display:none">
-      <div class="img-placeholder">🌾</div>
+      <div class="img-placeholder" style="background-image:url(https://picsum.photos/seed/dabie-mountains/800/440)">🌾</div>
       <h4 style="color:var(--gold-bright)">大别山革命老区：红色引领下的绿色振兴</h4>
       <p>湖北大别山革命老区涵盖红安、麻城、大悟、罗田、英山等地，是鄂豫皖革命根据地的核心区域。历史上，这里曾是全国最贫困的地区之一。在脱贫攻坚和乡村振兴战略的持续推动下，这片红色土地正在经历前所未有的蜕变。红安县通过"红色旅游+特色农业+光伏发电"三位一体的发展模式，于2019年顺利实现脱贫摘帽；麻城市依托杜鹃花海和红色遗迹，年接待游客超过1000万人次。</p>
       <p>实践团在红安县七里坪镇走访时了解到，当地将红色资源与乡村旅游深度融合，打造了"红军餐""重走红军路"等体验项目，不仅让游客接受了红色教育，也为村民带来了实实在在的收益。一位年过七旬的老支书对团员们说："当年我们这里为革命献出了14万英雄儿女，今天我们同样要靠自己的双手，让日子一天比一天红火。"</p>
@@ -875,7 +880,7 @@ body{
     </div>
 
     <div class="content-card" id="future-detail" style="display:none">
-      <div class="img-placeholder">🌟</div>
+      <div class="img-placeholder" style="background-image:url(https://picsum.photos/seed/future-china-youth/800/440)">🌟</div>
       <h4 style="color:#4FC3F7">薪火新程：新时代青年的使命与担当</h4>
       <p>习近平总书记指出："青年兴则国家兴，青年强则国家强。"从辛亥革命到五四运动，从长征路上的"红小鬼"到抗疫一线的"90后""00后"，中国青年始终是推动历史前进的重要力量。建党105年、长征胜利90年的今天，历史的接力棒已经传递到了当代青年手中。</p>
       <p>实践团在武汉的7天寻访中，不断在思考一个问题：红色精神在当代究竟意味着什么？它不是博物馆展柜里的文物，不是书本上僵硬的教条，而是一种"明知山有虎，偏向虎山行"的勇气，一种"功成不必在我，功成必定有我"的担当，一种将个人理想融入国家命运的自觉。</p>
