@@ -11,6 +11,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap');
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+/* 移除移动端点触蓝色高亮 */
+*{-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+/* 允许文本选择和输入 */
+input,textarea,[contenteditable]{-webkit-user-select:text;user-select:text}
+
+/* 全局点触反馈 */
+a,button,.enter-btn,.path-card,.location-card,.future-choice-card,.timeline-event,.quiz-opt,.pledge-submit,.sub-nav-btn,.btn-back,.btn-hub,.pledge-tag{
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transition:transform 0.15s ease,opacity 0.15s ease,background 0.35s,border-color 0.35s,box-shadow 0.35s;
+}
+a:active,button:active,.enter-btn:active,.path-card:active,.location-card:active,.future-choice-card:active,.timeline-event:active,.quiz-opt:active,.pledge-submit:active,.sub-nav-btn:active,.btn-back:active,.btn-hub:active{
+  transform:scale(0.96);
+  opacity:0.85;
+}
+/* 移除点击时的outline，保留键盘导航 */
+a:focus:not(:focus-visible),button:focus:not(:focus-visible),.enter-btn:focus:not(:focus-visible),
+.path-card:focus:not(:focus-visible),.location-card:focus:not(:focus-visible),
+.future-choice-card:focus:not(:focus-visible),.quiz-opt:focus:not(:focus-visible),
+.pledge-submit:focus:not(:focus-visible),.sub-nav-btn:focus:not(:focus-visible),
+.btn-back:focus:not(:focus-visible),.btn-hub:focus:not(:focus-visible){outline:none}
 
 :root{
   --red-dark:#6B0F0F;--red:#A51C30;--red-bright:#C41E3A;--red-light:#E8556D;
