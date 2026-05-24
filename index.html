@@ -429,14 +429,171 @@ body{
 
 /* ── Responsive ── */
 @media(max-width:768px){
-  .path-grid{flex-direction:column;align-items:center}
-  .path-card{max-width:100%}
-  .timeline-line{left:16px}.timeline-event{padding-left:44px}
-  .timeline-event::before{left:8px;width:14px;height:14px}
-  .prologue-card{padding:30px 20px}
-  .section-page{padding:50px 16px}
-  #topNav{top:4px;right:8px;gap:4px}
-  #topNav button{padding:6px 10px;font-size:0.75rem}
+  /* Global */
+  .section-page{padding:30px 14px 60px}
+  .section-title{font-size:1.5rem;letter-spacing:4px}
+  .section-sub{font-size:0.82rem}
+  .section-divider{margin-bottom:28px}
+
+  /* Landing */
+  #landing{padding:30px 16px}
+  .landing-logo{width:100px;height:100px;font-size:42px;margin-bottom:24px}
+  .landing-logo::before{inset:-10px}.landing-logo::after{inset:-20px}
+  #landing h1{font-size:2rem;letter-spacing:6px}
+  #landing .tagline{font-size:0.9rem;letter-spacing:3px}
+  #landing .anniversary{gap:12px;font-size:0.8rem;letter-spacing:1px;flex-wrap:wrap;justify-content:center}
+  #landing .anniversary span{padding:3px 10px}
+  #landing .intro-text{font-size:0.85rem;line-height:1.8;max-width:100%;margin-bottom:32px}
+  #landing .intro-text br{display:none}
+  .enter-btn{padding:14px 40px;font-size:1rem;letter-spacing:4px}
+
+  /* Prologue */
+  #prologue{padding:30px 14px}
+  .prologue-card{padding:24px 18px}
+  .prologue-card h2{font-size:1.4rem;letter-spacing:2px}
+  .prologue-card .team-intro{font-size:0.85rem;line-height:1.8}
+  .prologue-card .team-grid{grid-template-columns:1fr;gap:12px}
+  .team-group{padding:18px 14px}
+  .team-group .group-icon{font-size:28px}
+  .team-group .group-name{font-size:0.95rem}
+  .member-tag{font-size:0.7rem;padding:2px 8px}
+
+  /* Hub */
+  #hub{padding:30px 14px}
+  #hub h2{font-size:1.5rem;letter-spacing:4px}
+  #hub .hub-sub{font-size:0.85rem;margin-bottom:32px}
+  .path-grid{flex-direction:column;align-items:center;gap:18px}
+  .path-card{min-width:auto;max-width:100%;width:100%}
+  .path-card .card-img{height:130px;font-size:48px}
+  .path-card .card-body{padding:20px 18px 28px}
+  .path-card h3{font-size:1.5rem}
+  .path-card .card-desc{font-size:0.82rem}
+  .path-card .card-tags span{font-size:0.7rem;padding:3px 8px}
+
+  /* Content cards */
+  .content-card{padding:22px 16px;margin-bottom:14px}
+  .content-card h4{font-size:1.1rem;letter-spacing:1px}
+  .content-card p{font-size:0.85rem;line-height:1.8}
+  .content-card .highlight-box{padding:12px 14px;font-size:0.82rem}
+  .content-card .img-placeholder{height:160px;font-size:40px}
+
+  /* Sub-nav */
+  .sub-nav{gap:6px;margin-bottom:28px}
+  .sub-nav-btn{padding:8px 14px;font-size:0.78rem;letter-spacing:0}
+
+  /* Timeline */
+  .timeline{padding:20px 0}
+  .timeline-line{left:12px}
+  .timeline-event{padding-left:36px;padding-bottom:28px}
+  .timeline-event::before{left:4px;width:14px;height:14px}
+  .timeline-event .event-year{font-size:1.3rem}
+  .timeline-event h4{font-size:1rem}
+  .timeline-event .event-preview{font-size:0.82rem}
+  .timeline-event .event-detail p{font-size:0.82rem}
+  .timeline-event .event-detail .event-quote{font-size:0.82rem;padding:10px 14px}
+
+  /* Location grid */
+  .location-grid{grid-template-columns:1fr;gap:14px}
+  .location-card .loc-img{height:120px;font-size:44px}
+  .location-card .loc-body{padding:16px}
+  .location-card h4{font-size:1rem}
+  .location-card .loc-preview{font-size:0.78rem}
+
+  /* Future choices */
+  .future-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .future-choice-card{padding:20px 12px}
+  .future-choice-card .choice-icon{font-size:36px;margin-bottom:8px}
+  .future-choice-card h4{font-size:0.9rem;letter-spacing:1px}
+  .future-choice-card p{font-size:0.75rem}
+
+  /* Quiz */
+  .quiz-block{padding:22px 16px;margin-top:28px}
+  .quiz-block .quiz-q{font-size:1rem}
+  .quiz-options{gap:6px}
+  .quiz-opt{padding:10px 16px;font-size:0.82rem;border-radius:20px}
+
+  /* Pledge */
+  .pledge-section{padding:22px 16px;margin-top:28px}
+  .pledge-form{flex-direction:column;align-items:stretch}
+  .pledge-input{min-width:auto;width:100%}
+  .pledge-submit{width:100%;text-align:center}
+
+  /* Stats */
+  .stats-row{gap:14px;margin:20px 0}
+  .stat-card{padding:18px 14px;min-width:auto;flex:1 1 40%}
+  .stat-card .stat-num{font-size:2rem}
+  .stat-card .stat-label{font-size:0.75rem}
+
+  /* Summary */
+  #summary{padding:40px 16px}
+  #summary .summary-badge{font-size:52px;margin-bottom:14px}
+  #summary h2{font-size:1.5rem;letter-spacing:4px}
+  #summary .recap{font-size:0.85rem;line-height:2;max-width:100%}
+  #summary .fragment-display{gap:4px}
+  .spirit-fragment{width:32px;height:32px;font-size:16px}
+
+  /* Top nav */
+  #topNav{top:4px;right:4px;gap:3px;flex-wrap:wrap;justify-content:flex-end}
+  #topNav button{padding:5px 8px;font-size:0.7rem;border-radius:14px;letter-spacing:0}
+  #breadcrumb{top:8px;left:8px;font-size:0.7rem}
+
+  /* Toast */
+  .achievement-toast{left:16px;right:16px;bottom:20px;font-size:0.8rem;padding:12px 18px;border-radius:10px}
+
+  /* Back buttons */
+  .section-page .back-row{gap:8px;margin-bottom:24px}
+  .btn-back,.btn-hub{font-size:0.78rem;padding:7px 14px}
+}
+
+@media(max-width:480px){
+  /* Landing */
+  .landing-logo{width:80px;height:80px;font-size:34px;margin-bottom:20px}
+  #landing h1{font-size:1.6rem;letter-spacing:4px}
+  #landing .anniversary{flex-direction:column;gap:8px}
+  .enter-btn{padding:12px 32px;font-size:0.9rem;letter-spacing:3px}
+
+  /* Hub */
+  .path-card .card-img{height:100px;font-size:40px}
+  .path-card h3{font-size:1.3rem}
+  .path-card .card-body{padding:16px 14px 22px}
+
+  /* Future choices */
+  .future-grid{grid-template-columns:1fr;gap:10px}
+
+  /* Quiz */
+  .quiz-opt{width:100%;text-align:center}
+
+  /* Prologue */
+  .prologue-card{padding:18px 14px}
+  .prologue-card h2{font-size:1.2rem}
+
+  /* Top nav */
+  #topNav button{padding:4px 6px;font-size:0.65rem}
+
+  /* Content */
+  .content-card{padding:16px 12px}
+  .content-card h4{font-size:1rem}
+  .content-card p{font-size:0.8rem}
+  .content-card .img-placeholder{height:130px;font-size:36px}
+
+  /* Section */
+  .section-page{padding:24px 10px 50px}
+  .section-title{font-size:1.3rem}
+
+  /* Stats */
+  .stat-card .stat-num{font-size:1.6rem}
+
+  /* Summary */
+  #summary .summary-badge{font-size:42px}
+  #summary h2{font-size:1.3rem}
+
+  /* Sub-nav */
+  .sub-nav-btn{padding:6px 10px;font-size:0.72rem}
+
+  /* Timeline */
+  .timeline-event{padding-left:30px}
+  .timeline-event::before{left:2px;width:12px;height:12px}
+  .timeline-event .event-year{font-size:1.1rem}
 }
 </style>
 </head>
