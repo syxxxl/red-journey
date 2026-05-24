@@ -424,8 +424,8 @@ body{
 #summary .fragment-display{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:30px}
 
 /* ── Spark ── */
-.spark{position:fixed;pointer-events:none;z-index:5000;width:5px;height:5px;background:var(--gold);border-radius:50%;animation:sparkUp 0.7s ease-out forwards}
-@keyframes sparkUp{to{transform:translateY(-100px) scale(0);opacity:0}}
+.spark{position:fixed;pointer-events:none;z-index:5000;width:8px;height:8px;background:var(--gold);border-radius:50%;box-shadow:0 0 10px var(--gold),0 0 25px #FF6B35;animation:sparkUp 0.8s ease-out forwards}
+@keyframes sparkUp{to{transform:translate(var(--sx),var(--sy)) scale(0);opacity:0}}
 
 /* ── Responsive ── */
 @media(max-width:768px){
@@ -687,14 +687,14 @@ body{
     <div class="quiz-block" id="history-quiz">
       <h4>📝 历史知识闯关</h4>
       <div class="quiz-progress">共 3 题，测试你的红色历史知识</div>
-      <div class="quiz-q" id="h-q-text">第1题：八七会议是在哪个城市召开的？</div>
-      <div class="quiz-options" id="h-q-opts">
+      <div class="quiz-q" id="history-q-text">第1题：八七会议是在哪个城市召开的？</div>
+      <div class="quiz-options" id="history-q-opts">
         <button class="quiz-opt" data-correct="true">武汉</button>
         <button class="quiz-opt" data-correct="false">上海</button>
         <button class="quiz-opt" data-correct="false">南昌</button>
         <button class="quiz-opt" data-correct="false">广州</button>
       </div>
-      <div class="quiz-fb" id="h-q-fb"></div>
+      <div class="quiz-fb" id="history-q-fb"></div>
     </div>
   </div>
 </div>
@@ -824,14 +824,14 @@ body{
     <div class="quiz-block" id="reality-quiz">
       <h4>📝 武汉知识闯关</h4>
       <div class="quiz-progress">共 3 题，看看你对武汉了解多少</div>
-      <div class="quiz-q" id="r-q-text">第1题：武汉长江大桥建成通车于哪一年？</div>
-      <div class="quiz-options" id="r-q-opts">
+      <div class="quiz-q" id="reality-q-text">第1题：武汉长江大桥建成通车于哪一年？</div>
+      <div class="quiz-options" id="reality-q-opts">
         <button class="quiz-opt" data-correct="false">1949年</button>
         <button class="quiz-opt" data-correct="true">1957年</button>
         <button class="quiz-opt" data-correct="false">1965年</button>
         <button class="quiz-opt" data-correct="false">1978年</button>
       </div>
-      <div class="quiz-fb" id="r-q-fb"></div>
+      <div class="quiz-fb" id="reality-q-fb"></div>
     </div>
   </div>
 </div>
@@ -925,14 +925,14 @@ body{
     <div class="quiz-block" id="future-quiz">
       <h4>📝 时代使命闯关</h4>
       <div class="quiz-progress">共 3 题，关于新时代的使命与担当</div>
-      <div class="quiz-q" id="f-q-text">第1题："两个一百年"奋斗目标中，第二个百年目标是什么？</div>
-      <div class="quiz-options" id="f-q-opts">
+      <div class="quiz-q" id="future-q-text">第1题："两个一百年"奋斗目标中，第二个百年目标是什么？</div>
+      <div class="quiz-options" id="future-q-opts">
         <button class="quiz-opt" data-correct="false">全面建成小康社会</button>
         <button class="quiz-opt" data-correct="true">全面建成社会主义现代化强国</button>
         <button class="quiz-opt" data-correct="false">基本实现现代化</button>
         <button class="quiz-opt" data-correct="false">实现中华民族伟大复兴</button>
       </div>
-      <div class="quiz-fb" id="f-q-fb"></div>
+      <div class="quiz-fb" id="future-q-fb"></div>
     </div>
   </div>
 </div>
@@ -1084,6 +1084,8 @@ document.addEventListener('click',function(e){
     if(target==='timeline'){
       const tl=section.querySelector('#timeline');
       if(tl)tl.style.display='block';
+      const innerTL=section.querySelector('#timeline .timeline');
+      if(innerTL)innerTL.style.display='block';
     }
     if(target==='future-choices-panel'){
       const grid=section.querySelector('.future-grid');
@@ -1212,11 +1214,13 @@ function spawnSparks(el){
   }
 }
 document.addEventListener('mousemove',e=>{
-  if(Math.random()>0.85){
+  if(Math.random()>0.7){
     const spark=document.createElement('div');spark.className='spark';
     spark.style.left=e.clientX+'px';spark.style.top=e.clientY+'px';
-    spark.style.width='3px';spark.style.height='3px';
-    document.body.appendChild(spark);setTimeout(()=>spark.remove(),600);
+    const angle=Math.random()*Math.PI*2,dist=30+Math.random()*60;
+    spark.style.setProperty('--sx',Math.cos(angle)*dist+'px');
+    spark.style.setProperty('--sy',Math.sin(angle)*dist+'px');
+    document.body.appendChild(spark);setTimeout(()=>spark.remove(),800);
   }
 });
 
