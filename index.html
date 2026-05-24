@@ -1271,6 +1271,10 @@ document.addEventListener('click',function(e){
       const result=document.getElementById('future-result-card');
       if(result)result.style.display=S.futureChoice?'block':'none';
     }
+    if(target==='future-pledge'){
+      const ps=section.querySelector('#future-pledge .pledge-section');
+      if(ps)ps.style.display='block';
+    }
   }
 });
 
