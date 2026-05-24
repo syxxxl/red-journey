@@ -137,15 +137,23 @@ body{
   font-family:'Noto Serif SC',serif;font-size:1.8rem;color:var(--gold);letter-spacing:4px;margin-bottom:20px;
 }
 .prologue-card .team-intro{color:var(--text-dim);line-height:2;margin-bottom:24px;font-size:0.95rem}
-.prologue-card .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:30px}
-.team-member{
-  padding:20px 16px;text-align:center;background:rgba(255,255,255,0.02);
+.prologue-card .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:30px}
+.team-group{
+  padding:24px 20px;text-align:center;background:rgba(255,255,255,0.02);
   border:1px solid rgba(255,255,255,0.05);border-radius:var(--radius);transition:all 0.4s;
 }
-.team-member:hover{background:rgba(201,168,76,0.05);border-color:rgba(201,168,76,0.2);transform:translateY(-4px)}
-.team-member .avatar{font-size:36px;margin-bottom:8px}
-.team-member .name{color:var(--white);font-weight:600;font-size:0.95rem}
-.team-member .role{color:var(--text-dim);font-size:0.78rem;margin-top:4px}
+.team-group:hover{background:rgba(201,168,76,0.05);border-color:rgba(201,168,76,0.2);transform:translateY(-4px)}
+.team-group .group-icon{font-size:34px;margin-bottom:8px;display:block}
+.team-group .group-name{color:var(--gold);font-family:'Noto Serif SC',serif;font-size:1.05rem;letter-spacing:2px;margin-bottom:4px}
+.team-group .group-desc{color:var(--text-dim);font-size:0.78rem;line-height:1.5;margin-bottom:10px}
+.team-group .group-members{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.member-tag{
+  padding:3px 12px;font-size:0.78rem;background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:var(--text-dim);
+}
+@media(max-width:768px){
+  .prologue-card .team-grid{grid-template-columns:1fr}
+}
 
 /* ═══════════════════════ HUB ═══════════════════════ */
 #hub{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:60px 20px}
@@ -451,19 +459,41 @@ body{
   <div class="prologue-card">
     <h2>📋 实践团简介</h2>
     <p class="team-intro">
-      <strong>薪火新程红色寻访实践团</strong>由来自多所高校的 10 名青年学子组成，于 2026 年 5 月赴湖北省武汉市开展为期 7 天的红色寻访专项社会实践。团队以庆祝<strong>中国共产党成立 105 周年</strong>和<strong>中国工农红军长征胜利 90 周年</strong>为契机，围绕"历史溯源、现实观照、未来展望"三条主线，深入革命旧址、走访建设一线、对话时代楷模，力图在行走中感悟红色精神的当代价值，在实践中坚定青春报国的理想信念。
+      <strong>薪火新程红色寻访实践团</strong>由来自多所高校的 10 名青年学子组成，于 2026 年 5 月赴湖北省武汉市开展为期 7 天的红色寻访专项社会实践。团队以庆祝<strong>中国共产党成立 105 周年</strong>和<strong>中国工农红军长征胜利 90 周年</strong>为契机，围绕"历史溯源、现实观照、未来展望"三条主线，深入革命旧址、走访建设一线、对话时代楷模，力图在行走中感悟红色精神的当代价值，在实践中坚定青春报国的理想信念。团队下设<strong>文案组、宣传组、设计组、外联组</strong>四个小组，分工协作、高效运转。
     </p>
     <div class="team-grid">
-      <div class="team-member"><span class="avatar">👩‍🎓</span><div class="name">张思远</div><div class="role">团长 / 领队</div></div>
-      <div class="team-member"><span class="avatar">👨‍💻</span><div class="name">李明志</div><div class="role">文献调研</div></div>
-      <div class="team-member"><span class="avatar">👩‍🔬</span><div class="name">王雨晴</div><div class="role">访谈记录</div></div>
-      <div class="team-member"><span class="avatar">👨‍🎨</span><div class="name">赵文博</div><div class="role">摄影摄像</div></div>
-      <div class="team-member"><span class="avatar">👩‍💼</span><div class="name">陈晓彤</div><div class="role">后勤统筹</div></div>
-      <div class="team-member"><span class="avatar">👨‍🏫</span><div class="name">刘浩然</div><div class="role">文案撰写</div></div>
-      <div class="team-member"><span class="avatar">👩‍🎤</span><div class="name">孙悦然</div><div class="role">新媒体运营</div></div>
-      <div class="team-member"><span class="avatar">👨‍🔧</span><div class="name">周子涵</div><div class="role">技术保障</div></div>
-      <div class="team-member"><span class="avatar">👩‍🏫</span><div class="name">吴思琪</div><div class="role">数据整理</div></div>
-      <div class="team-member"><span class="avatar">👨‍🎓</span><div class="name">郑浩然</div><div class="role">成果汇编</div></div>
+      <div class="team-group">
+        <span class="group-icon">✍️</span>
+        <h4 class="group-name">文案组</h4>
+        <p class="group-desc">负责实践报告撰写、访谈记录整理、新闻稿件发布</p>
+        <div class="group-members">
+          <span class="member-tag">xxx</span><span class="member-tag">xxx</span><span class="member-tag">xxx</span>
+        </div>
+      </div>
+      <div class="team-group">
+        <span class="group-icon">📣</span>
+        <h4 class="group-name">宣传组</h4>
+        <p class="group-desc">负责新媒体运营、摄影摄像、视频剪辑与推广</p>
+        <div class="group-members">
+          <span class="member-tag">xxx</span><span class="member-tag">xxx</span><span class="member-tag">xxx</span>
+        </div>
+      </div>
+      <div class="team-group">
+        <span class="group-icon">🎨</span>
+        <h4 class="group-name">设计组</h4>
+        <p class="group-desc">负责网页开发、视觉设计、文创产品制作</p>
+        <div class="group-members">
+          <span class="member-tag">xxx</span><span class="member-tag">xxx</span>
+        </div>
+      </div>
+      <div class="team-group">
+        <span class="group-icon">🤝</span>
+        <h4 class="group-name">外联组</h4>
+        <p class="group-desc">负责对接实践单位、联络采访对象、统筹行程</p>
+        <div class="group-members">
+          <span class="member-tag">xxx</span><span class="member-tag">xxx</span>
+        </div>
+      </div>
     </div>
     <div style="text-align:center">
       <button class="enter-btn" onclick="navigateTo('hub')" style="font-size:1rem;padding:14px 44px;">
