@@ -16,7 +16,7 @@ body {
   font-family: var(--font-sans);
   background: var(--black-red);
   color: var(--white-warm);
-  overflow-x: hidden;
+  overflow: hidden;
   line-height: 1.85;
   -webkit-font-smoothing: antialiased;
 }
