@@ -70,8 +70,8 @@
 
 /* ═══════════════ LANDING ═══════════════ */
 #landing {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  min-height: 100vh; text-align: center; padding: 12px; color: #fff;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  min-height: 100vh; text-align: center; padding: 40px 12px 12px; color: #fff;
   position: relative;
   background:
     repeating-linear-gradient(2.5deg, transparent, transparent 3px, rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 6px),
@@ -114,7 +114,7 @@
 #landing .intro-text strong { color: var(--gold-pale); }
 
 /* ═══════════════ PROLOGUE ═══════════════ */
-#prologue { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 14px 12px; }
+#prologue { display: flex; align-items: center; justify-content: flex-start; min-height: 100vh; padding: 60px 12px 14px; }
 .prologue-card {
   max-width: 740px; width: 100%;
   background: linear-gradient(180deg, rgba(140,0,0,0.9) 0%, rgba(74,0,0,0.9) 100%);
@@ -151,7 +151,7 @@
 }
 
 /* ═══════════════ HUB ═══════════════ */
-#hub { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 14px 12px; }
+#hub { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 100vh; padding: 60px 12px 14px; }
 #hub h2 {
   font-family: var(--font-serif); font-size: clamp(1.4rem, 2.8vw, 2rem);
   letter-spacing: 10px;
@@ -354,8 +354,8 @@
 
 /* ═══════════════ SUMMARY ═══════════════ */
 #summary {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  min-height: 100vh; padding: 16px 20px; text-align: center; position: relative;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  min-height: 100vh; padding: 60px 20px 16px; text-align: center; position: relative;
   background:
     radial-gradient(ellipse at 50% 20%, rgba(255,215,0,0.12) 0%, transparent 55%),
     radial-gradient(ellipse at 50% 80%, rgba(222,41,16,0.12) 0%, transparent 45%),
@@ -373,7 +373,7 @@
 #summary .fragment-display { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; margin-bottom: 18px; }
 
 /* ═══════════════ GENEALOGY ═══════════════ */
-#genealogy-section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 14px 12px; }
+#genealogy-section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 60px 12px 14px; }
 #genealogy-section h2 {
   font-family: var(--font-serif); font-size: clamp(1.3rem, 2.2vw, 1.6rem);
   background: var(--gradient-title);
@@ -403,7 +403,7 @@
 }
 
 /* ═══════════════ HERO GALLERY ═══════════════ */
-#heroes-section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 14px 12px; }
+#heroes-section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 60px 12px 14px; }
 #heroes-section h2 {
   font-family: var(--font-serif); font-size: clamp(1.3rem, 2.2vw, 1.6rem);
   background: var(--gradient-title);
@@ -443,7 +443,7 @@
 }
 
 /* ═══════════════ VOICES ═══════════════ */
-#voices-section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px 12px; }
+#voices-section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 60px 12px 14px; }
 #voices-section h2 {
   font-family: var(--font-serif); font-size: clamp(1.3rem, 2.2vw, 1.6rem);
   background: var(--gradient-title);
@@ -559,7 +559,7 @@
   .enter-btn { padding: 10px 28px; font-size: 0.9rem; letter-spacing: 4px; }
 
   /* ── Prologue ── */
-  #prologue { padding: 10px 8px; }
+  #prologue { padding: 50px 8px 10px; }
   .prologue-card { padding: 14px 14px; }
   .prologue-card h2 { font-size: 1.1rem; letter-spacing: 3px; }
   .prologue-card .team-intro { font-size: 0.76rem; line-height: 1.55; }
@@ -571,7 +571,7 @@
   .member-tag { padding: 2px 8px; font-size: 0.68rem; }
 
   /* ── Hub ── */
-  #hub { padding: 10px 8px; }
+  #hub { padding: 50px 8px 10px; }
   #hub h2 { font-size: clamp(1.2rem, 4vw, 1.6rem); letter-spacing: 6px; }
   #hub .hub-sub { font-size: 0.74rem; letter-spacing: 2px; margin-bottom: 12px; }
   .path-grid { flex-direction: column; align-items: center; gap: 10px; }
@@ -631,7 +631,7 @@
   .pledge-submit { padding: 10px 18px; font-size: 0.78rem; }
 
   /* ── Genealogy ── */
-  #genealogy-section { padding: 10px 8px; }
+  #genealogy-section { padding: 50px 8px 10px; }
   #genealogy-section h2 { font-size: 1.15rem; letter-spacing: 6px; }
   #genealogy-section .genealogy-sub { font-size: 0.7rem; margin-bottom: 10px; }
   .genealogy-canvas { min-height: 280px; max-width: 100%; }
@@ -639,7 +639,7 @@
   #genealogy-section .back-row { position: static !important; margin-bottom: 6px; }
 
   /* ── Heroes ── */
-  #heroes-section { padding: 10px 8px; }
+  #heroes-section { padding: 50px 8px 10px; }
   #heroes-section h2 { font-size: 1.15rem; letter-spacing: 6px; }
   #heroes-section .heroes-sub { font-size: 0.7rem; margin-bottom: 10px; }
   .heroes-scroll { gap: 8px; padding: 6px 4px 12px; }
@@ -652,7 +652,7 @@
   #heroes-section .back-row { position: static !important; margin-bottom: 6px; }
 
   /* ── Voices ── */
-  #voices-section { padding: 10px 8px; }
+  #voices-section { padding: 50px 8px 10px; }
   #voices-section h2 { font-size: 1.15rem; letter-spacing: 6px; margin-bottom: 12px; }
   .voice-card { padding: 16px 16px; }
   .voice-card .voice-text { font-size: 0.95rem; min-height: 48px; }
@@ -661,7 +661,7 @@
   #voices-section .back-row { position: static !important; margin-bottom: 6px; }
 
   /* ── Summary ── */
-  #summary { padding: 12px 14px; }
+  #summary { padding: 50px 14px 12px; }
   #summary .summary-badge { font-size: 40px; margin-bottom: 8px; }
   #summary h2 { font-size: clamp(1.2rem, 4vw, 1.6rem); letter-spacing: 6px; }
   #summary .recap { font-size: 0.76rem; max-width: 100%; }
