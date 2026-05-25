@@ -7,11 +7,11 @@
 
 /* ── Page System ── */
 .page {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
+  position: absolute; top: 0; left: 0; width: 100%; min-height: 100vh;
   opacity: 0; pointer-events: none; transform: translateY(30px);
   transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
 }
-.page.active { opacity: 1; pointer-events: auto; transform: translateY(0); position: relative; overflow-y: auto; }
+.page.active { opacity: 1; pointer-events: auto; transform: translateY(0); position: relative; }
 .page.exiting { opacity: 0; transform: translateY(-20px); transition-duration: 0.25s; }
 
 /* ── Scroll Reveal ── */
@@ -21,7 +21,7 @@
 }
 .reveal.revealed { opacity: 1; transform: translateY(0); }
 
-/* ── Top Bar (进度条) ── */
+/* ── Top Bar ── */
 #topBar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 4px;
   background: var(--gradient-gold-bar);
