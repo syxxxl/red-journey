@@ -38,7 +38,7 @@ export function navigateTo(pageId) {
 
   curtainClose(() => {
     target.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    target.scrollTop = 0;
   });
 
   State._data.pageHistory.push(pageId);
