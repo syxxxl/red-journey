@@ -136,9 +136,9 @@
     border-radius: 16px; display: flex; align-items: center;
   }
 
-  /* Prevent fixed nav from covering page content */
-  .page { padding-top: 54px; }
-  #landing.page { padding-top: 0; }
+  /* Prevent fixed nav from covering page content — !important overrides page ID selectors */
+  .page { padding-top: 54px !important; }
+  #landing.page { padding-top: 0 !important; }
 
   /* Hide breadcrumb on mobile */
   #breadcrumb { display: none; }
@@ -172,8 +172,8 @@
 @media (max-width: 480px) {
   #topNav { padding: 6px 3px; gap: 2px; }
   #topNav button { padding: 7px 9px; font-size: 0.64rem; min-height: 32px; letter-spacing: 0.5px; border-radius: 14px; }
-  .page { padding-top: 46px; }
-  #landing.page { padding-top: 0; }
+  .page { padding-top: 46px !important; }
+  #landing.page { padding-top: 0 !important; }
 
   .section-page { padding: 4px 6px 10px; }
   .section-title { font-size: 1.1rem; letter-spacing: 4px; }
