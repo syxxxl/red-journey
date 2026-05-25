@@ -1,0 +1,91 @@
+/* ═══════════════════════════════════════════════
+   薪火新程 · 赤色华章 — Animations
+   ═══════════════════════════════════════════════ */
+
+/* ── 金色五星脉动 ── */
+@keyframes starPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 60px rgba(255,0,0,0.2), 0 0 140px rgba(222,41,16,0.08); }
+  50% { transform: scale(1.05); box-shadow: 0 0 100px rgba(255,0,0,0.4), 0 0 200px rgba(222,41,16,0.15); }
+}
+
+/* ── 光环脉动 ── */
+@keyframes starRing {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.12); opacity: 0.06; }
+}
+
+/* ── 标题淡入 ── */
+@keyframes titleFadeIn {
+  from { opacity: 0; transform: translateY(30px); filter: drop-shadow(0 0 0 transparent); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── 火星上升 ── */
+@keyframes sparkUp {
+  to { transform: translate(var(--sx), var(--sy)) scale(0); opacity: 0; }
+}
+
+/* ── 标签弹出 ── */
+@keyframes tagPop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ── 光标闪烁 ── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── 地图标记脉冲 ── */
+@keyframes markerPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* ── 五星浮动 ── */
+@keyframes starFloat {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.06; }
+  90% { opacity: 0.06; }
+  100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+}
+
+/* ── 丝幕闭合动画 ── */
+@keyframes curtainClose {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+
+/* ── 红旗飘动 ── */
+@keyframes flagWave {
+  0%, 100% { background-position: 0% 0%; }
+  25% { background-position: 1% 0%; }
+  75% { background-position: -1% 0%; }
+}
+
+/* ── 进度条流光 ── */
+@keyframes barGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ── 数字弹跳 ── */
+@keyframes countBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* ── 卡片滑入 ── */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ── 打字机动效 (cursor blink defined above) ── */

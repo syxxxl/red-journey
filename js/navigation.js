@@ -1,29 +1,45 @@
 // ══════════════════════════════════════════════
-// NAVIGATION — Page transitions, breadcrumb, top bar
+// NAVIGATION — Silk curtain transitions
 // ══════════════════════════════════════════════
 import { State } from './state.js';
 import { ALL_PAGES, PAGE_NAMES } from './constants.js';
 import { setParticleDensity } from './particles.js';
 
 let threeDimensionsShown = false;
+let isTransitioning = false;
+
+function curtainClose(callback) {
+  if (isTransitioning) return;
+  isTransitioning = true;
+  const curtain = document.getElementById('curtain');
+  curtain.classList.add('closed');
+  setTimeout(() => {
+    callback();
+    setTimeout(() => {
+      curtain.classList.remove('closed');
+      setTimeout(() => { isTransitioning = false; }, 500);
+    }, 80);
+  }, 450);
+}
 
 export function navigateTo(pageId) {
+  if (isTransitioning) return;
   const currentActive = document.querySelector('.page.active');
   if (currentActive && currentActive.id === pageId) return;
 
   if (currentActive) {
     currentActive.classList.add('exiting');
     currentActive.classList.remove('active');
-    setTimeout(() => currentActive.classList.remove('exiting'), 600);
+    setTimeout(() => currentActive.classList.remove('exiting'), 500);
   }
 
   const target = document.getElementById(pageId);
   if (!target) return;
 
-  setTimeout(() => {
+  curtainClose(() => {
     target.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, currentActive ? 300 : 50);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  });
 
   State._data.pageHistory.push(pageId);
   State._data.currentPage = pageId;
@@ -37,21 +53,23 @@ export function navigateTo(pageId) {
   updateBreadcrumb(pageId);
   setParticleDensity(pageId);
 
+  // Timeline animation on history page
   if (pageId === 'history-section') {
     setTimeout(() => {
       document.querySelectorAll('.timeline-event').forEach((el, i) => {
-        setTimeout(() => el.classList.add('visible'), i * 100);
+        setTimeout(() => el.classList.add('visible'), i * 80);
       });
-    }, 400);
+    }, 600);
   }
 
+  // Scroll reveal refresh
   setTimeout(() => {
     document.querySelectorAll('.reveal:not(.revealed)').forEach(el => {
       el.classList.add('revealed');
     });
-  }, 700);
+  }, 800);
 
-  // Three dimensions completed check
+  // Three dimensions achievement
   const v = State.get('visited');
   if (!threeDimensionsShown && v.has('history-section') && v.has('reality-section') && v.has('future-section')) {
     threeDimensionsShown = true;
@@ -62,7 +80,7 @@ export function navigateTo(pageId) {
 }
 
 export function updateTopBar() {
-  const total = 3;
+  const total = 10;
   const pct = Math.min(State.get('visited').size, total) / total * 100;
   document.getElementById('topBar').style.transform = `scaleX(${pct / 100})`;
 }
@@ -86,6 +104,12 @@ export function updateBreadcrumb(pageId) {
     html += '<span class="sep">›</span><span>寻访枢纽</span>';
   } else if (pageId === 'summary') {
     html += '<span class="sep">›</span><span onclick="window._navigateTo(\'hub\')">寻访枢纽</span><span class="sep">›</span><span>寻访总结</span>';
+  } else if (pageId === 'genealogy-section') {
+    html += '<span class="sep">›</span><span onclick="window._navigateTo(\'hub\')">寻访枢纽</span><span class="sep">›</span><span>精神谱系</span>';
+  } else if (pageId === 'heroes-section') {
+    html += '<span class="sep">›</span><span onclick="window._navigateTo(\'hub\')">寻访枢纽</span><span class="sep">›</span><span>英雄谱</span>';
+  } else if (pageId === 'voices-section') {
+    html += '<span class="sep">›</span><span onclick="window._navigateTo(\'hub\')">寻访枢纽</span><span class="sep">›</span><span>薪火之声</span>';
   } else {
     html += '<span class="sep">›</span><span onclick="window._navigateTo(\'hub\')">寻访枢纽</span><span class="sep">›</span><span>' + (PAGE_NAMES[pageId] || pageId) + '</span>';
   }

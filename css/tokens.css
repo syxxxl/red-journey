@@ -1,0 +1,46 @@
+/* ═══════════════════════════════════════════════
+   薪火新程 · 赤色华章 — Design Tokens
+   ═══════════════════════════════════════════════ */
+
+:root {
+  /* ── 革命红色系 (主色调，占据70%视觉面积) ── */
+  --red-flag:       #DE2910;   /* 国旗红 — 页面主背景 */
+  --red-revolution: #CC0000;   /* 革命红 — 渐变过渡 */
+  --red-blood:      #8B0000;   /* 血红 — 卡片底色 */
+  --red-dark:       #4A0000;   /* 暗红 — 最深区域 */
+  --red-bright:     #FF3333;   /* 亮红 — 悬停高亮 */
+  --red-glow:       #FF4444;   /* 辉光红 — 阴影发光 */
+
+  /* ── 金色系 (点缀色，用于边框/星标/标题) ── */
+  --gold-foil:      #FFD700;   /* 金箔 — 边框/星标 */
+  --gold-rich:      #C5A028;   /* 厚金 — 副标题 */
+  --gold-pale:      #FFF0AA;   /* 淡金 — 红底文字 */
+  --gold-dark:      #8B7500;   /* 暗金 — 立体阴影 */
+
+  /* ── 白色系 (文字) ── */
+  --white-bright:   #FFFFFF;   /* 纯白 — 标题 */
+  --white-warm:     #FFF5EE;   /* 暖白 — 正文 */
+  --white-muted:    rgba(255,255,255,0.65); /* 弱化 — 辅助文字 */
+
+  /* ── 深色辅助 ── */
+  --black-red:      #0D0000;   /* 黑红 — 最深背景 */
+  --navy-red:       #1A0A0A;   /* 深蓝红 — 交替背景 */
+
+  /* ── 间距/圆角/阴影/缓动 ── */
+  --radius-sm: 2px;
+  --radius:    4px;
+  --radius-lg: 6px;
+  --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:  cubic-bezier(0, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── 字体 ── */
+  --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', 'PingFang SC', 'Microsoft YaHei', serif;
+  --font-sans:  'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+
+  /* ── 预置渐变 ── */
+  --gradient-hero:   linear-gradient(180deg, #DE2910 0%, #8B0000 40%, #4A0000 100%);
+  --gradient-card:   linear-gradient(180deg, rgba(140,0,0,0.95) 0%, rgba(74,0,0,0.95) 100%);
+  --gradient-gold-bar: linear-gradient(90deg, transparent, var(--gold-foil), var(--gold-pale), var(--gold-foil), transparent);
+  --gradient-title:  linear-gradient(180deg, #FFFFFF 0%, #FFF0AA 30%, #FFD700 60%, #C5A028 100%);
+}

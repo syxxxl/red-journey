@@ -1,0 +1,108 @@
+/* ═══════════════════════════════════════════════
+   薪火新程 · 赤色华章 — Reset, Base & Typography
+   ═══════════════════════════════════════════════ */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+* { -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
+input, textarea, [contenteditable] { -webkit-user-select: text; user-select: text; }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-rich) var(--red-dark);
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--black-red);
+  color: var(--white-warm);
+  overflow-x: hidden;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 红色丝绸纹理背景 ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    /* 丝绸褶皱纹理 */
+    repeating-linear-gradient(
+      2.5deg,
+      transparent,
+      transparent 3px,
+      rgba(0,0,0,0.03) 3px,
+      rgba(0,0,0,0.03) 6px
+    ),
+    /* 底部发光 */
+    radial-gradient(ellipse at 50% 100%, rgba(222,41,16,0.25) 0%, transparent 55%),
+    radial-gradient(ellipse at 30% 0%, rgba(255,215,0,0.06) 0%, transparent 40%);
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--red-dark); }
+::-webkit-scrollbar-thumb { background: var(--gold-rich); border-radius: 3px; }
+
+/* ── 排版 ── */
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-serif); font-weight: 900; }
+
+/* ── Canvas ── */
+#bgCanvas {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+}
+
+/* ── ASCII 丝幕转场层 ── */
+#curtain {
+  position: fixed; inset: 0; z-index: 9000; pointer-events: none;
+  display: flex;
+}
+.curtain-panel {
+  flex: 1; height: 100%;
+  background: linear-gradient(180deg, #DE2910, #8B0000, #4A0000);
+  transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.3);
+}
+.curtain-panel.left  { transform: translateX(-100%); }
+.curtain-panel.right { transform: translateX(100%); }
+#curtain.closed .curtain-panel.left  { transform: translateX(0); }
+#curtain.closed .curtain-panel.right { transform: translateX(0); }
+
+/* ── 金色分隔线 ── */
+.gold-separator {
+  width: 80%; max-width: 600px; height: 3px;
+  margin: 36px auto;
+  background: var(--gradient-gold-bar);
+  position: relative;
+}
+.gold-separator::after {
+  content: '★';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gold-foil); font-size: 14px;
+  background: var(--red-blood); padding: 0 12px;
+}
+
+/* ── 对勾/选中标记 ── */
+a, button, .enter-btn, .path-card, .location-card, .future-choice-card,
+.timeline-event, .quiz-opt, .pledge-submit, .sub-nav-btn, .btn-back, .btn-hub, .pledge-tag {
+  touch-action: manipulation;
+  transition: transform 0.15s ease, opacity 0.15s ease, background 0.4s, border-color 0.4s, box-shadow 0.4s;
+}
+a:active, button:active, .enter-btn:active, .path-card:active, .location-card:active,
+.future-choice-card:active, .timeline-event:active, .quiz-opt:active, .pledge-submit:active,
+.sub-nav-btn:active, .btn-back:active, .btn-hub:active {
+  transform: scale(0.96); opacity: 0.85;
+}
+a:focus:not(:focus-visible), button:focus:not(:focus-visible),
+.enter-btn:focus:not(:focus-visible), .path-card:focus:not(:focus-visible),
+.location-card:focus:not(:focus-visible), .future-choice-card:focus:not(:focus-visible),
+.quiz-opt:focus:not(:focus-visible), .pledge-submit:focus:not(:focus-visible),
+.sub-nav-btn:focus:not(:focus-visible), .btn-back:focus:not(:focus-visible),
+.btn-hub:focus:not(:focus-visible) { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

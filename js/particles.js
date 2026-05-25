@@ -1,97 +1,108 @@
 // ══════════════════════════════════════════════
-// PARTICLES — Constellation background system
+// PARTICLES — Red Star particle system
 // ══════════════════════════════════════════════
+
 const canvas = document.getElementById('bgCanvas');
 const ctx = canvas.getContext('2d');
-let W, H, particles = [];
-const PARTICLE_COUNT = 100;
-const CONNECT_DIST = 120;
+
+let particles = [];
+const MAX = 80;
+let globalAlpha = 0.55;
+let globalSpeed = 0.35;
 
 function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
 window.addEventListener('resize', resize);
 resize();
 
+// Draw a 5-pointed star
+function drawStar(cx, cy, r, alpha) {
+  const spikes = 5;
+  const outerR = r;
+  const innerR = r * 0.4;
+  let rot = Math.PI / 2 * 3;
+  const step = Math.PI / spikes;
+
+  ctx.beginPath();
+  for (let i = 0; i < spikes; i++) {
+    let x = cx + Math.cos(rot) * outerR;
+    let y = cy - Math.sin(rot) * outerR;
+    ctx.lineTo(x, y);
+    rot += step;
+    x = cx + Math.cos(rot) * innerR;
+    y = cy - Math.sin(rot) * innerR;
+    ctx.lineTo(x, y);
+    rot += step;
+  }
+  ctx.closePath();
+  ctx.fillStyle = `rgba(255,215,0,${alpha})`;
+  ctx.shadowColor = `rgba(255,80,20,${alpha * 0.8})`;
+  ctx.shadowBlur = r * 1.2;
+  ctx.fill();
+  ctx.shadowBlur = 0;
+}
+
 class Particle {
   constructor() {
-    this.reset();
-    this.y = Math.random() * H;
+    this.reset(true);
   }
-  reset() {
-    this.x = Math.random() * W;
-    this.y = -10;
-    this.r = Math.random() * 2 + 0.8;
-    this.v = Math.random() * 0.35 + 0.12;
-    this.a = Math.random() * 0.4 + 0.15;
-    this.waveAmp = Math.random() * 1.8 + 0.5;
-    this.waveFreq = Math.random() * 0.01 + 0.004;
+  reset(initial) {
+    this.x = Math.random() * canvas.width;
+    this.y = initial ? Math.random() * canvas.height : canvas.height + 20;
+    this.size = 1.5 + Math.random() * 5;
+    this.speedY = -(0.15 + Math.random() * globalSpeed);
+    this.speedX = (Math.random() - 0.5) * 0.4;
+    this.wobble = Math.random() * Math.PI * 2;
+    this.wobbleSpeed = (Math.random() - 0.5) * 0.02;
+    this.alpha = 0.15 + Math.random() * globalAlpha;
   }
   update() {
-    this.y += this.v;
-    this.x += Math.sin(this.y * this.waveFreq) * this.waveAmp * 0.3;
-    if (this.y > H + 15) this.reset();
-    // wrap horizontally
-    if (this.x < -10) this.x = W + 10;
-    if (this.x > W + 10) this.x = -10;
+    this.y += this.speedY;
+    this.x += this.speedX + Math.sin(this.wobble) * 0.3;
+    this.wobble += this.wobbleSpeed;
+    if (this.y < -20) { this.y = canvas.height + 20; this.x = Math.random() * canvas.width; }
+    if (this.x < -20) this.x = canvas.width + 20;
+    if (this.x > canvas.width + 20) this.x = -20;
   }
   draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(212,168,67,${this.a})`;
-    ctx.fill();
+    drawStar(this.x, this.y, this.size, this.alpha);
   }
 }
 
-// Initialize particles
-for (let i = 0; i < PARTICLE_COUNT; i++) {
-  const p = new Particle();
-  p.y = Math.random() * H;
-  particles.push(p);
+for (let i = 0; i < MAX; i++) {
+  particles.push(new Particle());
 }
 
-// Draw connecting lines between nearby particles
-function drawConnections() {
+export function setParticleDensity(pageId) {
+  const map = { 'landing': 0.65, 'history-section': 0.7, 'reality-section': 0.55, 'future-section': 0.5, 'heroes-section': 0.6, 'voices-section': 0.35, 'summary': 0.75 };
+  globalAlpha = map[pageId] || 0.5;
+  globalSpeed = globalAlpha * 0.7;
+  particles.forEach(p => { p.alpha = 0.15 + Math.random() * globalAlpha; p.speedY = -(0.15 + Math.random() * globalSpeed); });
+}
+
+export function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Constellation lines
   for (let i = 0; i < particles.length; i++) {
     for (let j = i + 1; j < particles.length; j++) {
       const dx = particles[i].x - particles[j].x;
       const dy = particles[i].y - particles[j].y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < CONNECT_DIST) {
-        const alpha = (1 - dist / CONNECT_DIST) * 0.12;
+      if (dist < 110) {
+        const alpha = (1 - dist / 110) * 0.12;
+        ctx.strokeStyle = `rgba(255,215,0,${alpha})`;
+        ctx.lineWidth = 0.5;
         ctx.beginPath();
         ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `rgba(201,168,76,${alpha})`;
-        ctx.lineWidth = 0.5;
         ctx.stroke();
       }
     }
   }
-}
 
-export function animateParticles() {
-  ctx.clearRect(0, 0, W, H);
   particles.forEach(p => { p.update(); p.draw(); });
-  drawConnections();
   requestAnimationFrame(animateParticles);
-}
-
-// Adjust particle density based on page
-export function setParticleDensity(pageId) {
-  const densityMap = {
-    'landing': 1.2,
-    'prologue': 1.0,
-    'hub': 0.8,
-    'history-section': 1.1,
-    'reality-section': 1.0,
-    'future-section': 0.9,
-    'summary': 1.3
-  };
-  const factor = densityMap[pageId] || 1.0;
-  particles.forEach(p => {
-    p.v = (Math.random() * 0.35 + 0.12) * factor;
-    p.a = Math.min(0.6, (Math.random() * 0.4 + 0.15) * factor);
-  });
 }

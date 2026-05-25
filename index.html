@@ -7,24 +7,33 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/decorations.css">
+<link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
 
 <canvas id="bgCanvas"></canvas>
+<div id="curtain"><div class="curtain-panel left"></div><div class="curtain-panel right"></div></div>
 <div id="topBar"></div>
 <div id="topNav">
   <button onclick="navigateTo('hub')">🏠 枢纽</button>
   <button onclick="navigateTo('history-section')">📜 历史</button>
   <button onclick="navigateTo('reality-section')">🏙️ 现实</button>
   <button onclick="navigateTo('future-section')">🌟 未来</button>
+  <button onclick="navigateTo('genealogy-section')">🔗 谱系</button>
+  <button onclick="navigateTo('heroes-section')">🛡️ 英雄</button>
+  <button onclick="navigateTo('voices-section')">📢 之声</button>
   <button onclick="navigateTo('summary')">📊 总结</button>
 </div>
 <div id="breadcrumb"><span onclick="navigateTo('landing')">首页</span></div>
 
 <div class="stage">
 
-<!-- ═══════════════════════ LANDING ═══════════════════════ -->
+<!-- ═══════════════════════════ LANDING ═══════════════════════════ -->
 <div class="page active" id="landing">
   <div class="landing-logo">🔥</div>
   <h1>薪 火 新 程</h1>
@@ -42,7 +51,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════════ PROLOGUE ═══════════════════════ -->
+<!-- ═══════════════════════════ PROLOGUE ═══════════════════════════ -->
 <div class="page" id="prologue">
   <div class="prologue-card reveal">
     <h2>📋 实践团简介</h2>
@@ -54,33 +63,25 @@
         <span class="group-icon">✍️</span>
         <h4 class="group-name">文案组</h4>
         <p class="group-desc">负责实践报告撰写、访谈记录整理、新闻稿件发布</p>
-        <div class="group-members">
-          <span class="member-tag">xxx</span><span class="member-tag">xxx</span><span class="member-tag">xxx</span>
-        </div>
+        <div class="group-members"><span class="member-tag">xxx</span><span class="member-tag">xxx</span><span class="member-tag">xxx</span></div>
       </div>
       <div class="team-group">
         <span class="group-icon">📣</span>
         <h4 class="group-name">宣传组</h4>
         <p class="group-desc">负责新媒体运营、摄影摄像、视频剪辑与推广</p>
-        <div class="group-members">
-          <span class="member-tag">xxx</span><span class="member-tag">xxx</span><span class="member-tag">xxx</span>
-        </div>
+        <div class="group-members"><span class="member-tag">xxx</span><span class="member-tag">xxx</span><span class="member-tag">xxx</span></div>
       </div>
       <div class="team-group">
         <span class="group-icon">🎨</span>
         <h4 class="group-name">设计组</h4>
         <p class="group-desc">负责网页开发、视觉设计、文创产品制作</p>
-        <div class="group-members">
-          <span class="member-tag">xxx</span><span class="member-tag">xxx</span>
-        </div>
+        <div class="group-members"><span class="member-tag">xxx</span><span class="member-tag">xxx</span></div>
       </div>
       <div class="team-group">
         <span class="group-icon">🤝</span>
         <h4 class="group-name">外联组</h4>
         <p class="group-desc">负责对接实践单位、联络采访对象、统筹行程</p>
-        <div class="group-members">
-          <span class="member-tag">xxx</span><span class="member-tag">xxx</span>
-        </div>
+        <div class="group-members"><span class="member-tag">xxx</span><span class="member-tag">xxx</span></div>
       </div>
     </div>
     <div style="text-align:center">
@@ -91,12 +92,12 @@
   </div>
 </div>
 
-<!-- ═══════════════════════ HUB ═══════════════════════ -->
+<!-- ═══════════════════════════ HUB ═══════════════════════════ -->
 <div class="page" id="hub">
   <h2>选 择 寻 访 维 度</h2>
   <p class="hub-sub">三条路径，十二个站点，每一次选择都是与红色文化的一次深度对话</p>
   <div class="path-grid">
-    <div class="path-card history reveal" onclick="navigateTo('history-section')">
+    <div class="path-card reveal" onclick="navigateTo('history-section')">
       <div class="card-img">📜</div>
       <div class="card-body">
         <h3>历 史 之 路</h3>
@@ -105,7 +106,7 @@
         <span class="card-hint">📖 深入历史长河 →</span>
       </div>
     </div>
-    <div class="path-card reality reveal" onclick="navigateTo('reality-section')">
+    <div class="path-card reveal" onclick="navigateTo('reality-section')">
       <div class="card-img">🏙️</div>
       <div class="card-body">
         <h3>现 实 之 窗</h3>
@@ -114,7 +115,7 @@
         <span class="card-hint">🌆 感知今日脉搏 →</span>
       </div>
     </div>
-    <div class="path-card future reveal" onclick="navigateTo('future-section')">
+    <div class="path-card reveal" onclick="navigateTo('future-section')">
       <div class="card-img">🌟</div>
       <div class="card-body">
         <h3>未 来 之 梦</h3>
@@ -126,7 +127,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════════ HISTORY SECTION ═══════════════════════ -->
+<!-- ═══════════════════════════ HISTORY ═══════════════════════════ -->
 <div class="page" id="history-section">
   <div class="section-page">
     <div class="back-row">
@@ -134,23 +135,26 @@
       <button class="btn-hub" onclick="navigateTo('hub')">☰ 选择其他维度</button>
     </div>
     <h2 class="section-title">历 史 之 路</h2>
-    <p class="section-sub">六段烽火岁月，一部荆楚红色史诗</p>
+    <p class="section-sub">八段烽火岁月，一部荆楚红色史诗</p>
     <div class="section-divider"></div>
 
     <div class="sub-nav" id="history-nav">
       <button class="sub-nav-btn active" data-target="timeline">📅 时间轴</button>
       <button class="sub-nav-btn" data-target="event-1911">🔫 武昌起义</button>
       <button class="sub-nav-btn" data-target="event-1921">🚩 建党浪潮</button>
+      <button class="sub-nav-btn" data-target="event-1923">⚒️ 二七大罢工</button>
       <button class="sub-nav-btn" data-target="event-1927">📋 八七会议</button>
+      <button class="sub-nav-btn" data-target="event-1927b">🏴 黄麻起义</button>
       <button class="sub-nav-btn" data-target="event-1934">🥾 长征岁月</button>
       <button class="sub-nav-btn" data-target="event-1949">☀️ 建国新篇</button>
     </div>
 
     <div id="timeline" style="display:block">
       <div class="timeline-wrap reveal">
-        <h4 style="color:var(--crimson-glow);margin-bottom:20px">📅 红色时间轴 · 点击每个事件查看详情</h4>
+        <h4 style="color:var(--gold-pale);margin-bottom:20px;text-align:center;letter-spacing:4px">📅 红色时间轴 · 点击每个事件查看详情</h4>
         <div class="timeline">
           <div class="timeline-line"></div>
+          <!-- Event 1: 1911 -->
           <div class="timeline-event visible" onclick="expandTimeline(this);collectFragment('f1')">
             <div class="event-year">1911</div>
             <h4>🔫 武昌起义 —— 封建帝制的终结</h4>
@@ -160,15 +164,27 @@
               <div class="event-quote">"世人未为我敢为，天下未发我首发。" —— 辛亥首义精神</div>
             </div>
           </div>
+          <!-- Event 2: 1921-1927 -->
           <div class="timeline-event visible" onclick="expandTimeline(this);collectFragment('f2')">
             <div class="event-year">1921—1927</div>
             <h4>🚩 建党与大革命的洪流</h4>
             <p class="event-preview">中共一大召开，中国革命焕然一新。湖北籍代表董必武、陈潭秋参与建党伟业，武汉一度成为大革命的中心。</p>
             <div class="event-detail">
-              <p>1921年7月，中国共产党第一次全国代表大会召开。湖北籍代表董必武、陈潭秋参与了这一开天辟地的大事件。此后，湖北成为党早期活动的重要区域——1923年京汉铁路工人大罢工（二七大罢工）在武汉爆发，彰显了中国工人阶级的力量；1926—1927年，随着北伐军攻克武汉，国民政府迁都于此，武汉成为大革命的中心。毛泽东在武昌创办中央农民运动讲习所，培养了大批农运骨干，为中国革命的深入发展奠定了群众基础。</p>
+              <p>1921年7月，中国共产党第一次全国代表大会召开。湖北籍代表董必武、陈潭秋参与了这一开天辟地的大事件。此后，湖北成为党早期活动的重要区域——1926—1927年，随着北伐军攻克武汉，国民政府迁都于此，武汉成为大革命的中心。毛泽东在武昌创办中央农民运动讲习所，培养了大批农运骨干，为中国革命的深入发展奠定了群众基础。</p>
               <div class="event-quote">"革命不是请客吃饭，不是做文章，不是绘画绣花。" —— 毛泽东《湖南农民运动考察报告》（1927年于武昌撰写）</div>
             </div>
           </div>
+          <!-- Event 3: 1923 二七大罢工 (NEW) -->
+          <div class="timeline-event visible" onclick="expandTimeline(this);collectFragment('f7')">
+            <div class="event-year">1923</div>
+            <h4>⚒️ 二七大罢工 —— 中国工人运动的高潮</h4>
+            <p class="event-preview">京汉铁路工人大罢工在武汉爆发，这是中国共产党领导的第一次工人运动高潮的顶点，展现了中国工人阶级的伟大力量。</p>
+            <div class="event-detail">
+              <p>1923年2月1日，京汉铁路总工会在郑州召开成立大会，遭到军阀吴佩孚的武力阻挠。为抗议军阀暴行，2月4日，京汉铁路全线工人举行总罢工。2月7日，吴佩孚在帝国主义支持下对罢工工人进行血腥镇压——在汉口江岸，反动军警杀害了工人领袖林祥谦和"劳工律师"施洋等52人，打伤300余人，制造了震惊中外的"二七惨案"。这场斗争虽然失败，但充分展现了中国工人阶级的革命精神和组织力量，是中国工人运动史上的一座丰碑。</p>
+              <div class="event-quote">"头可断，工不可复！" —— 林祥谦烈士就义前的怒吼</div>
+            </div>
+          </div>
+          <!-- Event 4: 1927 八七会议 -->
           <div class="timeline-event visible" onclick="expandTimeline(this);collectFragment('f3')">
             <div class="event-year">1927</div>
             <h4>📋 八七会议 —— 伟大的历史转折</h4>
@@ -178,6 +194,17 @@
               <div class="event-quote">"须知政权是由枪杆子中取得的。" —— 毛泽东在八七会议上的讲话</div>
             </div>
           </div>
+          <!-- Event 5: 1927 黄麻起义 (NEW) -->
+          <div class="timeline-event visible" onclick="expandTimeline(this);collectFragment('f8')">
+            <div class="event-year">1927</div>
+            <h4>🏴 黄麻起义 —— 大别山区的武装烽火</h4>
+            <p class="event-preview">黄安、麻城三万农民揭竿而起，打响了鄂豫皖边区武装反抗国民党反动统治的第一枪，创建了鄂豫皖革命根据地的雏形。</p>
+            <div class="event-detail">
+              <p>1927年11月13日，在八七会议精神的指引下，湖北黄安（今红安）和麻城两县的三万余名农民自卫军和义勇队发动武装起义。起义军攻占黄安县城，宣布成立黄安县农民政府。虽然起义在国民党军的反扑下遭受重大挫折，但起义部队后来转入大别山区坚持游击战争，逐步发展为红四方面军的重要基础，为鄂豫皖革命根据地的创建奠定了根基。从这片土地上，走出了董必武、李先念等党和国家领导人以及223位开国将军。</p>
+              <div class="event-quote">"小小黄安，人人好汉。铜锣一响，四十八万。" —— 黄安民谣</div>
+            </div>
+          </div>
+          <!-- Event 6: 1934-1936 -->
           <div class="timeline-event visible" onclick="expandTimeline(this);collectFragment('f4')">
             <div class="event-year">1934—1936</div>
             <h4>🥾 长征路上的湖北印记</h4>
@@ -187,6 +214,7 @@
               <div class="event-quote">"红军不怕远征难，万水千山只等闲。" —— 毛泽东《七律·长征》</div>
             </div>
           </div>
+          <!-- Event 7: 1937-1945 -->
           <div class="timeline-event visible" onclick="expandTimeline(this);collectFragment('f5')">
             <div class="event-year">1937—1945</div>
             <h4>💣 抗日烽火中的湖北</h4>
@@ -196,6 +224,7 @@
               <div class="event-quote">"保卫大武汉！" —— 1938年响彻全国的战斗口号</div>
             </div>
           </div>
+          <!-- Event 8: 1949 -->
           <div class="timeline-event visible" onclick="expandTimeline(this);collectFragment('f6')">
             <div class="event-year">1949</div>
             <h4>☀️ 新中国成立以来的湖北篇章</h4>
@@ -209,35 +238,46 @@
       </div>
     </div>
 
+    <!-- History detail cards (same as original, preserved) -->
     <div class="content-card reveal" id="event-1911" style="display:none">
-      <div class="img-placeholder img-1911">🔫</div>
-      <h4 style="color:var(--crimson-glow)">武昌起义（1911年10月10日）</h4>
+      <h4 style="color:var(--gold-pale)">🔫 武昌起义（1911年10月10日）</h4>
       <p>1911年10月10日晚，湖北新军工程第八营的革命党人打响了武昌起义的第一枪。起义军迅速占领楚望台军械库，继而攻占总督衙门。一夜之间，武昌全城光复。随后，汉阳、汉口相继被起义军占领。这场由荆楚儿女率先发难的革命，迅速蔓延至全国——不到两个月的时间里，湖南、陕西、江西、山西、云南等十三个省份宣布脱离清廷独立。1912年1月1日，孙中山在南京宣誓就任中华民国临时大总统，延续两千余年的封建帝制就此终结。</p>
       <p>武汉之所以成为辛亥革命的首义之地，有其深刻的历史原因：作为洋务运动后期张之洞督鄂的重要基地，武汉较早接触近代工业和西式教育，新式学堂和新军成为革命思想的温床；同时武汉地处九省通衢，交通便利，信息流通快捷，为革命党人的秘密活动提供了有利条件。</p>
       <div class="highlight-box">💡 <strong>实践团足迹：</strong>团队参观了位于武昌阅马场的辛亥革命武昌起义纪念馆（红楼）和起义门，在讲解员的引导下深入了解了起义的策划过程、战斗经过及其深远影响。站在起义门城楼上，仿佛还能听到百年前那一声划破夜空的枪响。</div>
     </div>
 
     <div class="content-card reveal" id="event-1921" style="display:none">
-      <div class="img-placeholder img-1921">🚩</div>
-      <h4 style="color:var(--crimson-glow)">建党与大革命的洪流（1921—1927）</h4>
+      <h4 style="color:var(--gold-pale)">🚩 建党与大革命的洪流（1921—1927）</h4>
       <p>1921年7月，中国共产党第一次全国代表大会在上海和嘉兴召开，湖北籍代表董必武、陈潭秋参与了这一开天辟地的历史事件。董必武日后成为中华人民共和国代主席，陈潭秋则为革命事业壮烈牺牲于新疆。他们的革命生涯，正是从荆楚大地起步的。</p>
       <p>1923年2月，京汉铁路工人大罢工（二七大罢工）在武汉爆发，这是中国共产党领导的第一次工人运动高潮的顶点，充分展现了中国工人阶级的组织力量和革命精神。如今屹立于汉口江岸的"二七烈士纪念碑"，仍在无声诉说着那段血与火的岁月。</p>
       <p>1927年春，北伐军攻克武汉后，国民政府迁都于此，武汉一度成为中国革命的中心。毛泽东在武昌红巷创办中央农民运动讲习所，培养了大批来自全国各地的农运骨干。这些学员后来成为秋收起义、井冈山斗争和各地武装暴动的重要力量。</p>
       <div class="highlight-box">💡 <strong>实践团足迹：</strong>团队前往武昌红巷，参观了中央农民运动讲习所旧址、毛泽东旧居和中共五大会址。在农讲所大教室内，大家仿佛看到了当年毛泽东向学员们讲授"农民问题"的生动场景。一位队员说："站在这里，才真正理解了什么叫'星星之火，可以燎原'。"</div>
     </div>
 
+    <div class="content-card reveal" id="event-1923" style="display:none">
+      <h4 style="color:var(--gold-pale)">⚒️ 二七大罢工（1923年2月）</h4>
+      <p>1923年2月，京汉铁路工人为争取组织工会的权利，举行了声势浩大的全线总罢工。这是中国共产党领导的第一次工人运动高潮的顶点。2月7日，军阀吴佩孚在帝国主义支持下对罢工工人进行血腥镇压，制造了震惊中外的"二七惨案"。</p>
+      <p>在汉口江岸，反动军警杀害了京汉铁路总工会江岸分会委员长林祥谦和武汉工团联合会法律顾问施洋等52人。面对刽子手的屠刀，林祥谦断然拒绝下令复工，高呼"头可断，工不可复！"英勇就义。施洋律师在刑场上慷慨陈词："你们杀了一个施洋，还有千百个施洋！"二七精神从此成为中国工人运动的不朽丰碑。</p>
+      <div class="highlight-box">💡 <strong>实践团足迹：</strong>团队前往汉口江岸二七纪念馆，在二七烈士纪念碑前肃立默哀。这座高27米的纪念碑，无声地诉说着中国工人阶级在革命年代的英勇与担当。</div>
+    </div>
+
     <div class="content-card reveal" id="event-1927" style="display:none">
-      <div class="img-placeholder img-1927">📋</div>
-      <h4 style="color:var(--crimson-glow)">八七会议（1927年8月7日）</h4>
+      <h4 style="color:var(--gold-pale)">📋 八七会议（1927年8月7日）</h4>
       <p>1927年，蒋介石、汪精卫相继发动"四一二"和"七一五"反革命政变，大肆屠杀共产党人和革命群众，轰轰烈烈的大革命宣告失败。在白色恐怖的笼罩下，中国共产党面临着自成立以来最严峻的考验。</p>
       <p>在这生死存亡的危急关头，中共中央于1927年8月7日在汉口鄱阳街139号秘密召开紧急会议。由于当时形势极其险恶，会议只开了一天。出席会议的有中央委员、候补中央委员及其他方面的代表共21人。毛泽东在会上以亲身经历批评了陈独秀的右倾投降主义错误，并斩钉截铁地指出："以后要非常注意军事，须知政权是由枪杆子中取得的。"</p>
       <p>八七会议确定了土地革命和武装反抗国民党反动派的总方针，选举产生了以瞿秋白为首的临时中央政治局。会后，毛泽东以中央特派员的身份前往湖南，于9月9日领导了湘赣边界秋收起义；同年12月，张太雷等领导了广州起义。中国革命由此进入了土地革命战争的新时期。</p>
       <div class="highlight-box">💡 <strong>实践团足迹：</strong>团队参观了八七会议会址纪念馆，在复原的会议室中，仿佛能感受到当年与会者紧张而坚定的革命意志。一位队员在留言簿上写道："历史选择了武汉，武汉没有辜负历史。"</div>
     </div>
 
+    <div class="content-card reveal" id="event-1927b" style="display:none">
+      <h4 style="color:var(--gold-pale)">🏴 黄麻起义（1927年11月）</h4>
+      <p>1927年11月13日，在八七会议精神的指引下，湖北黄安（今红安）和麻城的农民自卫军和义勇队共三万余人发动武装起义。起义军一举攻占黄安县城，宣布成立黄安县农民政府，颁布了以土地革命为中心的施政纲领。这是中国共产党在鄂豫皖边区领导的第一次大规模农民武装起义。</p>
+      <p>虽然起义在国民党军的反扑下遭到挫折，但起义部队由吴光浩、戴克敏等率领转入大别山区，继续坚持游击战争，后来成为红四方面军和鄂豫皖革命根据地的重要基础。黄麻起义"以武装的革命反对武装的反革命"的实践，是八七会议方针的生动体现。</p>
+      <div class="highlight-box">💡 <strong>实践团足迹：</strong>团队赴红安参观了黄麻起义和鄂豫皖苏区革命烈士陵园，在烈士纪念碑前敬献花篮。14万红安儿女为革命献出生命的历史，让每一位团员深受震撼。</div>
+    </div>
+
     <div class="content-card reveal" id="event-1934" style="display:none">
-      <div class="img-placeholder img-1934">🥾</div>
-      <h4 style="color:var(--crimson-glow)">长征与湖北——血染的风采（1934—1936）</h4>
+      <h4 style="color:var(--gold-pale)">🥾 长征与湖北——血染的风采（1934—1936）</h4>
       <p>1934年至1936年，中国工农红军进行了举世闻名的二万五千里长征。湖北作为重要革命根据地——鄂豫皖革命根据地和湘鄂川黔革命根据地的核心区域，在长征史诗中写下了壮丽篇章。</p>
       <p>红四方面军主力于1932年从鄂豫皖根据地出发西征，后于1935年踏上长征路；红二、六军团（后合编为红二方面军）于1935年11月从湘鄂川黔根据地出发长征。两支主力红军途经湖北郧西、郧阳、恩施、宜昌等地，在当地群众的掩护和支援下突破了敌人的重重封锁。郧西县湖北口回族乡的"红军路"至今保存完好，当年老百姓冒着生命危险为红军带路、送粮、护理伤员的事迹在当地代代相传。</p>
       <p>据不完全统计，湖北籍参加长征的红军指战员超过3万人，其中约1.4万人永远长眠在了长征路上。大别山南麓的红安县（原名黄安），是全国著名的"将军县"——从这片红色土地上走出了董必武、李先念两位国家主席，以及韩先楚、陈锡联、王近山等223位开国将军。</p>
@@ -245,8 +285,7 @@
     </div>
 
     <div class="content-card reveal" id="event-1949" style="display:none">
-      <div class="img-placeholder img-1949">☀️</div>
-      <h4 style="color:var(--crimson-glow)">新中国·新武汉·新征程（1949至今）</h4>
+      <h4 style="color:var(--gold-pale)">☀️ 新中国·新武汉·新征程（1949至今）</h4>
       <p>1949年5月16日，中国人民解放军第四野战军解放武汉三镇，这座英雄的城市回到了人民手中。新中国成立后，湖北迅速从战争创伤中恢复，以崭新的姿态投入社会主义建设的热潮。</p>
       <p>在"一五"计划期间，国家将156项重点工程中的8项布局在武汉——武汉钢铁公司（新中国第一座大型钢铁联合企业）、武汉长江大桥（万里长江第一桥）、武汉重型机床厂、武汉锅炉厂等相继建成投产，使武汉成为新中国重要的工业基地和科教重镇。1956年，毛泽东在武汉三次畅游长江，写下了"一桥飞架南北，天堑变通途"的豪迈诗篇。</p>
       <p>改革开放后，武汉作为中部地区唯一的副省级城市和长江经济带核心城市，在科技创新、产业升级、城市建设等方面取得了令人瞩目的成就。东湖高新区（"中国光谷"）的崛起、武汉国家航天产业基地的建设、长江新区的规划实施……无不彰显着这座英雄城市在新时代的蓬勃活力。</p>
@@ -255,20 +294,15 @@
 
     <div class="quiz-block reveal" id="history-quiz">
       <h4>📝 历史知识闯关</h4>
-      <div class="quiz-progress">共 3 题，测试你的红色历史知识</div>
-      <div class="quiz-q" id="history-q-text">第1题：八七会议是在哪个城市召开的？</div>
-      <div class="quiz-options" id="history-q-opts">
-        <button class="quiz-opt" data-correct="true">武汉</button>
-        <button class="quiz-opt" data-correct="false">上海</button>
-        <button class="quiz-opt" data-correct="false">南昌</button>
-        <button class="quiz-opt" data-correct="false">广州</button>
-      </div>
+      <div class="quiz-progress">共 5 题，测试你的红色历史知识</div>
+      <div class="quiz-q" id="history-q-text"></div>
+      <div class="quiz-options" id="history-q-opts"></div>
       <div class="quiz-fb" id="history-q-fb"></div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════ REALITY SECTION ═══════════════════════ -->
+<!-- ═══════════════════════════ REALITY ═══════════════════════════ -->
 <div class="page" id="reality-section">
   <div class="section-page">
     <div class="back-row">
@@ -276,7 +310,7 @@
       <button class="btn-hub" onclick="navigateTo('hub')">☰ 选择其他维度</button>
     </div>
     <h2 class="section-title">现 实 之 窗</h2>
-    <p class="section-sub">红色基因在新时代的六重奏</p>
+    <p class="section-sub">红色基因在新时代的七重奏</p>
     <div class="section-divider"></div>
 
     <div class="sub-nav" id="reality-nav">
@@ -287,6 +321,7 @@
       <button class="sub-nav-btn" data-target="loc-optics">💡 中国光谷</button>
       <button class="sub-nav-btn" data-target="loc-covid">🎗️ 抗疫精神</button>
       <button class="sub-nav-btn" data-target="loc-rural">🌾 乡村振兴</button>
+      <button class="sub-nav-btn" data-target="loc-workers">⚒️ 工人文化宫</button>
     </div>
 
     <div id="loc-overview" style="display:block">
@@ -339,73 +374,79 @@
             <div class="loc-detail">湖北大别山革命老区涵盖红安、麻城、大悟等地，是鄂豫皖革命根据地的核心区域。近年来在国家乡村振兴战略的推动下，这些曾经的贫困山区发生了翻天覆地的变化。以红安县为例，通过发展红色旅游、生态农业和光伏产业，全县于2019年实现脱贫摘帽。每年超过500万游客来到这片红色土地，走出了一条"红色引领、绿色发展"的振兴之路。</div>
           </div>
         </div>
+        <!-- NEW location card -->
+        <div class="location-card reveal" onclick="this.classList.toggle('expanded');collectFragment('r7')">
+          <div class="loc-img">⚒️</div>
+          <div class="loc-body">
+            <h4>武汉工人文化宫</h4>
+            <p class="loc-preview">工人阶级的精神家园。从二七罢工到新时代建设者，武汉工人文化宫承载着中国工人运动的光辉记忆。</p>
+            <div class="loc-detail">武汉工人文化宫始建于1950年代，是武汉工人阶级文化活动的重要阵地。这里见证了武汉工人从社会主义建设时期到改革开放再到新时代的光荣历程。文化宫内设有工人运动历史陈列馆、劳模事迹展厅和职工文化活动空间，每年举办各类职工文化活动超过500场次，服务职工群众超过100万人次，是弘扬劳模精神、劳动精神、工匠精神的重要平台。</div>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- Reality detail cards (original content preserved) -->
     <div class="content-card reveal" id="loc-museum" style="display:none">
-      <div class="img-placeholder img-museum">🏛️</div>
-      <h4 style="color:var(--gold-bright)">武汉革命博物馆群</h4>
+      <h4 style="color:var(--gold-pale)">🏛️ 武汉革命博物馆群</h4>
       <p>位于武昌红巷的武汉革命博物馆，是全国重点文物保护单位和全国爱国主义教育示范基地。整个博物馆群由中央农民运动讲习所旧址、毛泽东旧居、中共五大会址、陈潭秋烈士纪念馆、武昌起义门等多个场馆组成，占地面积超过2万平方米，展陈面积超过8000平方米。</p>
       <p>这里不仅是武汉红色文化的地标，更是一座连接历史与现实的桥梁。每年有超过200万来自全国各地的参观者走进这片红色圣地。实践团参观当天正值周末，团队在农讲所大教室中偶遇了一群来自武汉小学的少先队员，孩子们在老师的带领下齐声朗诵毛泽东诗词，稚嫩而坚定的声音在百年建筑中回荡——那一幕，让所有人真切感受到了"薪火相传"的意义。</p>
       <div class="highlight-box">💡 <strong>打卡推荐：</strong>农讲所大教室、毛泽东旧居书房、五大开幕式会场、陈潭秋烈士事迹展厅。建议预留至少3小时深度参观。</div>
     </div>
 
     <div class="content-card reveal" id="loc-wuda" style="display:none">
-      <div class="img-placeholder img-wuda">🏫</div>
-      <h4 style="color:var(--gold-bright)">武汉大学：珞珈山下的红色记忆</h4>
+      <h4 style="color:var(--gold-pale)">🏫 武汉大学：珞珈山下的红色记忆</h4>
       <p>武汉大学不仅以樱花和百年建筑闻名，更有着深厚的红色基因。中共一大代表陈潭秋是武大前身——武昌高等师范学校的毕业生；另一位一大代表李达在1950年代曾任武大校长长达13年。周恩来、董必武等领导人也曾在珞珈山留下足迹。位于珞珈山南麓的"十八栋"别墅群中的周恩来故居（珞珈山"十八栋"27号），是1938年周恩来在武汉领导南方局和指导国民政府军事委员会政治部第三厅开展抗日宣传工作时的主要居所。</p>
       <p>抗战时期，武大西迁四川乐山，在极其艰苦的条件下坚持办学8年，保存了中国高等教育的火种。如今的武大已发展成为国家"双一流"建设A类高校，在校学生超过5万人，继续为国家培养着一代又一代的栋梁之材。</p>
       <div class="highlight-box">💡 <strong>打卡推荐：</strong>珞珈山周恩来故居、老图书馆、樱顶、万林艺术博物馆。校园内的"六一纪念亭"是为纪念1947年"六一"惨案中牺牲的武大学生而建。</div>
     </div>
 
     <div class="content-card reveal" id="loc-bridge" style="display:none">
-      <div class="img-placeholder img-bridge">🌉</div>
-      <h4 style="color:var(--gold-bright)">武汉长江大桥：钢铁脊梁上的时代印记</h4>
+      <h4 style="color:var(--gold-pale)">🌉 武汉长江大桥：钢铁脊梁上的时代印记</h4>
       <p>武汉长江大桥是中国第一座自主设计并建设的公铁两用桥（在苏联专家协助下），于1955年9月1日动工，1957年10月15日正式通车。大桥全长1670米，正桥8墩9孔，上层为公路桥，宽22.5米；下层为双线铁路桥。毛泽东1956年视察时挥毫写下"一桥飞架南北，天堑变通途"的千古名句。</p>
       <p>大桥不仅是工程技术的奇迹，更是新中国自力更生、艰苦奋斗精神的象征。在那个物资匮乏的年代，大桥建设者们创造了多项世界领先的技术成果——首次采用大型管柱钻孔法进行深水基础施工、首次使用国产桥梁钢……这些突破为后续南京长江大桥、九江长江大桥的建设积累了宝贵经验。60多年来，大桥经历了无数次洪水、撞击的考验，至今屹立如初，被誉为"桥坚强"。</p>
       <div class="highlight-box">💡 <strong>打卡推荐：</strong>建议从武昌桥头堡乘电梯登上桥面步行过江，全程约20分钟。桥面两侧设有观景台，可拍摄长江两岸全景。</div>
     </div>
 
     <div class="content-card reveal" id="loc-optics" style="display:none">
-      <div class="img-placeholder img-optics">💡</div>
-      <h4 style="color:var(--gold-bright)">中国光谷：从稻田到世界级创新集群</h4>
+      <h4 style="color:var(--gold-pale)">💡 中国光谷：从稻田到世界级创新集群</h4>
       <p>武汉东湖新技术开发区（"中国光谷"）的崛起，是中国改革开放和科技创新事业的生动缩影。1988年创建之初，这里还是一片农田和鱼塘；30多年后的今天，518平方公里的土地上集聚了超过13万家企业，其中包括华为、小米、联想、华大基因等国内巨头的研究院，以及长江存储、华星光电、天马微电子等本土科技领军企业。</p>
       <p>光谷拥有42所高校和56个国家及省部级科研院所，是中国最大的光纤光缆生产基地、光通信技术研发基地和激光产业基地。2023年光谷GDP突破3000亿元，高新技术产业增加值占GDP比重超过60%，成为名副其实的中部"硅谷"。从革命年代的"枪杆子"到和平年代的"芯片"，荆楚儿女始终挺立在时代的潮头。</p>
       <div class="highlight-box">💡 <strong>实践团见闻：</strong>团队参观了光谷展示中心，工作人员演示了自主研发的128层3D NAND闪存芯片。讲解员的一句话令人印象深刻："革命先辈用热血换来了独立，我们要用创新赢得未来。"</div>
     </div>
 
     <div class="content-card reveal" id="loc-covid" style="display:none">
-      <div class="img-placeholder img-covid">🎗️</div>
-      <h4 style="color:var(--gold-bright)">抗疫精神：新时代的英雄篇章</h4>
+      <h4 style="color:var(--gold-pale)">🎗️ 抗疫精神：新时代的英雄篇章</h4>
       <p>2020年初，一场突如其来的新冠肺炎疫情侵袭武汉。这座拥有1100万人口的特大城市毅然按下"暂停键"——武汉封城76天，以巨大的牺牲为全国乃至全球抗疫赢得了宝贵时间。在这76个日夜里，4.2万名医护人员从全国各地逆行出征，火神山、雷神山医院分别仅用10天和12天建成交付，16座方舱医院迅速投入使用。这就是令世界惊叹的"中国速度"和"中国力量"。</p>
       <p>在武汉抗疫纪念馆中，一封封请战书、一件件防护服、一张张口罩勒痕的面孔照片，无声地讲述着那段刻骨铭心的历史。习近平总书记将其概括为"生命至上、举国同心、舍生忘死、尊重科学、命运与共"的伟大抗疫精神——这是新时代红色基因的生动体现，是长征精神、抗战精神在和平年代的延续与升华。</p>
       <div class="highlight-box">💡 <strong>实践团感言：</strong>"如果说武昌起义证明了中国人敢为天下先的勇气，长征证明了中国人百折不挠的坚韧，那么武汉抗疫则证明了新时代中国人守望相助、共克时艰的精神力量。"</div>
     </div>
 
     <div class="content-card reveal" id="loc-rural" style="display:none">
-      <div class="img-placeholder img-rural">🌾</div>
-      <h4 style="color:var(--gold-bright)">大别山革命老区：红色引领下的绿色振兴</h4>
+      <h4 style="color:var(--gold-pale)">🌾 大别山革命老区：红色引领下的绿色振兴</h4>
       <p>湖北大别山革命老区涵盖红安、麻城、大悟、罗田、英山等地，是鄂豫皖革命根据地的核心区域。历史上，这里曾是全国最贫困的地区之一。在脱贫攻坚和乡村振兴战略的持续推动下，这片红色土地正在经历前所未有的蜕变。红安县通过"红色旅游+特色农业+光伏发电"三位一体的发展模式，于2019年顺利实现脱贫摘帽；麻城市依托杜鹃花海和红色遗迹，年接待游客超过1000万人次。</p>
       <p>实践团在红安县七里坪镇走访时了解到，当地将红色资源与乡村旅游深度融合，打造了"红军餐""重走红军路"等体验项目，不仅让游客接受了红色教育，也为村民带来了实实在在的收益。一位年过七旬的老支书对团员们说："当年我们这里为革命献出了14万英雄儿女，今天我们同样要靠自己的双手，让日子一天比一天红火。"</p>
       <div class="highlight-box">💡 <strong>实践团见闻：</strong>在七里坪长胜街——这条保留着明清建筑风貌的"红军街"上，团队看到红色书店、红军食堂、非遗工坊比邻而立，红色文化与乡村振兴正在这里碰撞出新的火花。</div>
     </div>
 
+    <div class="content-card reveal" id="loc-workers" style="display:none">
+      <h4 style="color:var(--gold-pale)">⚒️ 武汉工人文化宫：工人阶级的精神家园</h4>
+      <p>武汉工人文化宫坐落于汉口，是武汉市总工会直属的职工文化服务阵地。从1950年代建宫至今，这里见证了武汉从工业重镇到创新名城的历史变迁。文化宫内的工人运动历史陈列馆，系统展示了武汉作为中国工人运动重要发源地的光辉历程——从1923年二七大罢工到新中国成立后的社会主义建设，从改革开放到新时代大国工匠的崛起。</p>
+      <p>实践团在文化宫参观了"武汉劳模事迹展"，从新中国成立初期的"铁人"式工人到新时代"大国工匠"，一代又一代武汉工人在平凡岗位上创造了不平凡的业绩。文化宫工作人员告诉记者："每年有超过100万人次职工群众走进这里，这里不仅是文化活动阵地，更是弘扬劳模精神、劳动精神、工匠精神的重要平台。"</p>
+      <div class="highlight-box">💡 <strong>实践团感言：</strong>"从二七烈士的'头可断，工不可复'到新时代劳模的'干一行，爱一行，精一行'，武汉工人阶级的奋斗精神跨越百年依然熠熠生辉。"</div>
+    </div>
+
     <div class="quiz-block reveal" id="reality-quiz">
       <h4>📝 武汉知识闯关</h4>
-      <div class="quiz-progress">共 3 题，看看你对武汉了解多少</div>
-      <div class="quiz-q" id="reality-q-text">第1题：武汉长江大桥建成通车于哪一年？</div>
-      <div class="quiz-options" id="reality-q-opts">
-        <button class="quiz-opt" data-correct="false">1949年</button>
-        <button class="quiz-opt" data-correct="true">1957年</button>
-        <button class="quiz-opt" data-correct="false">1965年</button>
-        <button class="quiz-opt" data-correct="false">1978年</button>
-      </div>
+      <div class="quiz-progress">共 5 题，看看你对武汉了解多少</div>
+      <div class="quiz-q" id="reality-q-text"></div>
+      <div class="quiz-options" id="reality-q-opts"></div>
       <div class="quiz-fb" id="reality-q-fb"></div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════ FUTURE SECTION ═══════════════════════ -->
+<!-- ═══════════════════════════ FUTURE ═══════════════════════════ -->
 <div class="page" id="future-section">
   <div class="section-page">
     <div class="back-row">
@@ -424,47 +465,28 @@
     </div>
 
     <div id="future-choices-panel" style="display:block">
-      <p style="text-align:center;color:#A0A0B8;margin-bottom:30px;line-height:2">
+      <p style="text-align:center;color:var(--white-muted);margin-bottom:30px;line-height:2">
         站在建党105周年与长征胜利90周年的历史交汇点<br>
         作为新时代的青年，你将选择哪条道路来接续先辈的薪火？<br>
         <span style="color:var(--gold-pale);font-size:0.9rem">（选择后下方将出现对应的人生寄语）</span>
       </p>
       <div class="future-grid" id="future-choices">
-        <div class="future-choice-card reveal" onclick="selectFuture(this,'study')">
-          <span class="choice-icon">📚</span><h4>深耕专业，科技报国</h4>
-          <p>在科研一线攻克"卡脖子"技术难题，用创新续写新时代的长征故事。</p>
-        </div>
-        <div class="future-choice-card reveal" onclick="selectFuture(this,'culture')">
-          <span class="choice-icon">🎭</span><h4>赓续文脉，讲好中国故事</h4>
-          <p>用文字、影像、艺术让红色文化"活"起来，让更多年轻人了解这段光辉历史。</p>
-        </div>
-        <div class="future-choice-card reveal" onclick="selectFuture(this,'service')">
-          <span class="choice-icon">🤝</span><h4>扎根基层，服务人民</h4>
-          <p>到祖国最需要的地方去，在田间地头、社区街巷践行"为人民服务"的初心。</p>
-        </div>
-        <div class="future-choice-card reveal" onclick="selectFuture(this,'innovate')">
-          <span class="choice-icon">💡</span><h4>创新创业，敢为人先</h4>
-          <p>发扬武汉"敢为天下先"的首义精神，在市场的浪潮中开辟属于这个时代的天地。</p>
-        </div>
-        <div class="future-choice-card reveal" onclick="selectFuture(this,'education')">
-          <span class="choice-icon">🏫</span><h4>教书育人，点亮未来</h4>
-          <p>走向三尺讲台，在孩子们心中种下红色的种子，做新时代的"播火者"。</p>
-        </div>
-        <div class="future-choice-card reveal" onclick="selectFuture(this,'defend')">
-          <span class="choice-icon">🛡️</span><h4>携笔从戎，保家卫国</h4>
-          <p>传承长征"不怕远征难"的战斗精神，在国防事业中贡献青春力量。</p>
-        </div>
+        <div class="future-choice-card reveal" onclick="selectFuture(this,'study')"><span class="choice-icon">📚</span><h4>深耕专业，科技报国</h4><p>在科研一线攻克"卡脖子"技术难题，用创新续写新时代的长征故事。</p></div>
+        <div class="future-choice-card reveal" onclick="selectFuture(this,'culture')"><span class="choice-icon">🎭</span><h4>赓续文脉，讲好中国故事</h4><p>用文字、影像、艺术让红色文化"活"起来，让更多年轻人了解这段光辉历史。</p></div>
+        <div class="future-choice-card reveal" onclick="selectFuture(this,'service')"><span class="choice-icon">🤝</span><h4>扎根基层，服务人民</h4><p>到祖国最需要的地方去，在田间地头、社区街巷践行"为人民服务"的初心。</p></div>
+        <div class="future-choice-card reveal" onclick="selectFuture(this,'innovate')"><span class="choice-icon">💡</span><h4>创新创业，敢为人先</h4><p>发扬武汉"敢为天下先"的首义精神，在市场的浪潮中开辟属于这个时代的天地。</p></div>
+        <div class="future-choice-card reveal" onclick="selectFuture(this,'education')"><span class="choice-icon">🏫</span><h4>教书育人，点亮未来</h4><p>走向三尺讲台，在孩子们心中种下红色的种子，做新时代的"播火者"。</p></div>
+        <div class="future-choice-card reveal" onclick="selectFuture(this,'defend')"><span class="choice-icon">🛡️</span><h4>携笔从戎，保家卫国</h4><p>传承长征"不怕远征难"的战斗精神，在国防事业中贡献青春力量。</p></div>
       </div>
       <div class="content-card reveal" id="future-result-card" style="display:none">
-        <h4 id="future-result-title" style="color:#4FC3F7"></h4>
+        <h4 id="future-result-title" style="color:var(--gold-pale)"></h4>
         <p id="future-result-text"></p>
         <div class="highlight-box" id="future-result-quote"></div>
       </div>
     </div>
 
     <div class="content-card reveal" id="future-detail" style="display:none">
-      <div class="img-placeholder img-future">🌟</div>
-      <h4 style="color:#4FC3F7">薪火新程：新时代青年的使命与担当</h4>
+      <h4 style="color:var(--gold-pale)">🌟 薪火新程：新时代青年的使命与担当</h4>
       <p>习近平总书记指出："青年兴则国家兴，青年强则国家强。"从辛亥革命到五四运动，从长征路上的"红小鬼"到抗疫一线的"90后""00后"，中国青年始终是推动历史前进的重要力量。建党105年、长征胜利90年的今天，历史的接力棒已经传递到了当代青年手中。</p>
       <p>实践团在武汉的7天寻访中，不断在思考一个问题：红色精神在当代究竟意味着什么？它不是博物馆展柜里的文物，不是书本上僵硬的教条，而是一种"明知山有虎，偏向虎山行"的勇气，一种"功成不必在我，功成必定有我"的担当，一种将个人理想融入国家命运的自觉。</p>
       <p>在红安烈士陵园，团队遇到了一位义务讲解员——78岁的退休教师王爷爷。他每天步行40分钟来到陵园，风雨无阻地为游客讲述红军故事，一讲就是15年。当被问及坚持的原因时，王爷爷说："我讲这些故事，不是为了让你们记住过去有多苦，而是希望你们知道自己从哪里来，该往哪里去。"这番话令在场的每一位团员深受触动。</p>
@@ -474,7 +496,7 @@
     <div id="future-pledge" style="display:none">
       <div class="pledge-section reveal">
         <h4>✍️ 写下你的青春誓言</h4>
-        <p style="text-align:center;color:#A0A0B8;margin-bottom:16px;font-size:0.9rem">每一份誓言都是一颗火种，汇聚在一起便是照亮未来的光芒</p>
+        <p style="text-align:center;color:var(--white-muted);margin-bottom:16px;font-size:0.9rem">每一份誓言都是一颗火种，汇聚在一起便是照亮未来的光芒</p>
         <div class="pledge-form">
           <input class="pledge-input" id="pledgeInput" placeholder="我想对未来说……" maxlength="60">
           <button class="pledge-submit" onclick="submitPledge()">铭 记 誓 言</button>
@@ -484,7 +506,7 @@
     </div>
 
     <div class="content-card reveal" id="future-letter" style="display:none">
-      <h4 style="color:#4FC3F7">💌 致 2050 年的一封信</h4>
+      <h4 style="color:var(--gold-pale)">💌 致 2050 年的一封信</h4>
       <p>2050年，是中华人民共和国成立101周年，也是我国实现第二个百年奋斗目标——全面建成社会主义现代化强国的关键之年。到那时，今天写下誓言的你，将成为社会各领域的中坚力量。这封信，写给未来的自己，也写给未来的中国。</p>
       <p>实践团在行程最后一天的总结会上，每位团员都给2050年的自己写了一封信，由团长统一封存保管。团员们在信中写下了对未来的期许、对自己的要求，以及对祖国的祝福。有人写道："希望到那时回望今天，我可以坦然地说——我没有辜负这个伟大的时代。"</p>
       <p>长征永远在路上。每一代人都有自己的长征路，每一代人都要走好自己的长征路。从武昌城头的第一声枪响，到光谷之芯的创新脉动；从长征路上的草鞋足迹，到复兴路上的铿锵步伐——薪火相传，征程不止。</p>
@@ -493,20 +515,63 @@
 
     <div class="quiz-block reveal" id="future-quiz">
       <h4>📝 时代使命闯关</h4>
-      <div class="quiz-progress">共 3 题，关于新时代的使命与担当</div>
-      <div class="quiz-q" id="future-q-text">第1题："两个一百年"奋斗目标中，第二个百年目标是什么？</div>
-      <div class="quiz-options" id="future-q-opts">
-        <button class="quiz-opt" data-correct="false">全面建成小康社会</button>
-        <button class="quiz-opt" data-correct="true">全面建成社会主义现代化强国</button>
-        <button class="quiz-opt" data-correct="false">基本实现现代化</button>
-        <button class="quiz-opt" data-correct="false">实现中华民族伟大复兴</button>
-      </div>
+      <div class="quiz-progress">共 5 题，关于新时代的使命与担当</div>
+      <div class="quiz-q" id="future-q-text"></div>
+      <div class="quiz-options" id="future-q-opts"></div>
       <div class="quiz-fb" id="future-q-fb"></div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════ SUMMARY ═══════════════════════ -->
+<!-- ═══════════════════════════ GENEALOGY (新) ═══════════════════════════ -->
+<div class="page" id="genealogy-section">
+  <div class="back-row" style="position:absolute;top:30px;left:28px;z-index:10">
+    <button class="btn-back" onclick="navigateTo('hub')">← 返回枢纽</button>
+  </div>
+  <h2>精 神 谱 系 图</h2>
+  <p class="genealogy-sub">二十枚精神碎片，一脉相承的红色基因</p>
+  <div class="gold-separator"></div>
+  <div class="genealogy-canvas" id="genealogyCanvas">
+    <p style="text-align:center;color:var(--white-muted);padding-top:220px;letter-spacing:3px">
+      探索各个页面收集精神碎片<br>
+      在此查看你的精神谱系全景图
+    </p>
+  </div>
+  <p style="margin-top:20px;color:var(--white-muted);font-size:0.85rem;letter-spacing:2px">
+    💡 点击节点查看碎片详情  |  金色 = 已收集  |  红色 = 待探索
+  </p>
+</div>
+
+<!-- ═══════════════════════════ HEROES (新) ═══════════════════════════ -->
+<div class="page" id="heroes-section">
+  <div class="back-row" style="position:absolute;top:30px;left:28px;z-index:10">
+    <button class="btn-back" onclick="navigateTo('hub')">← 返回枢纽</button>
+  </div>
+  <h2>英 雄 谱</h2>
+  <p class="heroes-sub">八位荆楚英杰，照亮百年征程</p>
+  <div class="gold-separator"></div>
+  <div class="heroes-scroll" id="heroesScroll"></div>
+</div>
+
+<!-- ═══════════════════════════ VOICES (新) ═══════════════════════════ -->
+<div class="page" id="voices-section">
+  <div class="back-row" style="position:absolute;top:30px;left:28px;z-index:10">
+    <button class="btn-back" onclick="navigateTo('hub')">← 返回枢纽</button>
+  </div>
+  <h2>薪 火 之 声</h2>
+  <div class="gold-separator"></div>
+  <div class="voice-card reveal" id="voiceCard">
+    <div class="voice-text" id="voiceText"></div>
+    <div class="voice-attribution" id="voiceAttr"></div>
+  </div>
+  <div class="voice-nav">
+    <button id="voicePrev" onclick="prevVoice()">◂ 上一条</button>
+    <div class="voice-dots" id="voiceDots"></div>
+    <button id="voiceNext" onclick="nextVoice()">下一条 ▸</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ SUMMARY ═══════════════════════════ -->
 <div class="page" id="summary">
   <div class="summary-badge">🏆</div>
   <h2>寻 访 总 结</h2>
@@ -517,14 +582,19 @@
     <div class="stat-card"><div class="stat-num" id="stat-fragments">0</div><div class="stat-label">精神碎片</div></div>
     <div class="stat-card"><div class="stat-num" id="stat-pledges">0</div><div class="stat-label">青春誓言</div></div>
   </div>
-  <p style="color:#8888A8;margin-bottom:10px;font-size:0.9rem">✨ 收集的精神碎片 (点击交互元素收集)</p>
+  <p style="color:var(--white-muted);margin-bottom:10px;font-size:0.9rem;letter-spacing:2px">✨ 收集的精神碎片 (20枚 / 点击交互元素收集)</p>
   <div class="fragment-display" id="fragmentDisplay">
     <span class="spirit-fragment" data-fid="f1">📜</span><span class="spirit-fragment" data-fid="f2">🚩</span>
-    <span class="spirit-fragment" data-fid="f3">📋</span><span class="spirit-fragment" data-fid="f4">🥾</span>
-    <span class="spirit-fragment" data-fid="f5">💣</span><span class="spirit-fragment" data-fid="f6">☀️</span>
+    <span class="spirit-fragment" data-fid="f7">⚒️</span><span class="spirit-fragment" data-fid="f3">📋</span>
+    <span class="spirit-fragment" data-fid="f8">🏴</span><span class="spirit-fragment" data-fid="f4">🥾</span>
+    <span class="spirit-fragment" data-fid="f9">⭐</span><span class="spirit-fragment" data-fid="f5">💣</span>
+    <span class="spirit-fragment" data-fid="f6">☀️</span>
     <span class="spirit-fragment" data-fid="r1">🏛️</span><span class="spirit-fragment" data-fid="r2">🏫</span>
     <span class="spirit-fragment" data-fid="r3">🌉</span><span class="spirit-fragment" data-fid="r4">💡</span>
     <span class="spirit-fragment" data-fid="r5">🎗️</span><span class="spirit-fragment" data-fid="r6">🌾</span>
+    <span class="spirit-fragment" data-fid="r7">⚒️</span>
+    <span class="spirit-fragment" data-fid="h1">📜</span><span class="spirit-fragment" data-fid="h2">⭐</span>
+    <span class="spirit-fragment" data-fid="h3">🏛️</span><span class="spirit-fragment" data-fid="h4">🔥</span>
   </div>
   <button class="enter-btn" onclick="resetAll()" style="margin-top:30px;font-size:1rem;padding:14px 40px;">🔄 重新开始旅程</button>
 </div>

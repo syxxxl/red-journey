@@ -14,11 +14,15 @@ export function expandTimeline(el) {
 export function collectFragment(fid) {
   if (!State.collectFragment(fid)) return;
   const name = FRAGMENT_NAMES[fid] || fid;
-  showAchievement('✨', '收集到精神碎片：' + name + ' (' + State.get('fragments').size + '/' + TOTAL_FRAGMENTS + ')');
+  showAchievement('★', '收集到精神碎片：' + name + ' (' + State.get('fragments').size + '/' + TOTAL_FRAGMENTS + ')');
   if (State.get('fragments').size === TOTAL_FRAGMENTS) {
-    setTimeout(() => showAchievement('👑', '全部碎片收集完毕！你是真正的红色文化传承者！'), 1500);
+    setTimeout(() => showAchievement('🏆', '全部20枚碎片收集完毕！你是真正的红色文化传承者！'), 1500);
   }
   updateFragmentDisplay();
+  // Refresh genealogy if visible
+  if (document.getElementById('genealogy-section').classList.contains('active')) {
+    import('./genealogy.js').then(m => m.renderGenealogy());
+  }
 }
 
 export function updateFragmentDisplay() {
@@ -150,7 +154,8 @@ export function initSubNav() {
     const section = btn.closest('.section-page') || btn.closest('.page');
     if (!section) return;
 
-    const containers = section.querySelectorAll('.content-card, .location-grid, .future-grid, .pledge-section, .timeline, #future-result-card, [id^="loc-"]');
+    // Hide all containers
+    const containers = section.querySelectorAll('.content-card, .location-grid, .future-grid, .pledge-section, .timeline-wrap, #future-result-card, [id^="loc-"]');
     containers.forEach(c => { c.style.display = 'none'; });
 
     // Hide wrapper divs
@@ -171,8 +176,6 @@ export function initSubNav() {
     if (target === 'timeline') {
       const tl = section.querySelector('#timeline');
       if (tl) tl.style.display = 'block';
-      const innerTL = section.querySelector('#timeline .timeline');
-      if (innerTL) innerTL.style.display = 'block';
     }
     if (target === 'future-choices-panel') {
       const grid = section.querySelector('.future-grid');
@@ -189,7 +192,10 @@ export function initSubNav() {
 
 // ── Summary Builder ──
 export function buildSummary() {
-  const names = { 'history-section': '历史之路', 'reality-section': '现实之窗', 'future-section': '未来之梦' };
+  const names = {
+    'history-section': '历史之路', 'reality-section': '现实之窗', 'future-section': '未来之梦',
+    'genealogy-section': '精神谱系', 'heroes-section': '英雄谱', 'voices-section': '薪火之声'
+  };
   const visitedArr = [...State.get('visited')].filter(v => names[v]).map(v => names[v]);
   const totalQuizScore = Object.values(State.get('quizScores')).reduce((a, b) => a + b, 0);
   const totalQuizQ = Object.values(State.get('quizTotal')).reduce((a, b) => a + b, 0);
@@ -222,5 +228,4 @@ export function resetAll() {
   document.querySelectorAll('.timeline-event').forEach(el => { el.classList.remove('expanded', 'visible'); });
   document.querySelectorAll('.location-card').forEach(el => el.classList.remove('expanded'));
   resetAllQuizzes();
-  // Navigate will be called from app.js
 }

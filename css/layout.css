@@ -1,0 +1,115 @@
+/* ═══════════════════════════════════════════════
+   薪火新程 · 赤色华章 — Layout & Page System
+   ═══════════════════════════════════════════════ */
+
+/* ── Stage ── */
+.stage { position: relative; z-index: 2; min-height: 100vh; }
+
+/* ── Page System ── */
+.page {
+  position: absolute; top: 0; left: 0; width: 100%; min-height: 100vh;
+  opacity: 0; pointer-events: none; transform: translateY(30px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.page.active { opacity: 1; pointer-events: auto; transform: translateY(0); position: relative; }
+.page.exiting { opacity: 0; transform: translateY(-20px); transition-duration: 0.25s; }
+
+/* ── Scroll Reveal ── */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+.reveal.revealed { opacity: 1; transform: translateY(0); }
+
+/* ── Top Bar (进度条) ── */
+#topBar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 4px;
+  background: var(--gradient-gold-bar);
+  transform-origin: left; transform: scaleX(0);
+  transition: transform 0.7s var(--ease);
+  box-shadow: 0 0 12px rgba(255,215,0,0.4);
+}
+
+/* ── Top Nav ── */
+#topNav {
+  position: fixed; top: 18px; right: 24px; z-index: 999;
+  display: flex; gap: 6px; opacity: 0; transition: opacity 0.5s;
+}
+#topNav.show { opacity: 1; }
+#topNav button {
+  padding: 9px 18px; font-size: 0.8rem; letter-spacing: 2px;
+  background: rgba(74,0,0,0.85); color: var(--white-muted);
+  border: 1px solid rgba(255,215,0,0.2); cursor: pointer;
+  border-radius: 20px; font-family: inherit;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+#topNav button:hover { color: var(--gold-foil); border-color: var(--gold-foil); background: rgba(139,0,0,0.5); }
+
+/* ── Breadcrumb ── */
+#breadcrumb {
+  position: fixed; top: 20px; left: 28px; z-index: 999;
+  font-size: 0.8rem; color: var(--white-muted); opacity: 0;
+  transition: opacity 0.5s; display: flex; align-items: center; gap: 6px;
+}
+#breadcrumb.show { opacity: 1; }
+#breadcrumb span { color: var(--gold-foil); cursor: pointer; }
+#breadcrumb span:hover { color: var(--gold-pale); }
+#breadcrumb .sep { color: var(--white-muted); cursor: default; }
+
+/* ── Buttons ── */
+.btn-back, .btn-hub {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 22px; font-size: 0.85rem; letter-spacing: 2px;
+  border-radius: 20px; cursor: pointer; font-family: inherit;
+}
+.btn-back { background: transparent; color: var(--white-muted); border: 1px solid rgba(255,215,0,0.15); }
+.btn-back:hover { color: var(--gold-foil); border-color: var(--gold-foil); }
+.btn-hub { background: rgba(255,215,0,0.08); color: var(--gold-foil); border: 1px solid rgba(255,215,0,0.25); }
+.btn-hub:hover { background: rgba(255,215,0,0.15); box-shadow: 0 0 20px rgba(255,215,0,0.2); }
+
+/* ── Section Page Container ── */
+.section-page { max-width: 1000px; margin: 0 auto; padding: 80px 28px 100px; }
+.section-page .back-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
+.section-title {
+  font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 2.8rem);
+  letter-spacing: 14px; margin-bottom: 8px;
+  background: var(--gradient-title);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.section-sub { color: var(--gold-pale); letter-spacing: 6px; margin-bottom: 12px; font-size: 0.95rem; }
+.section-divider {
+  width: 70px; height: 4px; margin-bottom: 44px; border-radius: 2px;
+  background: var(--gradient-gold-bar);
+}
+
+/* ── Sub Nav Tabs ── */
+.sub-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 44px; }
+.sub-nav-btn {
+  padding: 11px 22px; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer;
+  background: rgba(139,0,0,0.3); color: var(--white-muted);
+  border: 1px solid rgba(255,215,0,0.12); border-radius: 22px;
+  font-family: inherit; white-space: nowrap;
+}
+.sub-nav-btn:hover { color: var(--gold-pale); border-color: rgba(255,215,0,0.3); }
+.sub-nav-btn.active { color: var(--white-bright); border-color: var(--gold-foil); background: rgba(222,41,16,0.4); }
+
+/* ── Image Placeholders ── */
+.img-placeholder {
+  width: 100%; height: 240px; margin-bottom: 22px; border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 56px; position: relative; overflow: hidden;
+  background-size: cover; background-position: center;
+}
+.img-placeholder::before {
+  content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.25); z-index: 1;
+}
+.img-placeholder > * { position: relative; z-index: 2; }
+
+/* ── Highlight Box ── */
+.highlight-box {
+  margin-top: 18px; padding: 18px 22px;
+  border-left: 3px solid var(--gold-foil);
+  background: rgba(255,215,0,0.06);
+  font-size: 0.92rem; color: var(--gold-pale); line-height: 1.85;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}

@@ -1,0 +1,94 @@
+/* ═══════════════════════════════════════════════
+   薪火新程 · 赤色华章 — Decorations
+   红星/金条/丝绸纹理/伪元素装饰
+   ═══════════════════════════════════════════════ */
+
+/* ── 金色五角星 (CSS clip-path) ── */
+.red-star {
+  width: 32px; aspect-ratio: 1;
+  background: var(--gold-foil);
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%,
+    79% 91%, 50% 70%, 21% 91%, 32% 57%,
+    2% 35%, 39% 35%
+  );
+  display: inline-block;
+  box-shadow: 0 0 15px rgba(255,215,0,0.5);
+}
+
+.red-star-sm { width: 18px; }
+.red-star-lg { width: 48px; }
+
+.red-star.pulse { animation: starPulse 3s ease-in-out infinite; }
+
+/* ── 背景五星阵列 ── */
+.star-field {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+}
+.star-field .bg-star {
+  position: absolute; width: 8px; aspect-ratio: 1;
+  background: rgba(255,215,0,0.08);
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%,
+    79% 91%, 50% 70%, 21% 91%, 32% 57%,
+    2% 35%, 39% 35%
+  );
+  animation: starFloat 12s linear infinite;
+}
+
+/* ── 红色丝绸纹理叠加层 ── */
+.silk-overlay {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    repeating-linear-gradient(
+      1.5deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.02) 2px,
+      rgba(0,0,0,0.02) 4px
+    );
+}
+
+/* ── 对角线金色光条 (宣传画装饰) ── */
+.gold-diagonal {
+  position: absolute; width: 200%; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.15), rgba(255,215,0,0.3), rgba(255,215,0,0.15), transparent);
+  transform-origin: center;
+}
+
+/* ── 印章边框 ── */
+.seal-border {
+  position: relative;
+  border: 2px solid var(--gold-foil);
+  border-radius: var(--radius-sm);
+}
+.seal-border::after {
+  content: ''; position: absolute; inset: 4px;
+  border: 1px solid rgba(255,215,0,0.3);
+  border-radius: var(--radius-sm); pointer-events: none;
+}
+
+/* ── 红旗飘扬模拟 ── */
+.flag-texture {
+  background:
+    repeating-linear-gradient(
+      3deg,
+      transparent 0px,
+      rgba(0,0,0,0.02) 2px,
+      transparent 2px,
+      rgba(0,0,0,0.02) 4px
+    ),
+    linear-gradient(180deg, #DE2910, #8B0000);
+}
+
+/* ── 页面角落五星装饰 ── */
+.page-corner-star {
+  position: fixed; z-index: 0; pointer-events: none; opacity: 0.06;
+  width: 120px; aspect-ratio: 1;
+  background: var(--gold-foil);
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%,
+    79% 91%, 50% 70%, 21% 91%, 32% 57%,
+    2% 35%, 39% 35%
+  );
+}
