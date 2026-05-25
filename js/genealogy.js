@@ -14,7 +14,8 @@ export function renderGenealogy() {
 
   const cx = canvas.clientWidth / 2;
   const cy = canvas.clientHeight / 2;
-  const ringRadii = { history: 80, reality: 130, heroes: 175 };
+  const maxR = Math.min(cx, cy) * 0.85;
+  const ringRadii = { history: maxR * 0.4, reality: maxR * 0.65, heroes: maxR * 0.88 };
 
   let html = '';
 
@@ -33,17 +34,18 @@ export function renderGenealogy() {
       const name = FRAGMENT_NAMES[fid] || fid;
 
       html += `<div class="genealogy-node${isCollected ? ' collected' : ''}"
-        style="left:${x - 24}px;top:${y - 24}px"
+        style="left:${x}px;top:${y}px"
         title="${name}${isCollected ? ' ✓ 已收集' : ''}"
         onclick="window._showFragmentInfo('${fid}','${name}')">${isCollected ? '★' : '●'}</div>`;
     });
   }
 
   // Center star
-  html += `<div style="position:absolute;left:${cx - 32}px;top:${cy - 32}px;width:64px;height:64px;
+  html += `<div style="position:absolute;left:${cx}px;top:${cy}px;width:64px;height:64px;
     background:var(--gold-foil);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
     display:flex;align-items:center;justify-content:center;font-size:22px;z-index:10;
-    box-shadow:0 0 30px rgba(255,215,0,0.6);animation:starPulse 3s ease-in-out infinite;"
+    box-shadow:0 0 30px rgba(255,215,0,0.6);animation:starPulse 3s ease-in-out infinite;
+    transform:translate(-50%,-50%);"
     title="红色精神核心">🔥</div>`;
 
   // Ring labels

@@ -113,3 +113,56 @@
   font-size: 0.92rem; color: var(--gold-pale); line-height: 1.85;
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
+
+/* ═══════════════ MOBILE: Navigation ═══════════════ */
+@media (max-width: 768px) {
+  /* Top nav → horizontal scroll strip at top */
+  #topNav {
+    top: 8px; right: 8px; left: 8px; gap: 4px;
+    justify-content: flex-start; overflow-x: auto;
+    scrollbar-width: none; -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+  #topNav::-webkit-scrollbar { display: none; }
+  #topNav button {
+    padding: 9px 13px; font-size: 0.7rem; letter-spacing: 1px;
+    white-space: nowrap; flex-shrink: 0; min-height: 40px;
+    border-radius: 16px; display: flex; align-items: center;
+  }
+
+  /* Hide breadcrumb on mobile */
+  #breadcrumb { display: none; }
+
+  /* Section page compact */
+  .section-page { padding: 8px 10px 12px; }
+  .section-page .back-row { margin-bottom: 6px; gap: 4px; }
+  .section-title { font-size: 1.15rem; letter-spacing: 4px; }
+  .section-sub { font-size: 0.72rem; letter-spacing: 1px; }
+  .section-divider { margin-bottom: 8px; width: 36px; }
+
+  /* Sub nav horizontal scroll */
+  .sub-nav {
+    flex-wrap: nowrap; overflow-x: auto; gap: 3px; margin-bottom: 8px;
+    scrollbar-width: none; -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+  .sub-nav::-webkit-scrollbar { display: none; }
+  .sub-nav-btn {
+    padding: 7px 12px; font-size: 0.68rem; letter-spacing: 0.5px;
+    flex-shrink: 0; border-radius: 16px; min-height: 36px;
+    display: flex; align-items: center;
+  }
+
+  /* Buttons */
+  .btn-back, .btn-hub { padding: 5px 10px; font-size: 0.7rem; letter-spacing: 0.5px; }
+  .gold-separator { margin: 20px auto; width: 90%; }
+}
+
+@media (max-width: 480px) {
+  #topNav { top: 6px; right: 4px; left: 4px; gap: 2px; }
+  #topNav button { padding: 8px 10px; font-size: 0.65rem; min-height: 36px; }
+  .section-page { padding: 6px 8px 10px; }
+  .sub-nav-btn { padding: 4px 8px; font-size: 0.64rem; }
+}
