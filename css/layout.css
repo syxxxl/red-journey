@@ -12,6 +12,7 @@
   transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
   overflow-y: auto; overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  padding-top: var(--nav-height, 0px) !important;
 }
 .page.active { opacity: 1; pointer-events: auto; transform: translateY(0); z-index: 2; }
 .page.exiting { opacity: 0; transform: translateY(-20px); transition-duration: 0.25s; z-index: 1; }
@@ -136,8 +137,7 @@
     border-radius: 16px; display: flex; align-items: center;
   }
 
-  /* Prevent fixed nav from covering page content — !important overrides page ID selectors */
-  .page { padding-top: 54px !important; }
+  /* Nav height applied dynamically via JS — see navigation.js */
   #landing.page { padding-top: 0 !important; }
 
   /* Hide breadcrumb on mobile */
@@ -172,7 +172,6 @@
 @media (max-width: 480px) {
   #topNav { padding: 6px 3px; gap: 2px; }
   #topNav button { padding: 7px 9px; font-size: 0.64rem; min-height: 32px; letter-spacing: 0.5px; border-radius: 14px; }
-  .page { padding-top: 46px !important; }
   #landing.page { padding-top: 0 !important; }
 
   .section-page { padding: 4px 6px 10px; }

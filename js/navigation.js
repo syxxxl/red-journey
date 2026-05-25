@@ -88,6 +88,20 @@ export function updateTopBar() {
 export function updateTopNav() {
   const current = document.querySelector('.page.active');
   document.getElementById('topNav').classList.toggle('show', current && current.id !== 'landing');
+  updateNavHeight();
+}
+
+// Dynamically measure nav bar height so pages get correct padding-top on any browser
+export function updateNavHeight() {
+  const nav = document.getElementById('topNav');
+  const isMobile = window.innerWidth <= 768;
+  if (nav && isMobile) {
+    // Force display to measure (opacity:0 still has height, but just in case)
+    const h = nav.offsetHeight;
+    document.documentElement.style.setProperty('--nav-height', h + 'px');
+  } else {
+    document.documentElement.style.setProperty('--nav-height', '0px');
+  }
 }
 
 export function updateBreadcrumb(pageId) {

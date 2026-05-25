@@ -1,7 +1,7 @@
 // ══════════════════════════════════════════════
 // APP — Entry point, bootstraps everything
 // ══════════════════════════════════════════════
-import { navigateTo, updateTopBar, updateTopNav } from './navigation.js';
+import { navigateTo, updateTopBar, updateTopNav, updateNavHeight } from './navigation.js';
 import { animateParticles } from './particles.js';
 import { initMouseSparks, initScrollReveal, typewriterText } from './effects.js';
 import {
@@ -173,6 +173,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateTopBar();
   updateTopNav();
+
+  // Dynamically track nav height for correct page padding on any browser
+  window.addEventListener('resize', updateNavHeight);
+  updateNavHeight();
 
   // Console branding
   console.log('%c薪火新程 %c赤色华章 %c2026',
