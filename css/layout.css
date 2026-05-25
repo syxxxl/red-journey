@@ -68,22 +68,22 @@
 .btn-hub:hover { background: rgba(255,215,0,0.15); box-shadow: 0 0 20px rgba(255,215,0,0.2); }
 
 /* ── Section Page Container ── */
-.section-page { max-width: 1000px; margin: 0 auto; padding: 20px 20px 40px; }
-.section-page .back-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+.section-page { max-width: 1000px; margin: 0 auto; padding: 16px 20px 24px; }
+.section-page .back-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
 .section-title {
-  font-family: var(--font-serif); font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-  letter-spacing: 10px; margin-bottom: 4px;
+  font-family: var(--font-serif); font-size: clamp(1.4rem, 3vw, 2rem);
+  letter-spacing: 8px; margin-bottom: 2px;
   background: var(--gradient-title);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.section-sub { color: var(--gold-pale); letter-spacing: 4px; margin-bottom: 8px; font-size: 0.88rem; }
+.section-sub { color: var(--gold-pale); letter-spacing: 3px; margin-bottom: 6px; font-size: 0.82rem; }
 .section-divider {
-  width: 60px; height: 3px; margin-bottom: 24px; border-radius: 2px;
+  width: 60px; height: 3px; margin-bottom: 16px; border-radius: 2px;
   background: var(--gradient-gold-bar);
 }
 
 /* ── Sub Nav Tabs ── */
-.sub-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.sub-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
 .sub-nav-btn {
   padding: 8px 16px; font-size: 0.82rem; letter-spacing: 2px; cursor: pointer;
   background: rgba(139,0,0,0.3); color: var(--white-muted);
