@@ -118,58 +118,65 @@
 
 /* ═══════════════ MOBILE: Navigation ═══════════════ */
 @media (max-width: 768px) {
-  /* Prevent fixed nav from covering page content */
-  .page { padding-top: 50px; }
-
-  /* Landing doesn't show topNav — no padding needed */
-  #landing.page { padding-top: 0; }
-  /* Top nav → horizontal scroll strip at top */
+  /* ── Top nav → fixed bar with background ── */
   #topNav {
-    top: 8px; right: 8px; left: 8px; gap: 4px;
+    top: 0; right: 0; left: 0; gap: 3px;
     justify-content: flex-start; overflow-x: auto;
     scrollbar-width: none; -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 4px;
+    padding: 7px 5px;
+    background: rgba(13, 0, 0, 0.94);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.12);
   }
   #topNav::-webkit-scrollbar { display: none; }
   #topNav button {
-    padding: 9px 13px; font-size: 0.7rem; letter-spacing: 1px;
-    white-space: nowrap; flex-shrink: 0; min-height: 40px;
+    padding: 8px 12px; font-size: 0.7rem; letter-spacing: 1px;
+    white-space: nowrap; flex-shrink: 0; min-height: 36px;
     border-radius: 16px; display: flex; align-items: center;
   }
+
+  /* Prevent fixed nav from covering page content */
+  .page { padding-top: 54px; }
+  #landing.page { padding-top: 0; }
 
   /* Hide breadcrumb on mobile */
   #breadcrumb { display: none; }
 
-  /* Section page compact */
-  .section-page { padding: 8px 10px 12px; }
-  .section-page .back-row { margin-bottom: 6px; gap: 4px; }
-  .section-title { font-size: 1.15rem; letter-spacing: 4px; }
-  .section-sub { font-size: 0.72rem; letter-spacing: 1px; }
-  .section-divider { margin-bottom: 8px; width: 36px; }
+  /* Section page */
+  .section-page { padding: 6px 10px 12px; }
+  .section-page .back-row { margin-bottom: 5px; gap: 4px; }
+  .section-title { font-size: 1.2rem; letter-spacing: 5px; }
+  .section-sub { font-size: 0.74rem; letter-spacing: 1px; }
+  .section-divider { margin-bottom: 10px; width: 40px; }
 
   /* Sub nav horizontal scroll */
   .sub-nav {
-    flex-wrap: nowrap; overflow-x: auto; gap: 3px; margin-bottom: 8px;
+    flex-wrap: nowrap; overflow-x: auto; gap: 4px; margin-bottom: 10px;
     scrollbar-width: none; -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 2px;
   }
   .sub-nav::-webkit-scrollbar { display: none; }
   .sub-nav-btn {
-    padding: 7px 12px; font-size: 0.68rem; letter-spacing: 0.5px;
+    padding: 7px 13px; font-size: 0.7rem; letter-spacing: 0.5px;
     flex-shrink: 0; border-radius: 16px; min-height: 36px;
     display: flex; align-items: center;
   }
 
   /* Buttons */
-  .btn-back, .btn-hub { padding: 5px 10px; font-size: 0.7rem; letter-spacing: 0.5px; }
-  .gold-separator { margin: 20px auto; width: 90%; }
+  .btn-back, .btn-hub { padding: 6px 12px; font-size: 0.72rem; letter-spacing: 1px; }
+  .gold-separator { margin: 18px auto; width: 90%; }
 }
 
 @media (max-width: 480px) {
-  #topNav { top: 6px; right: 4px; left: 4px; gap: 2px; }
-  #topNav button { padding: 8px 10px; font-size: 0.65rem; min-height: 36px; }
-  .section-page { padding: 6px 8px 10px; }
-  .sub-nav-btn { padding: 4px 8px; font-size: 0.64rem; }
+  #topNav { padding: 6px 3px; gap: 2px; }
+  #topNav button { padding: 7px 9px; font-size: 0.64rem; min-height: 32px; letter-spacing: 0.5px; border-radius: 14px; }
+  .page { padding-top: 46px; }
+  #landing.page { padding-top: 0; }
+
+  .section-page { padding: 4px 6px 10px; }
+  .section-title { font-size: 1.1rem; letter-spacing: 4px; }
+  .sub-nav-btn { padding: 6px 10px; font-size: 0.66rem; min-height: 32px; }
+  .btn-back, .btn-hub { padding: 5px 10px; font-size: 0.68rem; }
 }

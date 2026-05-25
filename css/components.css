@@ -552,7 +552,7 @@
   #landing .tagline { font-size: 0.72rem; letter-spacing: 4px; }
   #landing .anniversary { gap: 8px; font-size: 0.7rem; }
   #landing .anniversary span { padding: 2px 8px; }
-  #landing .intro-text { font-size: 0.72rem; line-height: 1.6; max-width: 100%; padding: 0 4px; }
+  #landing .intro-text { font-size: 0.76rem; line-height: 1.8; max-width: 100%; padding: 0 4px; }
   #landing .intro-text br { display: none; }
 
   /* ── Enter button ── */
@@ -606,15 +606,15 @@
   .location-card .loc-img { height: 56px; font-size: 26px; }
   .location-card .loc-body { padding: 8px 10px; }
   .location-card h4 { font-size: 0.84rem; }
-  .location-card .loc-preview { font-size: 0.7rem; }
-  .location-card .loc-detail { font-size: 0.74rem; }
+  .location-card .loc-preview { font-size: 0.74rem; }
+  .location-card .loc-detail { font-size: 0.76rem; }
 
   /* ── Future choices ── */
   .future-grid { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
   .future-choice-card { padding: 12px 10px; }
   .future-choice-card .choice-icon { font-size: 26px; margin-bottom: 4px; }
   .future-choice-card h4 { font-size: 0.82rem; }
-  .future-choice-card p { font-size: 0.7rem; }
+  .future-choice-card p { font-size: 0.74rem; }
 
   /* ── Quiz ── */
   .quiz-block { padding: 10px 12px; margin-top: 10px; }
@@ -712,12 +712,12 @@
   .timeline-event .event-year { font-size: 0.85rem; }
   .timeline-event h4 { font-size: 0.74rem; }
 
-  /* ── Future choices → 2 columns grid ── */
+  /* ── Future choices ── */
   .future-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
-  .future-choice-card { padding: 10px 6px; }
-  .future-choice-card .choice-icon { font-size: 22px; }
-  .future-choice-card h4 { font-size: 0.72rem; letter-spacing: 1px; }
-  .future-choice-card p { font-size: 0.66rem; }
+  .future-choice-card { padding: 12px 8px; }
+  .future-choice-card .choice-icon { font-size: 24px; }
+  .future-choice-card h4 { font-size: 0.74rem; letter-spacing: 1px; }
+  .future-choice-card p { font-size: 0.7rem; }
 
   /* ── Quiz options full-width ── */
   .quiz-options { flex-direction: column; align-items: stretch; }
@@ -733,18 +733,18 @@
   .hero-card .hero-portrait { height: 80px; font-size: 34px; }
 
   /* ── Voices ── */
-  .voice-card { padding: 12px 12px; }
-  .voice-card .voice-text { font-size: 0.82rem; min-height: 40px; }
-  .voice-nav { gap: 6px; }
-  .voice-nav button { padding: 6px 10px; font-size: 0.68rem; }
+  .voice-card { padding: 14px 12px; }
+  .voice-card .voice-text { font-size: 0.84rem; min-height: 40px; }
+  .voice-nav { gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .voice-nav button { padding: 8px 14px; font-size: 0.72rem; min-height: 38px; }
 
   /* ── Stats single column ── */
   .stats-row { flex-direction: row; flex-wrap: wrap; }
   .stat-card { flex: 1 1 40%; min-width: 0; }
 
   /* ── Genealogy ── */
-  .genealogy-canvas { min-height: 240px; }
-  .genealogy-node { width: 28px; height: 28px; font-size: 12px; }
+  .genealogy-canvas { min-height: 250px; }
+  .genealogy-node { width: 32px; height: 32px; font-size: 13px; }
 
   /* ── Summary ── */
   #summary .recap { font-size: 0.72rem; }
