@@ -118,6 +118,11 @@
 
 /* ═══════════════ MOBILE: Navigation ═══════════════ */
 @media (max-width: 768px) {
+  /* Prevent fixed nav from covering page content */
+  .page { padding-top: 50px; }
+
+  /* Landing doesn't show topNav — no padding needed */
+  #landing.page { padding-top: 0; }
   /* Top nav → horizontal scroll strip at top */
   #topNav {
     top: 8px; right: 8px; left: 8px; gap: 4px;
