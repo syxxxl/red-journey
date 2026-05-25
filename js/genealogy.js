@@ -14,7 +14,7 @@ export function renderGenealogy() {
 
   const cx = canvas.clientWidth / 2;
   const cy = canvas.clientHeight / 2;
-  const ringRadii = { history: 140, reality: 220, heroes: 290 };
+  const ringRadii = { history: 80, reality: 130, heroes: 175 };
 
   let html = '';
 
