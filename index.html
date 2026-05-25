@@ -4,619 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>薪火新程 — 湖北武汉红色寻访实践团 | 建党105周年 · 长征胜利90周年</title>
-<style>
-/* ═══════════════════════════════════════════════
-   GLOBAL STYLES
-   ═══════════════════════════════════════════════ */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap');
-
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-/* 移除移动端点触蓝色高亮 */
-*{-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
-/* 允许文本选择和输入 */
-input,textarea,[contenteditable]{-webkit-user-select:text;user-select:text}
-
-/* 全局点触反馈 */
-a,button,.enter-btn,.path-card,.location-card,.future-choice-card,.timeline-event,.quiz-opt,.pledge-submit,.sub-nav-btn,.btn-back,.btn-hub,.pledge-tag{
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
-  transition:transform 0.15s ease,opacity 0.15s ease,background 0.35s,border-color 0.35s,box-shadow 0.35s;
-}
-a:active,button:active,.enter-btn:active,.path-card:active,.location-card:active,.future-choice-card:active,.timeline-event:active,.quiz-opt:active,.pledge-submit:active,.sub-nav-btn:active,.btn-back:active,.btn-hub:active{
-  transform:scale(0.96);
-  opacity:0.85;
-}
-/* 移除点击时的outline，保留键盘导航 */
-a:focus:not(:focus-visible),button:focus:not(:focus-visible),.enter-btn:focus:not(:focus-visible),
-.path-card:focus:not(:focus-visible),.location-card:focus:not(:focus-visible),
-.future-choice-card:focus:not(:focus-visible),.quiz-opt:focus:not(:focus-visible),
-.pledge-submit:focus:not(:focus-visible),.sub-nav-btn:focus:not(:focus-visible),
-.btn-back:focus:not(:focus-visible),.btn-hub:focus:not(:focus-visible){outline:none}
-
-:root{
-  --red-dark:#6B0F0F;--red:#A51C30;--red-bright:#C41E3A;--red-light:#E8556D;
-  --gold-dark:#8B6914;--gold:#C9A84C;--gold-bright:#E8D078;--gold-light:#F5E6B8;
-  --ink:#0d0d1a;--ink2:#13132A;--ink3:#1A1A35;--ink4:#242450;
-  --cream:#FFF8EC;--white:#FFFFFF;--text:#E0E0E0;--text-dim:#A0A0B8;
-  --shadow-sm:0 4px 20px rgba(0,0,0,0.3);--shadow:0 10px 40px rgba(0,0,0,0.4);
-  --shadow-lg:0 20px 60px rgba(0,0,0,0.5);--shadow-gold:0 0 30px rgba(201,168,76,0.3);
-  --radius:12px;--radius-lg:20px;
-  --ease:cubic-bezier(0.4,0,0.2,1);--ease-out:cubic-bezier(0,0,0.2,1);
-  --ease-bounce:cubic-bezier(0.34,1.56,0.64,1);--ease-spring:cubic-bezier(0.68,-0.55,0.265,1.55);
-}
-
-html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--gold) var(--ink2)}
-body{
-  font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
-  background:var(--ink);color:var(--text);overflow-x:hidden;line-height:1.8;
-  -webkit-font-smoothing:antialiased;
-}
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:var(--ink2)}
-::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
-
-#bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-
-#topBar{
-  position:fixed;top:0;left:0;right:0;z-index:1000;height:4px;
-  background:linear-gradient(90deg,var(--red),var(--gold),#4FC3F7,#4CAF50);
-  background-size:300% 100%;animation:barShift 4s ease infinite;
-  transform-origin:left;transform:scaleX(0);transition:transform 0.6s var(--ease);
-}
-@keyframes barShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-
-#topNav{
-  position:fixed;top:8px;right:16px;z-index:999;
-  display:flex;gap:10px;opacity:0;transition:opacity 0.5s;
-}
-#topNav.show{opacity:1}
-#topNav button{
-  padding:8px 16px;font-size:0.82rem;letter-spacing:1px;
-  background:rgba(13,13,26,0.85);color:var(--text-dim);
-  border:1px solid rgba(255,255,255,0.12);cursor:pointer;
-  border-radius:20px;transition:all 0.35s;backdrop-filter:blur(10px);
-}
-#topNav button:hover{color:var(--gold);border-color:var(--gold);background:rgba(201,168,76,0.1)}
-
-#breadcrumb{
-  position:fixed;top:12px;left:20px;z-index:999;
-  font-size:0.8rem;color:var(--text-dim);opacity:0;
-  transition:opacity 0.5s;display:flex;align-items:center;gap:6px;
-}
-#breadcrumb.show{opacity:1}
-#breadcrumb span{color:var(--gold);cursor:pointer;transition:color 0.3s}
-#breadcrumb span:hover{color:var(--gold-bright)}
-#breadcrumb .sep{color:var(--text-dim);cursor:default}
-
-.stage{position:relative;z-index:1;min-height:100vh}
-
-.page{
-  position:absolute;top:0;left:0;width:100%;min-height:100vh;
-  opacity:0;pointer-events:none;transform:translateY(30px);
-  transition:opacity 0.6s var(--ease),transform 0.6s var(--ease);
-}
-.page.active{opacity:1;pointer-events:auto;transform:translateY(0);position:relative}
-.page.exiting{opacity:0;transform:translateY(-30px)}
-
-/* ═══════════════════════ LANDING ═══════════════════════ */
-#landing{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  min-height:100vh;text-align:center;padding:40px 20px;color:var(--white);
-}
-.landing-logo{
-  width:140px;height:140px;border:3px solid var(--gold);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;font-size:60px;
-  position:relative;animation:logoPulse 3s ease-in-out infinite;margin-bottom:36px;
-  background:radial-gradient(circle at center,rgba(201,168,76,0.08) 0%,transparent 70%);
-}
-.landing-logo::before,.landing-logo::after{
-  content:'';position:absolute;border-radius:50%;
-  border:1px solid rgba(201,168,76,0.3);animation:logoRing 3s ease-in-out infinite;
-}
-.landing-logo::before{inset:-14px;animation-delay:0.6s}
-.landing-logo::after{inset:-28px;animation-delay:1.2s}
-@keyframes logoPulse{0%,100%{box-shadow:0 0 40px rgba(201,168,76,0.2)}50%{box-shadow:0 0 80px rgba(201,168,76,0.5)}}
-@keyframes logoRing{0%,100%{transform:scale(1);opacity:0.8}50%{transform:scale(1.06);opacity:0.15}}
-
-#landing h1{
-  font-family:'Noto Serif SC',serif;font-size:clamp(2.2rem,5.5vw,4rem);
-  font-weight:900;letter-spacing:10px;
-  background:linear-gradient(180deg,#F5E6B8 0%,#C9A84C 40%,#8B6914 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:12px;line-height:1.3;
-}
-#landing .tagline{font-size:clamp(1rem,2.2vw,1.3rem);color:rgba(255,255,255,0.65);letter-spacing:6px;margin-bottom:8px}
-#landing .anniversary{
-  display:inline-flex;gap:20px;margin-bottom:30px;font-size:0.95rem;color:var(--gold-bright);letter-spacing:3px;
-}
-#landing .anniversary span{padding:4px 16px;border:1px solid rgba(201,168,76,0.3);border-radius:4px}
-#landing .intro-text{max-width:620px;color:rgba(255,255,255,0.5);font-size:0.95rem;line-height:2;margin-bottom:48px}
-#landing .intro-text strong{color:var(--gold-light)}
-.enter-btn{
-  display:inline-flex;align-items:center;gap:10px;padding:18px 56px;
-  font-family:'Noto Serif SC',serif;font-size:1.15rem;letter-spacing:6px;
-  color:var(--gold);background:transparent;border:2px solid var(--gold);
-  cursor:pointer;position:relative;overflow:hidden;
-  transition:all 0.5s var(--ease);text-decoration:none;
-}
-.enter-btn:hover{background:var(--gold);color:var(--ink);box-shadow:0 0 50px rgba(201,168,76,0.4);transform:translateY(-3px)}
-.enter-btn .arrow{transition:transform 0.4s}
-.enter-btn:hover .arrow{transform:translateX(6px)}
-
-/* ═══════════════════════ PROLOGUE ═══════════════════════ */
-#prologue{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:60px 30px}
-.prologue-card{
-  max-width:800px;width:100%;background:rgba(19,19,42,0.7);
-  border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-lg);padding:50px 40px;
-  backdrop-filter:blur(10px);position:relative;overflow:hidden;
-}
-.prologue-card::before{
-  content:'';position:absolute;top:0;left:0;width:4px;height:100%;
-  background:linear-gradient(180deg,var(--red),var(--gold));
-}
-.prologue-card h2{
-  font-family:'Noto Serif SC',serif;font-size:1.8rem;color:var(--gold);letter-spacing:4px;margin-bottom:20px;
-}
-.prologue-card .team-intro{color:var(--text-dim);line-height:2;margin-bottom:24px;font-size:0.95rem}
-.prologue-card .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:30px}
-.team-group{
-  padding:24px 20px;text-align:center;background:rgba(255,255,255,0.02);
-  border:1px solid rgba(255,255,255,0.05);border-radius:var(--radius);transition:all 0.4s;
-}
-.team-group:hover{background:rgba(201,168,76,0.05);border-color:rgba(201,168,76,0.2);transform:translateY(-4px)}
-.team-group .group-icon{font-size:34px;margin-bottom:8px;display:block}
-.team-group .group-name{color:var(--gold);font-family:'Noto Serif SC',serif;font-size:1.05rem;letter-spacing:2px;margin-bottom:4px}
-.team-group .group-desc{color:var(--text-dim);font-size:0.78rem;line-height:1.5;margin-bottom:10px}
-.team-group .group-members{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
-.member-tag{
-  padding:3px 12px;font-size:0.78rem;background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:var(--text-dim);
-}
-@media(max-width:768px){
-  .prologue-card .team-grid{grid-template-columns:1fr}
-}
-
-/* ═══════════════════════ HUB ═══════════════════════ */
-#hub{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:60px 20px}
-#hub h2{font-family:'Noto Serif SC',serif;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--gold);letter-spacing:6px;margin-bottom:10px}
-#hub .hub-sub{color:var(--text-dim);margin-bottom:50px;letter-spacing:2px;font-size:0.95rem}
-.path-grid{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;max-width:1200px;width:100%}
-.path-card{
-  flex:1;min-width:300px;max-width:380px;padding:0;cursor:pointer;position:relative;
-  background:rgba(19,19,42,0.6);border:1px solid rgba(255,255,255,0.08);
-  border-radius:var(--radius-lg);overflow:hidden;transition:all 0.5s var(--ease);
-}
-.path-card:hover{transform:translateY(-12px);box-shadow:var(--shadow-lg)}
-.path-card .card-img{
-  height:180px;display:flex;align-items:center;justify-content:center;
-  font-size:64px;position:relative;overflow:hidden;
-}
-.path-card.history .card-img{background:linear-gradient(135deg,#1a0a0a 0%,#3d1010 50%,#1a0a0a 100%)}
-.path-card.reality .card-img{background:linear-gradient(135deg,#1a1508 0%,#3d320f 50%,#1a1508 100%)}
-.path-card.future .card-img{background:linear-gradient(135deg,#08141a 0%,#0f2a3d 50%,#08141a 100%)}
-.path-card .card-img::after{
-  content:'';position:absolute;inset:0;background:radial-gradient(circle at center,rgba(255,255,255,0.05) 0%,transparent 70%);
-}
-.path-card .card-body{padding:30px 24px 36px}
-.path-card h3{font-family:'Noto Serif SC',serif;font-size:1.8rem;letter-spacing:4px;margin-bottom:8px}
-.path-card.history h3{color:var(--red-light)}
-.path-card.reality h3{color:var(--gold-bright)}
-.path-card.future h3{color:#4FC3F7}
-.path-card .card-desc{color:var(--text-dim);font-size:0.9rem;line-height:1.8;margin-bottom:16px}
-.path-card .card-tags{display:flex;flex-wrap:wrap;gap:6px}
-.path-card .card-tags span{
-  padding:4px 12px;font-size:0.75rem;border-radius:12px;letter-spacing:1px;
-  background:rgba(255,255,255,0.04);color:var(--text-dim);
-}
-.path-card.history .card-tags span{border:1px solid rgba(196,30,58,0.3);color:rgba(232,85,109,0.8)}
-.path-card.reality .card-tags span{border:1px solid rgba(201,168,76,0.3);color:rgba(201,168,76,0.8)}
-.path-card.future .card-tags span{border:1px solid rgba(79,195,247,0.3);color:rgba(79,195,247,0.8)}
-.path-card .card-hint{
-  display:block;text-align:center;margin-top:20px;padding:10px 0;
-  color:var(--text-dim);font-size:0.85rem;letter-spacing:2px;
-  transition:color 0.4s;border-top:1px solid rgba(255,255,255,0.05);
-}
-
-/* ═══════════════════════ CONTENT SECTIONS ═══════════════════════ */
-.section-page{max-width:960px;margin:0 auto;padding:70px 24px}
-.section-page .back-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
-.btn-back,.btn-hub{
-  display:inline-flex;align-items:center;gap:6px;padding:9px 18px;
-  font-size:0.85rem;letter-spacing:1px;border-radius:20px;cursor:pointer;
-  transition:all 0.35s;text-decoration:none;font-family:inherit;
-}
-.btn-back{background:transparent;color:var(--text-dim);border:1px solid rgba(255,255,255,0.15)}
-.btn-back:hover{color:var(--gold);border-color:var(--gold)}
-.btn-hub{background:rgba(201,168,76,0.08);color:var(--gold);border:1px solid rgba(201,168,76,0.25)}
-.btn-hub:hover{background:rgba(201,168,76,0.18)}
-.section-title{
-  font-family:'Noto Serif SC',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);
-  letter-spacing:6px;margin-bottom:6px;
-}
-.section-sub{color:var(--text-dim);letter-spacing:2px;margin-bottom:10px;font-size:0.9rem}
-.section-divider{width:60px;height:3px;margin-bottom:40px;border-radius:2px}
-#history-section .section-title{color:var(--red-light)}
-#history-section .section-divider{background:var(--red)}
-#reality-section .section-title{color:var(--gold-bright)}
-#reality-section .section-divider{background:var(--gold)}
-#future-section .section-title{color:#4FC3F7}
-#future-section .section-divider{background:#4FC3F7}
-
-.sub-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
-.sub-nav-btn{
-  padding:10px 20px;font-size:0.88rem;letter-spacing:1px;cursor:pointer;
-  background:rgba(255,255,255,0.02);color:var(--text-dim);
-  border:1px solid rgba(255,255,255,0.1);border-radius:24px;
-  transition:all 0.35s;font-family:inherit;white-space:nowrap;
-}
-.sub-nav-btn:hover,.sub-nav-btn.active{
-  color:var(--white);border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.06);
-}
-#history-section .sub-nav-btn.active{border-color:var(--red);color:var(--red-light);background:rgba(196,30,58,0.1)}
-#reality-section .sub-nav-btn.active{border-color:var(--gold);color:var(--gold-bright);background:rgba(201,168,76,0.1)}
-#future-section .sub-nav-btn.active{border-color:#4FC3F7;color:#4FC3F7;background:rgba(79,195,247,0.1)}
-
-.content-card{
-  background:rgba(19,19,42,0.6);border:1px solid rgba(255,255,255,0.06);
-  border-radius:var(--radius);padding:32px 28px;margin-bottom:20px;
-  transition:all 0.4s;position:relative;overflow:hidden;
-}
-.content-card:hover{background:rgba(19,19,42,0.8);border-color:rgba(255,255,255,0.12)}
-.content-card h4{font-family:'Noto Serif SC',serif;font-size:1.3rem;margin-bottom:12px;letter-spacing:2px}
-.content-card p{color:var(--text-dim);line-height:1.9;font-size:0.93rem}
-.content-card .card-meta{font-size:0.82rem;color:var(--text-dim);margin-top:12px;opacity:0.7}
-.content-card .highlight-box{
-  margin-top:16px;padding:16px 20px;border-left:3px solid var(--gold);
-  background:rgba(201,168,76,0.05);font-size:0.9rem;color:var(--gold-light);line-height:1.8;
-}
-.content-card .img-placeholder{
-  width:100%;height:220px;margin-bottom:20px;border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:48px;position:relative;overflow:hidden;
-  background-size:cover;background-position:center;
-}
-.img-placeholder::before{
-  content:'';position:absolute;inset:0;background:rgba(0,0,0,0.35);z-index:1;
-}
-.img-placeholder>*{position:relative;z-index:2}
-#history-section .img-placeholder{background-color:#1a0a0a}
-#reality-section .img-placeholder{background-color:#1a1508}
-#future-section .img-placeholder{background-color:#08141a}
-
-/* ── Venue-specific illustration backgrounds ── */
-.img-1911{background:linear-gradient(180deg,#1a0505 0%,#3d1010 30%,#6b1a1a 60%,#1a0505 100%),radial-gradient(ellipse at 70% 20%,#c9a84c22 0%,transparent 60%),radial-gradient(circle at 50% 80%,#c41e3a33 0%,transparent 50%)}
-.img-1921{background:linear-gradient(135deg,#1a0000 0%,#2d0808 40%,#5c1414 70%,#1a0000 100%),radial-gradient(circle at 30% 50%,#e8d07833 0%,transparent 50%)}
-.img-1927{background:linear-gradient(180deg,#0d0d1a 0%,#1a1a35 40%,#2d2d55 70%,#0d0d1a 100%),radial-gradient(circle at 60% 70%,#c9a84c22 0%,transparent 40%)}
-.img-1934{background:linear-gradient(180deg,#1a1008 0%,#3d2815 30%,#5c3d1f 50%,#8b5e2f 80%,#3d2815 100%),radial-gradient(ellipse at 50% 20%,#c41e3a44 0%,transparent 50%)}
-.img-1949{background:linear-gradient(180deg,#1a0505 0%,#4a1010 35%,#c41e3a22 60%,#8b691444 100%),radial-gradient(circle at 50% 30%,#f5e6b866 0%,#e8d07833 30%,transparent 60%)}
-.img-museum{background:linear-gradient(180deg,#1a1208 0%,#3d2a10 35%,#5c3d18 65%,#1a1208 100%),radial-gradient(ellipse at 40% 50%,#d4a84322 0%,transparent 55%)}
-.img-wuda{background:linear-gradient(180deg,#0d1a0d 0%,#1a3d1a 30%,#2d5c2d 55%,#0d1a0d 100%),radial-gradient(circle at 70% 40%,#c9a84c22 0%,transparent 50%)}
-.img-bridge{background:linear-gradient(180deg,#0d1a2d 0%,#153550 35%,#1a4d70 60%,#0d1a2d 100%),radial-gradient(ellipse at 50% 30%,#e8d07833 0%,transparent 60%)}
-.img-optics{background:linear-gradient(135deg,#0d0d1a 0%,#151530 30%,#1a1a50 50%,#0d0d2d 100%),radial-gradient(circle at 60% 40%,#4fc3f722 0%,transparent 50%)}
-.img-covid{background:linear-gradient(180deg,#1a1a1a 0%,#2d2d2d 35%,#4a4a4a 60%,#1a1a1a 100%),radial-gradient(circle at 50% 50%,#ffffff11 0%,transparent 50%)}
-.img-rural{background:linear-gradient(180deg,#0d1a08 0%,#1a3d10 30%,#2d5c1a 50%,#3d7a22 70%,#1a3d10 100%),radial-gradient(ellipse at 50% 20%,#f5e6b822 0%,transparent 55%)}
-.img-future{background:linear-gradient(135deg,#08101a 0%,#0d2035 30%,#153050 50%,#0d2845 100%),radial-gradient(circle at 50% 40%,#4fc3f733 0%,#4fc3f711 40%,transparent 65%)}
-
-/* ── Timeline ── */
-.timeline{position:relative;padding:30px 0}
-.timeline-line{
-  position:absolute;left:24px;top:0;bottom:0;width:2px;
-  background:linear-gradient(180deg,var(--red),var(--red-bright),var(--red-light),var(--gold));
-}
-.timeline-event{
-  position:relative;padding-left:56px;padding-bottom:36px;opacity:0;transform:translateX(-20px);
-  transition:all 0.7s var(--ease-out);cursor:pointer;
-}
-.timeline-event.visible{opacity:1;transform:translateX(0)}
-.timeline-event::before{
-  content:'';position:absolute;left:16px;top:6px;width:18px;height:18px;
-  background:var(--ink3);border:2px solid var(--red);border-radius:50%;
-  transition:all 0.4s;z-index:2;
-}
-.timeline-event:hover::before{background:var(--red);box-shadow:0 0 20px rgba(196,30,58,0.5)}
-.timeline-event .event-year{
-  font-family:'Noto Serif SC',serif;font-size:1.6rem;font-weight:900;color:var(--red-light);margin-bottom:4px;
-}
-.timeline-event h4{font-size:1.15rem;color:var(--white);margin-bottom:6px}
-.timeline-event .event-preview{color:var(--text-dim);font-size:0.9rem;line-height:1.7}
-.timeline-event .event-detail{max-height:0;overflow:hidden;transition:max-height 0.5s var(--ease)}
-.timeline-event.expanded .event-detail{max-height:400px;margin-top:14px}
-.timeline-event .event-detail p{color:var(--text-dim);font-size:0.9rem;line-height:1.9}
-.timeline-event .event-detail .event-quote{
-  margin-top:14px;padding:14px 18px;font-style:italic;border-left:2px solid var(--gold);
-  background:rgba(201,168,76,0.05);color:var(--gold-light);font-size:0.9rem;
-}
-
-/* ── Location Grid ── */
-.location-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-bottom:30px}
-.location-card{
-  background:rgba(19,19,42,0.6);border:1px solid rgba(255,255,255,0.06);
-  border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all 0.4s;
-}
-.location-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(201,168,76,0.2)}
-.location-card .loc-img{
-  height:150px;display:flex;align-items:center;justify-content:center;font-size:56px;
-  background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.02));
-}
-.location-card .loc-body{padding:20px}
-.location-card h4{font-size:1.1rem;color:var(--gold-bright);margin-bottom:6px}
-.location-card .loc-preview{color:var(--text-dim);font-size:0.85rem;line-height:1.7}
-.location-card .loc-detail{max-height:0;overflow:hidden;transition:max-height 0.5s var(--ease);color:var(--text-dim);font-size:0.88rem;line-height:1.8}
-.location-card.expanded .loc-detail{max-height:300px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05)}
-
-/* ── Future Choices ── */
-.future-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:30px}
-.future-choice-card{
-  padding:28px 20px;text-align:center;
-  background:rgba(19,19,42,0.6);border:1px solid rgba(255,255,255,0.06);
-  border-radius:var(--radius);cursor:pointer;transition:all 0.4s;position:relative;
-}
-.future-choice-card:hover{transform:translateY(-6px);border-color:rgba(79,195,247,0.3);box-shadow:0 0 30px rgba(79,195,247,0.1)}
-.future-choice-card .choice-icon{font-size:44px;margin-bottom:12px;display:block}
-.future-choice-card h4{font-size:1.1rem;color:#4FC3F7;margin-bottom:6px;letter-spacing:2px}
-.future-choice-card p{color:var(--text-dim);font-size:0.85rem;line-height:1.7}
-.future-choice-card.selected{border-color:#4FC3F7;background:rgba(79,195,247,0.08);box-shadow:0 0 30px rgba(79,195,247,0.15)}
-.future-choice-card.selected::after{content:'✓';position:absolute;top:12px;right:16px;font-size:1.2rem;color:#4FC3F7}
-
-/* ── Toast ── */
-.achievement-toast{
-  position:fixed;bottom:30px;right:30px;z-index:2000;
-  padding:16px 24px;background:var(--ink3);border:1px solid var(--gold);
-  border-radius:12px;color:var(--gold);font-size:0.9rem;letter-spacing:2px;
-  box-shadow:0 10px 40px rgba(0,0,0,0.6);
-  animation:toastIn 0.5s var(--ease-bounce),toastOut 0.4s 3s var(--ease) forwards;
-  display:flex;align-items:center;gap:10px;
-}
-@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
-@keyframes toastOut{from{transform:translateX(0);opacity:1}to{transform:translateX(120%);opacity:0}}
-
-/* ── Quiz ── */
-.quiz-block{
-  background:rgba(19,19,42,0.6);border:1px solid rgba(255,255,255,0.06);
-  border-radius:var(--radius);padding:30px;margin-top:40px;
-}
-.quiz-block h4{font-family:'Noto Serif SC',serif;text-align:center;color:var(--gold);letter-spacing:3px;margin-bottom:6px}
-.quiz-block .quiz-progress{text-align:center;color:var(--text-dim);font-size:0.85rem;margin-bottom:20px}
-.quiz-block .quiz-q{text-align:center;font-size:1.1rem;color:var(--white);margin-bottom:18px}
-.quiz-options{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.quiz-opt{
-  padding:12px 24px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);
-  color:var(--text);cursor:pointer;border-radius:24px;font-size:0.92rem;
-  transition:all 0.35s;
-}
-.quiz-opt:hover{border-color:var(--gold);color:var(--gold)}
-.quiz-opt.correct{background:rgba(76,175,80,0.2)!important;border-color:#4CAF50!important;color:#81C784!important}
-.quiz-opt.wrong{background:rgba(244,67,54,0.2)!important;border-color:#F44336!important;color:#EF9A9A!important}
-.quiz-fb{margin-top:16px;text-align:center;font-size:0.95rem;min-height:24px}
-
-/* ── Pledge ── */
-.pledge-section{margin-top:40px;padding:30px;background:rgba(19,19,42,0.6);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius)}
-.pledge-section h4{font-family:'Noto Serif SC',serif;text-align:center;color:var(--gold);letter-spacing:3px;margin-bottom:16px}
-.pledge-form{display:flex;gap:10px;max-width:500px;margin:0 auto;flex-wrap:wrap;justify-content:center}
-.pledge-input{
-  flex:1;min-width:200px;padding:12px 18px;background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.12);color:var(--white);font-size:0.95rem;
-  border-radius:24px;outline:none;font-family:inherit;transition:border-color 0.35s;
-}
-.pledge-input:focus{border-color:var(--gold)}
-.pledge-submit{
-  padding:12px 28px;background:transparent;border:1px solid var(--gold);
-  color:var(--gold);cursor:pointer;border-radius:24px;letter-spacing:2px;
-  font-size:0.9rem;transition:all 0.35s;font-family:inherit;
-}
-.pledge-submit:hover{background:var(--gold);color:var(--ink)}
-.pledge-wall{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px}
-.pledge-tag{
-  padding:7px 16px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);
-  color:var(--gold-light);border-radius:20px;font-size:0.85rem;animation:tagPop 0.4s var(--ease-bounce);
-}
-@keyframes tagPop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
-
-/* ── Spirit Fragment ── */
-.spirit-fragment{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:40px;height:40px;border-radius:50%;font-size:20px;
-  background:rgba(201,168,76,0.1);border:2px solid rgba(201,168,76,0.3);
-  margin:4px;cursor:default;transition:all 0.4s;
-}
-.spirit-fragment.collected{background:rgba(201,168,76,0.25);border-color:var(--gold);box-shadow:0 0 16px rgba(201,168,76,0.4)}
-.fragment-tracker{
-  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
-  padding:10px 16px;background:rgba(0,0,0,0.3);border-radius:24px;
-  font-size:0.82rem;color:var(--text-dim);
-}
-
-/* ── Stats ── */
-.stats-row{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin:30px 0}
-.stat-card{
-  flex:1;min-width:140px;max-width:200px;padding:24px 20px;text-align:center;
-  background:rgba(19,19,42,0.6);border:1px solid rgba(255,255,255,0.06);
-  border-radius:var(--radius);
-}
-.stat-card .stat-num{font-family:'Noto Serif SC',serif;font-size:2.6rem;font-weight:900;color:var(--gold);line-height:1}
-.stat-card .stat-label{font-size:0.85rem;color:var(--text-dim);margin-top:8px;letter-spacing:1px}
-
-/* ── Summary ── */
-#summary{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:60px 24px;text-align:center}
-#summary .summary-badge{font-size:72px;margin-bottom:20px}
-#summary h2{font-family:'Noto Serif SC',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:var(--gold);letter-spacing:6px;margin-bottom:16px}
-#summary .recap{max-width:640px;color:var(--text-dim);line-height:2.2;margin-bottom:30px;font-size:0.95rem}
-#summary .recap span{color:var(--gold-light)}
-#summary .fragment-display{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:30px}
-
-/* ── Spark ── */
-.spark{position:fixed;pointer-events:none;z-index:5000;width:8px;height:8px;background:var(--gold);border-radius:50%;box-shadow:0 0 10px var(--gold),0 0 25px #FF6B35;animation:sparkUp 0.8s ease-out forwards}
-@keyframes sparkUp{to{transform:translate(var(--sx),var(--sy)) scale(0);opacity:0}}
-
-/* ── Responsive ── */
-@media(max-width:768px){
-  /* Global */
-  .section-page{padding:30px 14px 60px}
-  .section-title{font-size:1.5rem;letter-spacing:4px}
-  .section-sub{font-size:0.82rem}
-  .section-divider{margin-bottom:28px}
-
-  /* Landing */
-  #landing{padding:30px 16px}
-  .landing-logo{width:100px;height:100px;font-size:42px;margin-bottom:24px}
-  .landing-logo::before{inset:-10px}.landing-logo::after{inset:-20px}
-  #landing h1{font-size:2rem;letter-spacing:6px}
-  #landing .tagline{font-size:0.9rem;letter-spacing:3px}
-  #landing .anniversary{gap:12px;font-size:0.8rem;letter-spacing:1px;flex-wrap:wrap;justify-content:center}
-  #landing .anniversary span{padding:3px 10px}
-  #landing .intro-text{font-size:0.85rem;line-height:1.8;max-width:100%;margin-bottom:32px}
-  #landing .intro-text br{display:none}
-  .enter-btn{padding:14px 40px;font-size:1rem;letter-spacing:4px}
-
-  /* Prologue */
-  #prologue{padding:30px 14px}
-  .prologue-card{padding:24px 18px}
-  .prologue-card h2{font-size:1.4rem;letter-spacing:2px}
-  .prologue-card .team-intro{font-size:0.85rem;line-height:1.8}
-  .prologue-card .team-grid{grid-template-columns:1fr;gap:12px}
-  .team-group{padding:18px 14px}
-  .team-group .group-icon{font-size:28px}
-  .team-group .group-name{font-size:0.95rem}
-  .member-tag{font-size:0.7rem;padding:2px 8px}
-
-  /* Hub */
-  #hub{padding:30px 14px}
-  #hub h2{font-size:1.5rem;letter-spacing:4px}
-  #hub .hub-sub{font-size:0.85rem;margin-bottom:32px}
-  .path-grid{flex-direction:column;align-items:center;gap:18px}
-  .path-card{min-width:auto;max-width:100%;width:100%}
-  .path-card .card-img{height:130px;font-size:48px}
-  .path-card .card-body{padding:20px 18px 28px}
-  .path-card h3{font-size:1.5rem}
-  .path-card .card-desc{font-size:0.82rem}
-  .path-card .card-tags span{font-size:0.7rem;padding:3px 8px}
-
-  /* Content cards */
-  .content-card{padding:22px 16px;margin-bottom:14px}
-  .content-card h4{font-size:1.1rem;letter-spacing:1px}
-  .content-card p{font-size:0.85rem;line-height:1.8}
-  .content-card .highlight-box{padding:12px 14px;font-size:0.82rem}
-  .content-card .img-placeholder{height:160px;font-size:40px}
-
-  /* Sub-nav */
-  .sub-nav{gap:6px;margin-bottom:28px}
-  .sub-nav-btn{padding:8px 14px;font-size:0.78rem;letter-spacing:0}
-
-  /* Timeline */
-  .timeline{padding:20px 0}
-  .timeline-line{left:12px}
-  .timeline-event{padding-left:36px;padding-bottom:28px}
-  .timeline-event::before{left:6px;width:14px;height:14px}
-  .timeline-event .event-year{font-size:1.3rem}
-  .timeline-event h4{font-size:1rem}
-  .timeline-event .event-preview{font-size:0.82rem}
-  .timeline-event .event-detail p{font-size:0.82rem}
-  .timeline-event .event-detail .event-quote{font-size:0.82rem;padding:10px 14px}
-
-  /* Location grid */
-  .location-grid{grid-template-columns:1fr;gap:14px}
-  .location-card .loc-img{height:120px;font-size:44px}
-  .location-card .loc-body{padding:16px}
-  .location-card h4{font-size:1rem}
-  .location-card .loc-preview{font-size:0.78rem}
-
-  /* Future choices */
-  .future-grid{grid-template-columns:1fr 1fr;gap:12px}
-  .future-choice-card{padding:20px 12px}
-  .future-choice-card .choice-icon{font-size:36px;margin-bottom:8px}
-  .future-choice-card h4{font-size:0.9rem;letter-spacing:1px}
-  .future-choice-card p{font-size:0.75rem}
-
-  /* Quiz */
-  .quiz-block{padding:22px 16px;margin-top:28px}
-  .quiz-block .quiz-q{font-size:1rem}
-  .quiz-options{gap:6px}
-  .quiz-opt{padding:10px 16px;font-size:0.82rem;border-radius:20px}
-
-  /* Pledge */
-  .pledge-section{padding:22px 16px;margin-top:28px}
-  .pledge-form{flex-direction:column;align-items:stretch}
-  .pledge-input{min-width:auto;width:100%}
-  .pledge-submit{width:100%;text-align:center}
-
-  /* Stats */
-  .stats-row{gap:14px;margin:20px 0}
-  .stat-card{padding:18px 14px;min-width:auto;flex:1 1 40%}
-  .stat-card .stat-num{font-size:2rem}
-  .stat-card .stat-label{font-size:0.75rem}
-
-  /* Summary */
-  #summary{padding:40px 16px}
-  #summary .summary-badge{font-size:52px;margin-bottom:14px}
-  #summary h2{font-size:1.5rem;letter-spacing:4px}
-  #summary .recap{font-size:0.85rem;line-height:2;max-width:100%}
-  #summary .fragment-display{gap:4px}
-  .spirit-fragment{width:32px;height:32px;font-size:16px}
-
-  /* Top nav */
-  #topNav{top:4px;right:4px;gap:3px;flex-wrap:wrap;justify-content:flex-end}
-  #topNav button{padding:5px 8px;font-size:0.7rem;border-radius:14px;letter-spacing:0}
-  #breadcrumb{top:8px;left:8px;font-size:0.7rem}
-
-  /* Toast */
-  .achievement-toast{left:16px;right:16px;bottom:20px;font-size:0.8rem;padding:12px 18px;border-radius:10px}
-
-  /* Back buttons */
-  .section-page .back-row{gap:8px;margin-bottom:24px}
-  .btn-back,.btn-hub{font-size:0.78rem;padding:7px 14px}
-}
-
-@media(max-width:480px){
-  /* Landing */
-  .landing-logo{width:80px;height:80px;font-size:34px;margin-bottom:20px}
-  #landing h1{font-size:1.6rem;letter-spacing:4px}
-  #landing .anniversary{flex-direction:column;gap:8px}
-  .enter-btn{padding:12px 32px;font-size:0.9rem;letter-spacing:3px}
-
-  /* Hub */
-  .path-card .card-img{height:100px;font-size:40px}
-  .path-card h3{font-size:1.3rem}
-  .path-card .card-body{padding:16px 14px 22px}
-
-  /* Future choices */
-  .future-grid{grid-template-columns:1fr;gap:10px}
-
-  /* Quiz */
-  .quiz-opt{width:100%;text-align:center}
-
-  /* Prologue */
-  .prologue-card{padding:18px 14px}
-  .prologue-card h2{font-size:1.2rem}
-
-  /* Top nav */
-  #topNav button{padding:4px 6px;font-size:0.65rem}
-
-  /* Content */
-  .content-card{padding:16px 12px}
-  .content-card h4{font-size:1rem}
-  .content-card p{font-size:0.8rem}
-  .content-card .img-placeholder{height:130px;font-size:36px}
-
-  /* Section */
-  .section-page{padding:24px 10px 50px}
-  .section-title{font-size:1.3rem}
-
-  /* Stats */
-  .stat-card .stat-num{font-size:1.6rem}
-
-  /* Summary */
-  #summary .summary-badge{font-size:42px}
-  #summary h2{font-size:1.3rem}
-
-  /* Sub-nav */
-  .sub-nav-btn{padding:6px 10px;font-size:0.72rem}
-
-  /* Timeline */
-  .timeline-event{padding-left:30px}
-  .timeline-event::before{left:7px;width:12px;height:12px}
-  .timeline-event .event-year{font-size:1.1rem}
-}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
@@ -653,7 +44,7 @@ body{
 
 <!-- ═══════════════════════ PROLOGUE ═══════════════════════ -->
 <div class="page" id="prologue">
-  <div class="prologue-card">
+  <div class="prologue-card reveal">
     <h2>📋 实践团简介</h2>
     <p class="team-intro">
       <strong>薪火新程红色寻访实践团</strong>由来自多所高校的 10 名青年学子组成，于 2026 年 5 月赴湖北省武汉市开展为期 7 天的红色寻访专项社会实践。团队以庆祝<strong>中国共产党成立 105 周年</strong>和<strong>中国工农红军长征胜利 90 周年</strong>为契机，围绕"历史溯源、现实观照、未来展望"三条主线，深入革命旧址、走访建设一线、对话时代楷模，力图在行走中感悟红色精神的当代价值，在实践中坚定青春报国的理想信念。团队下设<strong>文案组、宣传组、设计组、外联组</strong>四个小组，分工协作、高效运转。
@@ -705,7 +96,7 @@ body{
   <h2>选 择 寻 访 维 度</h2>
   <p class="hub-sub">三条路径，十二个站点，每一次选择都是与红色文化的一次深度对话</p>
   <div class="path-grid">
-    <div class="path-card history" onclick="navigateTo('history-section')">
+    <div class="path-card history reveal" onclick="navigateTo('history-section')">
       <div class="card-img">📜</div>
       <div class="card-body">
         <h3>历 史 之 路</h3>
@@ -714,7 +105,7 @@ body{
         <span class="card-hint">📖 深入历史长河 →</span>
       </div>
     </div>
-    <div class="path-card reality" onclick="navigateTo('reality-section')">
+    <div class="path-card reality reveal" onclick="navigateTo('reality-section')">
       <div class="card-img">🏙️</div>
       <div class="card-body">
         <h3>现 实 之 窗</h3>
@@ -723,7 +114,7 @@ body{
         <span class="card-hint">🌆 感知今日脉搏 →</span>
       </div>
     </div>
-    <div class="path-card future" onclick="navigateTo('future-section')">
+    <div class="path-card future reveal" onclick="navigateTo('future-section')">
       <div class="card-img">🌟</div>
       <div class="card-body">
         <h3>未 来 之 梦</h3>
@@ -756,8 +147,8 @@ body{
     </div>
 
     <div id="timeline" style="display:block">
-      <div style="background:rgba(19,19,42,0.6);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);padding:30px 28px">
-        <h4 style="color:var(--red-light);margin-bottom:20px">📅 红色时间轴 · 点击每个事件查看详情</h4>
+      <div class="timeline-wrap reveal">
+        <h4 style="color:var(--red-400);margin-bottom:20px">📅 红色时间轴 · 点击每个事件查看详情</h4>
         <div class="timeline">
           <div class="timeline-line"></div>
           <div class="timeline-event visible" onclick="expandTimeline(this);collectFragment('f1')">
@@ -818,51 +209,51 @@ body{
       </div>
     </div>
 
-    <div class="content-card" id="event-1911" style="display:none">
+    <div class="content-card reveal" id="event-1911" style="display:none">
       <div class="img-placeholder img-1911">🔫</div>
-      <h4 style="color:var(--red-light)">武昌起义（1911年10月10日）</h4>
+      <h4 style="color:var(--red-400)">武昌起义（1911年10月10日）</h4>
       <p>1911年10月10日晚，湖北新军工程第八营的革命党人打响了武昌起义的第一枪。起义军迅速占领楚望台军械库，继而攻占总督衙门。一夜之间，武昌全城光复。随后，汉阳、汉口相继被起义军占领。这场由荆楚儿女率先发难的革命，迅速蔓延至全国——不到两个月的时间里，湖南、陕西、江西、山西、云南等十三个省份宣布脱离清廷独立。1912年1月1日，孙中山在南京宣誓就任中华民国临时大总统，延续两千余年的封建帝制就此终结。</p>
       <p>武汉之所以成为辛亥革命的首义之地，有其深刻的历史原因：作为洋务运动后期张之洞督鄂的重要基地，武汉较早接触近代工业和西式教育，新式学堂和新军成为革命思想的温床；同时武汉地处九省通衢，交通便利，信息流通快捷，为革命党人的秘密活动提供了有利条件。</p>
       <div class="highlight-box">💡 <strong>实践团足迹：</strong>团队参观了位于武昌阅马场的辛亥革命武昌起义纪念馆（红楼）和起义门，在讲解员的引导下深入了解了起义的策划过程、战斗经过及其深远影响。站在起义门城楼上，仿佛还能听到百年前那一声划破夜空的枪响。</div>
     </div>
 
-    <div class="content-card" id="event-1921" style="display:none">
+    <div class="content-card reveal" id="event-1921" style="display:none">
       <div class="img-placeholder img-1921">🚩</div>
-      <h4 style="color:var(--red-light)">建党与大革命的洪流（1921—1927）</h4>
+      <h4 style="color:var(--red-400)">建党与大革命的洪流（1921—1927）</h4>
       <p>1921年7月，中国共产党第一次全国代表大会在上海和嘉兴召开，湖北籍代表董必武、陈潭秋参与了这一开天辟地的历史事件。董必武日后成为中华人民共和国代主席，陈潭秋则为革命事业壮烈牺牲于新疆。他们的革命生涯，正是从荆楚大地起步的。</p>
       <p>1923年2月，京汉铁路工人大罢工（二七大罢工）在武汉爆发，这是中国共产党领导的第一次工人运动高潮的顶点，充分展现了中国工人阶级的组织力量和革命精神。如今屹立于汉口江岸的"二七烈士纪念碑"，仍在无声诉说着那段血与火的岁月。</p>
       <p>1927年春，北伐军攻克武汉后，国民政府迁都于此，武汉一度成为中国革命的中心。毛泽东在武昌红巷创办中央农民运动讲习所，培养了大批来自全国各地的农运骨干。这些学员后来成为秋收起义、井冈山斗争和各地武装暴动的重要力量。</p>
       <div class="highlight-box">💡 <strong>实践团足迹：</strong>团队前往武昌红巷，参观了中央农民运动讲习所旧址、毛泽东旧居和中共五大会址。在农讲所大教室内，大家仿佛看到了当年毛泽东向学员们讲授"农民问题"的生动场景。一位队员说："站在这里，才真正理解了什么叫'星星之火，可以燎原'。"</div>
     </div>
 
-    <div class="content-card" id="event-1927" style="display:none">
+    <div class="content-card reveal" id="event-1927" style="display:none">
       <div class="img-placeholder img-1927">📋</div>
-      <h4 style="color:var(--red-light)">八七会议（1927年8月7日）</h4>
+      <h4 style="color:var(--red-400)">八七会议（1927年8月7日）</h4>
       <p>1927年，蒋介石、汪精卫相继发动"四一二"和"七一五"反革命政变，大肆屠杀共产党人和革命群众，轰轰烈烈的大革命宣告失败。在白色恐怖的笼罩下，中国共产党面临着自成立以来最严峻的考验。</p>
       <p>在这生死存亡的危急关头，中共中央于1927年8月7日在汉口鄱阳街139号秘密召开紧急会议。由于当时形势极其险恶，会议只开了一天。出席会议的有中央委员、候补中央委员及其他方面的代表共21人。毛泽东在会上以亲身经历批评了陈独秀的右倾投降主义错误，并斩钉截铁地指出："以后要非常注意军事，须知政权是由枪杆子中取得的。"</p>
       <p>八七会议确定了土地革命和武装反抗国民党反动派的总方针，选举产生了以瞿秋白为首的临时中央政治局。会后，毛泽东以中央特派员的身份前往湖南，于9月9日领导了湘赣边界秋收起义；同年12月，张太雷等领导了广州起义。中国革命由此进入了土地革命战争的新时期。</p>
       <div class="highlight-box">💡 <strong>实践团足迹：</strong>团队参观了八七会议会址纪念馆，在复原的会议室中，仿佛能感受到当年与会者紧张而坚定的革命意志。一位队员在留言簿上写道："历史选择了武汉，武汉没有辜负历史。"</div>
     </div>
 
-    <div class="content-card" id="event-1934" style="display:none">
+    <div class="content-card reveal" id="event-1934" style="display:none">
       <div class="img-placeholder img-1934">🥾</div>
-      <h4 style="color:var(--red-light)">长征与湖北——血染的风采（1934—1936）</h4>
+      <h4 style="color:var(--red-400)">长征与湖北——血染的风采（1934—1936）</h4>
       <p>1934年至1936年，中国工农红军进行了举世闻名的二万五千里长征。湖北作为重要革命根据地——鄂豫皖革命根据地和湘鄂川黔革命根据地的核心区域，在长征史诗中写下了壮丽篇章。</p>
       <p>红四方面军主力于1932年从鄂豫皖根据地出发西征，后于1935年踏上长征路；红二、六军团（后合编为红二方面军）于1935年11月从湘鄂川黔根据地出发长征。两支主力红军途经湖北郧西、郧阳、恩施、宜昌等地，在当地群众的掩护和支援下突破了敌人的重重封锁。郧西县湖北口回族乡的"红军路"至今保存完好，当年老百姓冒着生命危险为红军带路、送粮、护理伤员的事迹在当地代代相传。</p>
       <p>据不完全统计，湖北籍参加长征的红军指战员超过3万人，其中约1.4万人永远长眠在了长征路上。大别山南麓的红安县（原名黄安），是全国著名的"将军县"——从这片红色土地上走出了董必武、李先念两位国家主席，以及韩先楚、陈锡联、王近山等223位开国将军。</p>
       <div class="highlight-box">💡 <strong>实践团足迹：</strong>团队赴红安县参观了黄麻起义和鄂豫皖苏区革命烈士陵园，在烈士纪念碑前敬献花篮、重温入团誓词。一位队员在日记中写道："站在烈士墓前，第一次真切感受到'红色江山来之不易'这句话的分量。"</div>
     </div>
 
-    <div class="content-card" id="event-1949" style="display:none">
+    <div class="content-card reveal" id="event-1949" style="display:none">
       <div class="img-placeholder img-1949">☀️</div>
-      <h4 style="color:var(--red-light)">新中国·新武汉·新征程（1949至今）</h4>
+      <h4 style="color:var(--red-400)">新中国·新武汉·新征程（1949至今）</h4>
       <p>1949年5月16日，中国人民解放军第四野战军解放武汉三镇，这座英雄的城市回到了人民手中。新中国成立后，湖北迅速从战争创伤中恢复，以崭新的姿态投入社会主义建设的热潮。</p>
       <p>在"一五"计划期间，国家将156项重点工程中的8项布局在武汉——武汉钢铁公司（新中国第一座大型钢铁联合企业）、武汉长江大桥（万里长江第一桥）、武汉重型机床厂、武汉锅炉厂等相继建成投产，使武汉成为新中国重要的工业基地和科教重镇。1956年，毛泽东在武汉三次畅游长江，写下了"一桥飞架南北，天堑变通途"的豪迈诗篇。</p>
       <p>改革开放后，武汉作为中部地区唯一的副省级城市和长江经济带核心城市，在科技创新、产业升级、城市建设等方面取得了令人瞩目的成就。东湖高新区（"中国光谷"）的崛起、武汉国家航天产业基地的建设、长江新区的规划实施……无不彰显着这座英雄城市在新时代的蓬勃活力。</p>
       <div class="highlight-box">💡 <strong>实践团足迹：</strong>团队登临武汉长江大桥，从黄鹤楼远眺三镇风光。从"一五"时期的工业脊梁到新时代的创新高地，武汉的发展历程本身就是一部浓缩的中国现代化史诗。</div>
     </div>
 
-    <div class="quiz-block" id="history-quiz">
+    <div class="quiz-block reveal" id="history-quiz">
       <h4>📝 历史知识闯关</h4>
       <div class="quiz-progress">共 3 题，测试你的红色历史知识</div>
       <div class="quiz-q" id="history-q-text">第1题：八七会议是在哪个城市召开的？</div>
@@ -900,7 +291,7 @@ body{
 
     <div id="loc-overview" style="display:block">
       <div class="location-grid">
-        <div class="location-card" onclick="this.classList.toggle('expanded');collectFragment('r1')">
+        <div class="location-card reveal" onclick="this.classList.toggle('expanded');collectFragment('r1')">
           <div class="loc-img">🏛️</div>
           <div class="loc-body">
             <h4>武汉革命博物馆</h4>
@@ -908,7 +299,7 @@ body{
             <div class="loc-detail">武汉革命博物馆位于武昌红巷，下辖毛泽东同志主办的中央农民运动讲习所旧址纪念馆、毛泽东旧居纪念馆、中共五大会址纪念馆、陈潭秋烈士纪念馆等。每年接待观众超过200万人次，是进行爱国主义教育和革命传统教育的重要基地。2021年，该馆被中宣部命名为"全国爱国主义教育示范基地"。</div>
           </div>
         </div>
-        <div class="location-card" onclick="this.classList.toggle('expanded');collectFragment('r2')">
+        <div class="location-card reveal" onclick="this.classList.toggle('expanded');collectFragment('r2')">
           <div class="loc-img">🏫</div>
           <div class="loc-body">
             <h4>武汉大学</h4>
@@ -916,7 +307,7 @@ body{
             <div class="loc-detail">武汉大学溯源于1893年的自强学堂，是中国近代教育史上最早国立综合性大学之一。在革命年代，武大是湖北地区传播马克思主义的重要阵地——中共一大代表陈潭秋、李达均在此学习或任教；抗战时期武大西迁四川乐山坚持办学；位于珞珈山南麓的"十八栋"别墅群中的周恩来故居，见证了国共合作抗战的重要历史时刻。</div>
           </div>
         </div>
-        <div class="location-card" onclick="this.classList.toggle('expanded');collectFragment('r3')">
+        <div class="location-card reveal" onclick="this.classList.toggle('expanded');collectFragment('r3')">
           <div class="loc-img">🌉</div>
           <div class="loc-body">
             <h4>武汉长江大桥</h4>
@@ -924,7 +315,7 @@ body{
             <div class="loc-detail">武汉长江大桥于1955年动工，1957年10月15日正式通车，全长1670米，是中国在长江上修建的第一座铁路、公路两用桥梁。它的建成实现了"一桥飞架南北，天堑变通途"的千年梦想，结束了粤汉、京汉铁路被长江阻隔的历史。大桥的建设凝聚了苏联专家和中国工程技术人员的心血，是新中国"一五"计划的重要成果。</div>
           </div>
         </div>
-        <div class="location-card" onclick="this.classList.toggle('expanded');collectFragment('r4')">
+        <div class="location-card reveal" onclick="this.classList.toggle('expanded');collectFragment('r4')">
           <div class="loc-img">💡</div>
           <div class="loc-body">
             <h4>中国光谷</h4>
@@ -932,7 +323,7 @@ body{
             <div class="loc-detail">武汉东湖新技术开发区（"中国光谷"）创建于1988年，是中国首批国家级高新区之一。经过三十余年发展，已形成以光电子信息为核心，生物医药、节能环保、高端装备制造、现代服务业并举的产业体系。华为、小米、华大基因、长江存储等超过3000家高新技术企业在此集聚，年生产总值超过3000亿元。</div>
           </div>
         </div>
-        <div class="location-card" onclick="this.classList.toggle('expanded');collectFragment('r5')">
+        <div class="location-card reveal" onclick="this.classList.toggle('expanded');collectFragment('r5')">
           <div class="loc-img">🎗️</div>
           <div class="loc-body">
             <h4>武汉抗疫纪念馆</h4>
@@ -940,7 +331,7 @@ body{
             <div class="loc-detail">武汉抗疫纪念馆位于武汉客厅，于2020年12月建成开放。馆内以"人民至上、生命至上"为主题，通过1000余件实物、2000余张照片以及大量视频和互动装置，全景式再现了2020年初武汉保卫战中惊心动魄的抗疫历程。从火神山、雷神山的"中国速度"到4.2万援鄂医护人员的"最美逆行"，每一件展品都在无声地讲述着新时代的英雄故事。</div>
           </div>
         </div>
-        <div class="location-card" onclick="this.classList.toggle('expanded');collectFragment('r6')">
+        <div class="location-card reveal" onclick="this.classList.toggle('expanded');collectFragment('r6')">
           <div class="loc-img">🌾</div>
           <div class="loc-body">
             <h4>红色美丽乡村</h4>
@@ -951,55 +342,55 @@ body{
       </div>
     </div>
 
-    <div class="content-card" id="loc-museum" style="display:none">
+    <div class="content-card reveal" id="loc-museum" style="display:none">
       <div class="img-placeholder img-museum">🏛️</div>
-      <h4 style="color:var(--gold-bright)">武汉革命博物馆群</h4>
+      <h4 style="color:var(--gold-400)">武汉革命博物馆群</h4>
       <p>位于武昌红巷的武汉革命博物馆，是全国重点文物保护单位和全国爱国主义教育示范基地。整个博物馆群由中央农民运动讲习所旧址、毛泽东旧居、中共五大会址、陈潭秋烈士纪念馆、武昌起义门等多个场馆组成，占地面积超过2万平方米，展陈面积超过8000平方米。</p>
       <p>这里不仅是武汉红色文化的地标，更是一座连接历史与现实的桥梁。每年有超过200万来自全国各地的参观者走进这片红色圣地。实践团参观当天正值周末，团队在农讲所大教室中偶遇了一群来自武汉小学的少先队员，孩子们在老师的带领下齐声朗诵毛泽东诗词，稚嫩而坚定的声音在百年建筑中回荡——那一幕，让所有人真切感受到了"薪火相传"的意义。</p>
       <div class="highlight-box">💡 <strong>打卡推荐：</strong>农讲所大教室、毛泽东旧居书房、五大开幕式会场、陈潭秋烈士事迹展厅。建议预留至少3小时深度参观。</div>
     </div>
 
-    <div class="content-card" id="loc-wuda" style="display:none">
+    <div class="content-card reveal" id="loc-wuda" style="display:none">
       <div class="img-placeholder img-wuda">🏫</div>
-      <h4 style="color:var(--gold-bright)">武汉大学：珞珈山下的红色记忆</h4>
+      <h4 style="color:var(--gold-400)">武汉大学：珞珈山下的红色记忆</h4>
       <p>武汉大学不仅以樱花和百年建筑闻名，更有着深厚的红色基因。中共一大代表陈潭秋是武大前身——武昌高等师范学校的毕业生；另一位一大代表李达在1950年代曾任武大校长长达13年。周恩来、董必武等领导人也曾在珞珈山留下足迹。位于珞珈山南麓的"十八栋"别墅群中的周恩来故居（珞珈山"十八栋"27号），是1938年周恩来在武汉领导南方局和指导国民政府军事委员会政治部第三厅开展抗日宣传工作时的主要居所。</p>
       <p>抗战时期，武大西迁四川乐山，在极其艰苦的条件下坚持办学8年，保存了中国高等教育的火种。如今的武大已发展成为国家"双一流"建设A类高校，在校学生超过5万人，继续为国家培养着一代又一代的栋梁之材。</p>
       <div class="highlight-box">💡 <strong>打卡推荐：</strong>珞珈山周恩来故居、老图书馆、樱顶、万林艺术博物馆。校园内的"六一纪念亭"是为纪念1947年"六一"惨案中牺牲的武大学生而建。</div>
     </div>
 
-    <div class="content-card" id="loc-bridge" style="display:none">
+    <div class="content-card reveal" id="loc-bridge" style="display:none">
       <div class="img-placeholder img-bridge">🌉</div>
-      <h4 style="color:var(--gold-bright)">武汉长江大桥：钢铁脊梁上的时代印记</h4>
+      <h4 style="color:var(--gold-400)">武汉长江大桥：钢铁脊梁上的时代印记</h4>
       <p>武汉长江大桥是中国第一座自主设计并建设的公铁两用桥（在苏联专家协助下），于1955年9月1日动工，1957年10月15日正式通车。大桥全长1670米，正桥8墩9孔，上层为公路桥，宽22.5米；下层为双线铁路桥。毛泽东1956年视察时挥毫写下"一桥飞架南北，天堑变通途"的千古名句。</p>
       <p>大桥不仅是工程技术的奇迹，更是新中国自力更生、艰苦奋斗精神的象征。在那个物资匮乏的年代，大桥建设者们创造了多项世界领先的技术成果——首次采用大型管柱钻孔法进行深水基础施工、首次使用国产桥梁钢……这些突破为后续南京长江大桥、九江长江大桥的建设积累了宝贵经验。60多年来，大桥经历了无数次洪水、撞击的考验，至今屹立如初，被誉为"桥坚强"。</p>
       <div class="highlight-box">💡 <strong>打卡推荐：</strong>建议从武昌桥头堡乘电梯登上桥面步行过江，全程约20分钟。桥面两侧设有观景台，可拍摄长江两岸全景。</div>
     </div>
 
-    <div class="content-card" id="loc-optics" style="display:none">
+    <div class="content-card reveal" id="loc-optics" style="display:none">
       <div class="img-placeholder img-optics">💡</div>
-      <h4 style="color:var(--gold-bright)">中国光谷：从稻田到世界级创新集群</h4>
+      <h4 style="color:var(--gold-400)">中国光谷：从稻田到世界级创新集群</h4>
       <p>武汉东湖新技术开发区（"中国光谷"）的崛起，是中国改革开放和科技创新事业的生动缩影。1988年创建之初，这里还是一片农田和鱼塘；30多年后的今天，518平方公里的土地上集聚了超过13万家企业，其中包括华为、小米、联想、华大基因等国内巨头的研究院，以及长江存储、华星光电、天马微电子等本土科技领军企业。</p>
       <p>光谷拥有42所高校和56个国家及省部级科研院所，是中国最大的光纤光缆生产基地、光通信技术研发基地和激光产业基地。2023年光谷GDP突破3000亿元，高新技术产业增加值占GDP比重超过60%，成为名副其实的中部"硅谷"。从革命年代的"枪杆子"到和平年代的"芯片"，荆楚儿女始终挺立在时代的潮头。</p>
       <div class="highlight-box">💡 <strong>实践团见闻：</strong>团队参观了光谷展示中心，工作人员演示了自主研发的128层3D NAND闪存芯片。讲解员的一句话令人印象深刻："革命先辈用热血换来了独立，我们要用创新赢得未来。"</div>
     </div>
 
-    <div class="content-card" id="loc-covid" style="display:none">
+    <div class="content-card reveal" id="loc-covid" style="display:none">
       <div class="img-placeholder img-covid">🎗️</div>
-      <h4 style="color:var(--gold-bright)">抗疫精神：新时代的英雄篇章</h4>
+      <h4 style="color:var(--gold-400)">抗疫精神：新时代的英雄篇章</h4>
       <p>2020年初，一场突如其来的新冠肺炎疫情侵袭武汉。这座拥有1100万人口的特大城市毅然按下"暂停键"——武汉封城76天，以巨大的牺牲为全国乃至全球抗疫赢得了宝贵时间。在这76个日夜里，4.2万名医护人员从全国各地逆行出征，火神山、雷神山医院分别仅用10天和12天建成交付，16座方舱医院迅速投入使用。这就是令世界惊叹的"中国速度"和"中国力量"。</p>
       <p>在武汉抗疫纪念馆中，一封封请战书、一件件防护服、一张张口罩勒痕的面孔照片，无声地讲述着那段刻骨铭心的历史。习近平总书记将其概括为"生命至上、举国同心、舍生忘死、尊重科学、命运与共"的伟大抗疫精神——这是新时代红色基因的生动体现，是长征精神、抗战精神在和平年代的延续与升华。</p>
       <div class="highlight-box">💡 <strong>实践团感言：</strong>"如果说武昌起义证明了中国人敢为天下先的勇气，长征证明了中国人百折不挠的坚韧，那么武汉抗疫则证明了新时代中国人守望相助、共克时艰的精神力量。"</div>
     </div>
 
-    <div class="content-card" id="loc-rural" style="display:none">
+    <div class="content-card reveal" id="loc-rural" style="display:none">
       <div class="img-placeholder img-rural">🌾</div>
-      <h4 style="color:var(--gold-bright)">大别山革命老区：红色引领下的绿色振兴</h4>
+      <h4 style="color:var(--gold-400)">大别山革命老区：红色引领下的绿色振兴</h4>
       <p>湖北大别山革命老区涵盖红安、麻城、大悟、罗田、英山等地，是鄂豫皖革命根据地的核心区域。历史上，这里曾是全国最贫困的地区之一。在脱贫攻坚和乡村振兴战略的持续推动下，这片红色土地正在经历前所未有的蜕变。红安县通过"红色旅游+特色农业+光伏发电"三位一体的发展模式，于2019年顺利实现脱贫摘帽；麻城市依托杜鹃花海和红色遗迹，年接待游客超过1000万人次。</p>
       <p>实践团在红安县七里坪镇走访时了解到，当地将红色资源与乡村旅游深度融合，打造了"红军餐""重走红军路"等体验项目，不仅让游客接受了红色教育，也为村民带来了实实在在的收益。一位年过七旬的老支书对团员们说："当年我们这里为革命献出了14万英雄儿女，今天我们同样要靠自己的双手，让日子一天比一天红火。"</p>
       <div class="highlight-box">💡 <strong>实践团见闻：</strong>在七里坪长胜街——这条保留着明清建筑风貌的"红军街"上，团队看到红色书店、红军食堂、非遗工坊比邻而立，红色文化与乡村振兴正在这里碰撞出新的火花。</div>
     </div>
 
-    <div class="quiz-block" id="reality-quiz">
+    <div class="quiz-block reveal" id="reality-quiz">
       <h4>📝 武汉知识闯关</h4>
       <div class="quiz-progress">共 3 题，看看你对武汉了解多少</div>
       <div class="quiz-q" id="reality-q-text">第1题：武汉长江大桥建成通车于哪一年？</div>
@@ -1033,45 +424,45 @@ body{
     </div>
 
     <div id="future-choices-panel" style="display:block">
-      <p style="text-align:center;color:var(--text-dim);margin-bottom:30px;line-height:2">
+      <p style="text-align:center;color:#A0A0B8;margin-bottom:30px;line-height:2">
         站在建党105周年与长征胜利90周年的历史交汇点<br>
         作为新时代的青年，你将选择哪条道路来接续先辈的薪火？<br>
-        <span style="color:var(--gold-light);font-size:0.9rem">（选择后下方将出现对应的人生寄语）</span>
+        <span style="color:var(--gold-300);font-size:0.9rem">（选择后下方将出现对应的人生寄语）</span>
       </p>
       <div class="future-grid" id="future-choices">
-        <div class="future-choice-card" onclick="selectFuture(this,'study')">
+        <div class="future-choice-card reveal" onclick="selectFuture(this,'study')">
           <span class="choice-icon">📚</span><h4>深耕专业，科技报国</h4>
           <p>在科研一线攻克"卡脖子"技术难题，用创新续写新时代的长征故事。</p>
         </div>
-        <div class="future-choice-card" onclick="selectFuture(this,'culture')">
+        <div class="future-choice-card reveal" onclick="selectFuture(this,'culture')">
           <span class="choice-icon">🎭</span><h4>赓续文脉，讲好中国故事</h4>
           <p>用文字、影像、艺术让红色文化"活"起来，让更多年轻人了解这段光辉历史。</p>
         </div>
-        <div class="future-choice-card" onclick="selectFuture(this,'service')">
+        <div class="future-choice-card reveal" onclick="selectFuture(this,'service')">
           <span class="choice-icon">🤝</span><h4>扎根基层，服务人民</h4>
           <p>到祖国最需要的地方去，在田间地头、社区街巷践行"为人民服务"的初心。</p>
         </div>
-        <div class="future-choice-card" onclick="selectFuture(this,'innovate')">
+        <div class="future-choice-card reveal" onclick="selectFuture(this,'innovate')">
           <span class="choice-icon">💡</span><h4>创新创业，敢为人先</h4>
           <p>发扬武汉"敢为天下先"的首义精神，在市场的浪潮中开辟属于这个时代的天地。</p>
         </div>
-        <div class="future-choice-card" onclick="selectFuture(this,'education')">
+        <div class="future-choice-card reveal" onclick="selectFuture(this,'education')">
           <span class="choice-icon">🏫</span><h4>教书育人，点亮未来</h4>
           <p>走向三尺讲台，在孩子们心中种下红色的种子，做新时代的"播火者"。</p>
         </div>
-        <div class="future-choice-card" onclick="selectFuture(this,'defend')">
+        <div class="future-choice-card reveal" onclick="selectFuture(this,'defend')">
           <span class="choice-icon">🛡️</span><h4>携笔从戎，保家卫国</h4>
           <p>传承长征"不怕远征难"的战斗精神，在国防事业中贡献青春力量。</p>
         </div>
       </div>
-      <div class="content-card" id="future-result-card" style="display:none">
+      <div class="content-card reveal" id="future-result-card" style="display:none">
         <h4 id="future-result-title" style="color:#4FC3F7"></h4>
         <p id="future-result-text"></p>
         <div class="highlight-box" id="future-result-quote"></div>
       </div>
     </div>
 
-    <div class="content-card" id="future-detail" style="display:none">
+    <div class="content-card reveal" id="future-detail" style="display:none">
       <div class="img-placeholder img-future">🌟</div>
       <h4 style="color:#4FC3F7">薪火新程：新时代青年的使命与担当</h4>
       <p>习近平总书记指出："青年兴则国家兴，青年强则国家强。"从辛亥革命到五四运动，从长征路上的"红小鬼"到抗疫一线的"90后""00后"，中国青年始终是推动历史前进的重要力量。建党105年、长征胜利90年的今天，历史的接力棒已经传递到了当代青年手中。</p>
@@ -1081,9 +472,9 @@ body{
     </div>
 
     <div id="future-pledge" style="display:none">
-      <div class="pledge-section">
+      <div class="pledge-section reveal">
         <h4>✍️ 写下你的青春誓言</h4>
-        <p style="text-align:center;color:var(--text-dim);margin-bottom:16px;font-size:0.9rem">每一份誓言都是一颗火种，汇聚在一起便是照亮未来的光芒</p>
+        <p style="text-align:center;color:#A0A0B8;margin-bottom:16px;font-size:0.9rem">每一份誓言都是一颗火种，汇聚在一起便是照亮未来的光芒</p>
         <div class="pledge-form">
           <input class="pledge-input" id="pledgeInput" placeholder="我想对未来说……" maxlength="60">
           <button class="pledge-submit" onclick="submitPledge()">铭 记 誓 言</button>
@@ -1092,7 +483,7 @@ body{
       </div>
     </div>
 
-    <div class="content-card" id="future-letter" style="display:none">
+    <div class="content-card reveal" id="future-letter" style="display:none">
       <h4 style="color:#4FC3F7">💌 致 2050 年的一封信</h4>
       <p>2050年，是中华人民共和国成立101周年，也是我国实现第二个百年奋斗目标——全面建成社会主义现代化强国的关键之年。到那时，今天写下誓言的你，将成为社会各领域的中坚力量。这封信，写给未来的自己，也写给未来的中国。</p>
       <p>实践团在行程最后一天的总结会上，每位团员都给2050年的自己写了一封信，由团长统一封存保管。团员们在信中写下了对未来的期许、对自己的要求，以及对祖国的祝福。有人写道："希望到那时回望今天，我可以坦然地说——我没有辜负这个伟大的时代。"</p>
@@ -1100,7 +491,7 @@ body{
       <div class="highlight-box">💡 <strong>你的信：</strong>如果让你给2050年的自己写一句话，你会写什么？不妨把它写在誓言墙上，让时间见证你的成长。</div>
     </div>
 
-    <div class="quiz-block" id="future-quiz">
+    <div class="quiz-block reveal" id="future-quiz">
       <h4>📝 时代使命闯关</h4>
       <div class="quiz-progress">共 3 题，关于新时代的使命与担当</div>
       <div class="quiz-q" id="future-q-text">第1题："两个一百年"奋斗目标中，第二个百年目标是什么？</div>
@@ -1126,7 +517,7 @@ body{
     <div class="stat-card"><div class="stat-num" id="stat-fragments">0</div><div class="stat-label">精神碎片</div></div>
     <div class="stat-card"><div class="stat-num" id="stat-pledges">0</div><div class="stat-label">青春誓言</div></div>
   </div>
-  <p style="color:var(--text-dim);margin-bottom:10px;font-size:0.9rem">✨ 收集的精神碎片 (点击交互元素收集)</p>
+  <p style="color:#8888A8;margin-bottom:10px;font-size:0.9rem">✨ 收集的精神碎片 (点击交互元素收集)</p>
   <div class="fragment-display" id="fragmentDisplay">
     <span class="spirit-fragment" data-fid="f1">📜</span><span class="spirit-fragment" data-fid="f2">🚩</span>
     <span class="spirit-fragment" data-fid="f3">📋</span><span class="spirit-fragment" data-fid="f4">🥾</span>
@@ -1140,322 +531,6 @@ body{
 
 </div><!-- /.stage -->
 
-<script>
-// ══════════════════════════════════════════════
-// STATE
-// ══════════════════════════════════════════════
-const S = {
-  visited: new Set(),
-  fragments: new Set(),
-  quizScores: {history:0, reality:0, future:0},
-  quizTotal: {history:0, reality:0, future:0},
-  pledges: [],
-  futureChoice: null,
-  pageHistory: ['landing']
-};
-const TOTAL_FRAGMENTS = 12;
-const ALL_PAGES = ['landing','prologue','hub','history-section','reality-section','future-section','summary'];
-
-// ══════════════════════════════════════════════
-// BACKGROUND CANVAS
-// ══════════════════════════════════════════════
-const canvas = document.getElementById('bgCanvas');
-const ctx = canvas.getContext('2d');
-let W, H, particles = [];
-function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
-window.addEventListener('resize',resize);resize();
-
-class Particle{
-  constructor(){this.reset();this.y=Math.random()*H}
-  reset(){this.x=Math.random()*W;this.y=-8;this.r=Math.random()*2+0.8;this.v=Math.random()*0.4+0.15;this.a=Math.random()*0.4+0.15;this.w=Math.random()*2}
-  update(){this.y+=this.v;this.x+=Math.sin(this.y*0.008)*this.w*0.25;if(this.y>H+10)this.reset()}
-  draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(212,168,67,${this.a})`;ctx.fill()}
-}
-for(let i=0;i<100;i++){const p=new Particle();p.y=Math.random()*H;particles.push(p)}
-function animate(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.update();p.draw()});requestAnimationFrame(animate)}
-animate();
-
-// ═══════════════════════ NAVIGATION ═══════════════════════
-function navigateTo(pageId){
-  document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active','exiting')});
-  const target=document.getElementById(pageId);
-  if(!target)return;
-  target.classList.add('active');
-  S.pageHistory.push(pageId);
-  if(ALL_PAGES.includes(pageId)&&pageId!=='landing'&&pageId!=='prologue') S.visited.add(pageId);
-  updateTopBar();updateTopNav();updateBreadcrumb(pageId);
-  window.scrollTo({top:0,behavior:'smooth'});
-  if(pageId==='history-section'){
-    setTimeout(()=>{document.querySelectorAll('.timeline-event').forEach((el,i)=>{setTimeout(()=>el.classList.add('visible'),i*120)})},200);
-  }
-  if(S.visited.has('history-section')&&S.visited.has('reality-section')&&S.visited.has('future-section')){
-    setTimeout(()=>showAchievement('🏆','三维探索者：你已走完历史·现实·未来全部旅程！'),600);
-  }
-}
-
-function updateTopBar(){
-  const total=3;const pct=(Math.min(S.visited.size,total)/total)*100;
-  document.getElementById('topBar').style.transform=`scaleX(${pct/100})`;
-}
-function updateTopNav(){
-  const current=document.querySelector('.page.active');
-  document.getElementById('topNav').classList.toggle('show',current&&current.id!=='landing');
-}
-function updateBreadcrumb(pageId){
-  const bc=document.getElementById('breadcrumb');
-  const names={landing:'首页',prologue:'团队简介',hub:'寻访枢纽','history-section':'历史之路','reality-section':'现实之窗','future-section':'未来之梦',summary:'寻访总结'};
-  if(pageId==='landing'){bc.classList.remove('show');return}
-  bc.classList.add('show');
-  let html='<span onclick="navigateTo(\'landing\')">首页</span>';
-  if(pageId==='prologue') html+='<span class=sep>›</span><span>团队简介</span>';
-  else if(pageId==='hub') html+='<span class=sep>›</span><span>寻访枢纽</span>';
-  else if(pageId==='summary') html+='<span class=sep>›</span><span onclick="navigateTo(\'hub\')">寻访枢纽</span><span class=sep>›</span><span>寻访总结</span>';
-  else html+='<span class=sep>›</span><span onclick="navigateTo(\'hub\')">寻访枢纽</span><span class=sep>›</span><span>'+names[pageId]+'</span>';
-  bc.innerHTML=html;
-}
-
-// ═══════════════════════ TIMELINE ═══════════════════════
-function expandTimeline(el){el.classList.toggle('expanded')}
-
-// ═══════════════════════ FRAGMENTS ═══════════════════════
-function collectFragment(fid){
-  if(S.fragments.has(fid))return;
-  S.fragments.add(fid);
-  const names={f1:'辛亥首义',f2:'建党伟业',f3:'八七会议',f4:'长征精神',f5:'抗日烽火',f6:'建国新篇',r1:'革命博物馆',r2:'珞珈薪火',r3:'长江天堑',r4:'光谷创新',r5:'抗疫精神',r6:'乡村振兴'};
-  showAchievement('✨','收集到精神碎片：'+names[fid]+' ('+S.fragments.size+'/'+TOTAL_FRAGMENTS+')');
-  if(S.fragments.size===TOTAL_FRAGMENTS) setTimeout(()=>showAchievement('👑','全部碎片收集完毕！你是真正的红色文化传承者！'),1500);
-  updateFragmentDisplay();
-}
-function updateFragmentDisplay(){
-  document.querySelectorAll('.spirit-fragment').forEach(el=>{if(S.fragments.has(el.dataset.fid))el.classList.add('collected')});
-}
-
-// ═══════════════════════ TOAST ═══════════════════════
-function showAchievement(icon,text){
-  const toast=document.createElement('div');toast.className='achievement-toast';
-  toast.innerHTML=`<span>${icon}</span> ${text}`;
-  document.body.appendChild(toast);
-  setTimeout(()=>toast.remove(),3500);
-}
-
-// ═══════════════════════ SUB-NAV TABS ═══════════════════════
-document.addEventListener('click',function(e){
-  const btn=e.target.closest('.sub-nav-btn');
-  if(!btn)return;
-  const target=btn.dataset.target;
-  const parent=btn.parentElement;
-  parent.querySelectorAll('.sub-nav-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  const section=btn.closest('.section-page')||btn.closest('.page');
-  if(section){
-    const containers=section.querySelectorAll('.content-card, .location-grid, .future-grid, .pledge-section, .timeline, #future-result-card, [id^="loc-"]');
-    containers.forEach(c=>{c.style.display='none'});
-    // Special: show #timeline wrapper div
-    const timelineDiv=section.querySelector('#timeline');
-    if(timelineDiv)timelineDiv.style.display='none';
-    const targetEl=document.getElementById(target);
-    if(targetEl){targetEl.style.display='block'}
-    if(target==='loc-overview'){
-      const grid=section.querySelector('.location-grid');
-      if(grid)grid.style.display='grid';
-    }
-    if(target==='timeline'){
-      const tl=section.querySelector('#timeline');
-      if(tl)tl.style.display='block';
-      const innerTL=section.querySelector('#timeline .timeline');
-      if(innerTL)innerTL.style.display='block';
-    }
-    if(target==='future-choices-panel'){
-      const grid=section.querySelector('.future-grid');
-      if(grid)grid.style.display='grid';
-      const result=document.getElementById('future-result-card');
-      if(result)result.style.display=S.futureChoice?'block':'none';
-    }
-    if(target==='future-pledge'){
-      const ps=section.querySelector('#future-pledge .pledge-section');
-      if(ps)ps.style.display='block';
-    }
-  }
-});
-
-// ═══════════════════════ FUTURE CHOICE ═══════════════════════
-function selectFuture(el,choice){
-  document.querySelectorAll('#future-choices .future-choice-card').forEach(c=>c.classList.remove('selected'));
-  el.classList.add('selected');
-  S.futureChoice=choice;
-  const messages={
-    study:{title:'📚 科技报国，薪火相传',text:'你选择了深耕专业、科技报国的道路。正如革命先辈用热血开辟了民族独立的道路，今天的我们用智慧和创新攻克一个又一个"卡脖子"难题。从跟跑到并跑再到领跑，每一次技术突破都是新时代长征路上的坚实脚印。愿你以实验室为战场，以代码为武器，在科技强国的征途中书写无悔青春。',quote:'"科学技术是第一生产力。" —— 邓小平'},
-    culture:{title:'🎭 赓续文脉，讲好中国故事',text:'你选择了传播红色文化的使命。历史不应被遗忘，精神需要被传承。从武昌城头的首义枪声到长征路上的草鞋足迹，从八七会议的历史转折到抗疫精神的时代光芒——这些故事需要用年轻人喜欢的方式讲述出来。愿你成为新时代的"宣传队"和"播种机"，让红色文化在Z世代心中生根发芽。',quote:'"文化自信是更基础、更广泛、更深厚的自信。" —— 习近平'},
-    service:{title:'🤝 扎根大地，服务人民',text:'你选择了扎根基层的道路。从井冈山到延安，从脱贫攻坚到乡村振兴，中国共产党始终与人民站在一起。到基层去、到一线去、到祖国最需要的地方去——这不是一句空洞的口号，而是无数青年用脚步丈量出来的信仰之路。愿你在田间地头、在社区街巷，在每一个平凡的岗位上践行"为人民服务"的誓言。',quote:'"人民对美好生活的向往，就是我们的奋斗目标。" —— 习近平'},
-    innovate:{title:'💡 敢为人先，勇立潮头',text:'你选择了创新创业的赛道。武汉本就是一座"敢为天下先"的城市——从辛亥首义到改革开放，创新精神早已融入这座城市的文化基因。愿你像武昌首义的革命党人那样，在时代变革的潮头挺身而出，用你的创造力和行动力为社会发展注入新的活力。',quote:'"创新是引领发展的第一动力。" —— 习近平'},
-    education:{title:'🏫 教书育人，点亮未来',text:'你选择了教育报国的道路。中央农民运动讲习所的灯光、武汉大学西迁路上的朗朗书声、抗疫期间"停课不停学"的坚守——教育始终是薪火相传最重要的纽带。愿你走上三尺讲台，用知识点亮孩子们的未来，在他们心中种下爱国、奋斗、创新的种子，做新时代的"播火者"。',quote:'"教育是国之大计、党之大计。" —— 习近平'},
-    defend:{title:'🛡️ 携笔从戎，保家卫国',text:'你选择了携笔从戎、献身国防的道路。从"枪杆子里出政权"的历史启示，到"强国必须强军"的时代召唤，人民军队始终是党和人民的忠诚卫士。愿你传承长征路上红军将士"不怕远征难"的战斗精神，在国防现代化的征程中贡献青春、智慧和力量。',quote:'"强国必须强军，军强才能国安。" —— 习近平'}
-  };
-  document.getElementById('future-result-title').textContent=messages[choice].title;
-  document.getElementById('future-result-text').textContent=messages[choice].text;
-  document.getElementById('future-result-quote').textContent=messages[choice].quote;
-  document.getElementById('future-result-card').style.display='block';
-  document.getElementById('future-result-card').scrollIntoView({behavior:'smooth'});
-}
-
-// ═══════════════════════ PLEDGE ═══════════════════════
-function submitPledge(){
-  const input=document.getElementById('pledgeInput');
-  const text=input.value.trim();
-  if(!text)return;
-  S.pledges.push(text);
-  const wall=document.getElementById('pledgeWall');
-  const tag=document.createElement('span');tag.className='pledge-tag';tag.textContent=text;
-  wall.appendChild(tag);
-  input.value='';
-  spawnSparks(tag);
-  showAchievement('💬','誓言已铭记：'+text.substring(0,20)+(text.length>20?'…':''));
-}
-document.addEventListener('keydown',function(e){
-  if(e.key==='Enter'&&document.activeElement===document.getElementById('pledgeInput')){submitPledge()}
-});
-
-// ═══════════════════════ QUIZ ═══════════════════════
-const quizData={
-  'history-quiz':[
-    {q:'第1题：八七会议是在哪个城市召开的？',opts:[{t:'武汉',c:true},{t:'上海',c:false},{t:'南昌',c:false},{t:'广州',c:false}]},
-    {q:'第2题：毛泽东在哪次会议上提出"枪杆子里出政权"？',opts:[{t:'遵义会议',c:false},{t:'八七会议',c:true},{t:'古田会议',c:false},{t:'瓦窑堡会议',c:false}]},
-    {q:'第3题：湖北红安县被誉为"将军县"，走出了多少位开国将军？',opts:[{t:'108位',c:false},{t:'156位',c:false},{t:'223位',c:true},{t:'300位',c:false}]}
-  ],
-  'reality-quiz':[
-    {q:'第1题：武汉长江大桥建成通车于哪一年？',opts:[{t:'1949年',c:false},{t:'1957年',c:true},{t:'1965年',c:false},{t:'1978年',c:false}]},
-    {q:'第2题：武汉东湖高新区被誉为什么？',opts:[{t:'中国硅谷',c:false},{t:'中国光谷',c:true},{t:'中国药谷',c:false},{t:'中国智谷',c:false}]},
-    {q:'第3题：2020年武汉封城持续了多少天？',opts:[{t:'56天',c:false},{t:'66天',c:false},{t:'76天',c:true},{t:'86天',c:false}]}
-  ],
-  'future-quiz':[
-    {q:'第1题："两个一百年"奋斗目标中，第二个百年目标是什么？',opts:[{t:'全面建成小康社会',c:false},{t:'全面建成社会主义现代化强国',c:true},{t:'基本实现现代化',c:false},{t:'实现中华民族伟大复兴',c:false}]},
-    {q:'第2题：习近平总书记提出的"四个自信"不包括哪一个？',opts:[{t:'道路自信',c:false},{t:'理论自信',c:false},{t:'制度自信',c:false},{t:'经济自信',c:true}]},
-    {q:'第3题：伟大的抗疫精神的内涵是什么？',opts:[{t:'生命至上、举国同心、舍生忘死、尊重科学、命运与共',c:true},{t:'无私奉献、艰苦奋斗、团结协作、勇于创新',c:false},{t:'爱国敬业、诚信友善、拼搏进取、追求卓越',c:false},{t:'坚定信念、艰苦奋斗、实事求是、敢闯新路',c:false}]}
-  ]
-};
-
-let quizStates={};
-function initQuiz(quizId){
-  quizStates[quizId]={current:0,answered:false};renderQuiz(quizId);
-}
-function renderQuiz(quizId){
-  const data=quizData[quizId];const state=quizStates[quizId];
-  if(!data||!state)return;
-  const prefix=quizId.split('-')[0];
-  const qEl=document.getElementById(prefix+'-q-text');
-  const optsEl=document.getElementById(prefix+'-q-opts');
-  const fbEl=document.getElementById(prefix+'-q-fb');
-  if(state.current>=data.length){
-    const section=quizId.split('-')[0];
-    const score=S.quizScores[section];const total=S.quizTotal[section];
-    qEl.textContent='🎉 问答完成！';
-    optsEl.innerHTML='';
-    fbEl.textContent='你的得分：'+score+'/'+total+(score===total?' ⭐ 全部正确！太棒了！':' 继续加油！');
-    fbEl.style.color=score===total?'#81C784':'#FFD54F';
-    return;
-  }
-  const item=data[state.current];
-  qEl.textContent=item.q;
-  optsEl.innerHTML=item.opts.map(o=>`<button class="quiz-opt" data-correct="${o.c}">${o.t}</button>`).join('');
-  fbEl.textContent='';state.answered=false;
-}
-
-document.addEventListener('click',function(e){
-  const opt=e.target.closest('.quiz-opt');
-  if(!opt||opt.dataset.handled)return;
-  opt.dataset.handled='1';
-  const quizBlock=opt.closest('.quiz-block');
-  if(!quizBlock)return;
-  const quizId=quizBlock.id;const state=quizStates[quizId];
-  if(!state||state.answered)return;state.answered=true;
-  const isCorrect=opt.dataset.correct==='true';
-  const section=quizId.split('-')[0];
-  S.quizTotal[section]++;
-  const optsContainer=opt.parentElement;
-  optsContainer.querySelectorAll('.quiz-opt').forEach(o=>{
-    o.style.pointerEvents='none';
-    if(o.dataset.correct==='true')o.classList.add('correct');
-    else if(o===opt&&!isCorrect)o.classList.add('wrong');
-  });
-  const fbEl=document.getElementById(section+'-q-fb');
-  if(isCorrect){S.quizScores[section]++;fbEl.textContent='✅ 回答正确！';fbEl.style.color='#81C784';spawnSparks(opt)}
-  else{fbEl.textContent='❌ 不对哦，正确答案已高亮显示。';fbEl.style.color='#EF9A9A'}
-  setTimeout(()=>{state.current++;state.answered=false;renderQuiz(quizId)},1500);
-});
-
-Object.keys(quizData).forEach(id=>initQuiz(id));
-
-// ═══════════════════════ SPARKS ═══════════════════════
-function spawnSparks(el){
-  const rect=el.getBoundingClientRect();const cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;
-  for(let i=0;i<14;i++){
-    const spark=document.createElement('div');spark.className='spark';
-    spark.style.left=cx+'px';spark.style.top=cy+'px';
-    spark.style.transform=`translate(${(Math.random()-0.5)*150}px,${(Math.random()-0.5)*150}px)`;
-    document.body.appendChild(spark);setTimeout(()=>spark.remove(),700);
-  }
-}
-document.addEventListener('mousemove',e=>{
-  if(Math.random()>0.7){
-    const spark=document.createElement('div');spark.className='spark';
-    spark.style.left=e.clientX+'px';spark.style.top=e.clientY+'px';
-    const angle=Math.random()*Math.PI*2,dist=30+Math.random()*60;
-    spark.style.setProperty('--sx',Math.cos(angle)*dist+'px');
-    spark.style.setProperty('--sy',Math.sin(angle)*dist+'px');
-    document.body.appendChild(spark);setTimeout(()=>spark.remove(),800);
-  }
-});
-
-// ═══════════════════════ SUMMARY ═══════════════════════
-function buildSummary(){
-  const names={'history-section':'历史之路','reality-section':'现实之窗','future-section':'未来之梦'};
-  const visitedArr=[...S.visited].filter(v=>names[v]).map(v=>names[v]);
-  const totalQuizScore=Object.values(S.quizScores).reduce((a,b)=>a+b,0);
-  const totalQuizQ=Object.values(S.quizTotal).reduce((a,b)=>a+b,0);
-  document.getElementById('summaryRecap').innerHTML=`
-    你的寻访轨迹：<span>${visitedArr.join(' → ')||'尚未深度探索'}</span><br><br>
-    在建党105周年、长征胜利90周年之际，<br>
-    你沿着<span>「历史·现实·未来」</span>三维实践体系，<br>
-    深入湖北武汉，穿越了百年红色时空。<br>
-    从1911年武昌城头的枪声到2026年光谷的脉动，<br>
-    从长征路上的草鞋足迹到新时代青年的铿锵誓言——<br>
-    你走过的每一站，都是薪火相传路上的一个坐标；<br>
-    你收集的每一枚精神碎片，都是照亮未来的星火。
-  `;
-  document.getElementById('stat-paths').textContent=visitedArr.length;
-  document.getElementById('stat-quiz').textContent=totalQuizQ>0?Math.round((totalQuizScore/totalQuizQ)*100)+'%':'—';
-  document.getElementById('stat-fragments').textContent=S.fragments.size+'/'+TOTAL_FRAGMENTS;
-  document.getElementById('stat-pledges').textContent=S.pledges.length;
-  updateFragmentDisplay();
-}
-
-function resetAll(){
-  S.visited.clear();S.fragments.clear();
-  S.quizScores={history:0,reality:0,future:0};S.quizTotal={history:0,reality:0,future:0};
-  S.pledges=[];S.futureChoice=null;S.pageHistory=['landing'];
-  document.getElementById('pledgeWall').innerHTML='';
-  document.getElementById('topBar').style.transform='scaleX(0)';
-  document.getElementById('future-result-card').style.display='none';
-  document.querySelectorAll('.future-choice-card').forEach(c=>c.classList.remove('selected'));
-  document.querySelectorAll('.spirit-fragment').forEach(el=>el.classList.remove('collected'));
-  document.querySelectorAll('.timeline-event').forEach(el=>{el.classList.remove('expanded','visible')});
-  document.querySelectorAll('.location-card').forEach(el=>el.classList.remove('expanded'));
-  Object.keys(quizData).forEach(id=>{quizStates[id]={current:0,answered:false};renderQuiz(id)});
-  navigateTo('landing');
-}
-
-// ═══════════════════════ KEYBOARD ═══════════════════════
-document.addEventListener('keydown',e=>{
-  if(document.activeElement.tagName==='INPUT')return;
-  const current=document.querySelector('.page.active');
-  if(!current)return;
-  if(current.id==='hub'){if(e.key==='1')navigateTo('history-section');if(e.key==='2')navigateTo('reality-section');if(e.key==='3')navigateTo('future-section')}
-});
-
-updateTopBar();updateTopNav();
-console.log('%c薪火新程 %c红色寻访实践团 %c2026','font-size:28px;color:#C9A84C;font-weight:bold','font-size:16px;color:#E0E0E0','color:#C41E3A');
-console.log('%c建党105周年 · 长征胜利90周年 | 历史·现实·未来','font-size:14px;color:#4FC3F7');
-console.log('%c12枚精神碎片等你收集 | 3组知识闯关 | 青春誓言墙 | 6条未来道路','font-size:12px;color:#A0A0B8');
-</script>
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
